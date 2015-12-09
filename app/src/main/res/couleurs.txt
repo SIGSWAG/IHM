@@ -1,0 +1,13 @@
+https://duckduckgo.com/?t=lm&q=color+picker&ia=colorpicker
+
+gris foncé pour faire resortir un titre : #49545A
+couleur de la font du titre : #FFFFFF
+
+gris foncé : #444444 (couleur d'un texte basique)
+gris medium : #cccccc (pour les formes géométriques : cerles..)
+gris très clair : #dddddd (pour le background d'un texte basique)
+gris clair : #999999 (pour le fond d'une zone de texte qui ressort)
+
+gris très clair : #eeeeee (pour le background)
+
+LE rouge : #E42618
