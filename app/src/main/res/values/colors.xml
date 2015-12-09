@@ -3,4 +3,36 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!-- LE rouge utilisé de partout -->
+    <color name="insaRed">#E42618</color>
+
+
+    <!-- ************************************************************** -->
+    <!-- Toutes les nuances de gris utilisés pour le texte et les fonds -->
+
+    <!-- gris foncé pour faire resortir un titre : -->
+    <color name="darkerGrayForTitleBackground">#49545A</color>
+
+    <!-- couleur de la font du titre : -->
+    <color name="whiteForTitle">#FFFFFF</color>
+
+    <!-- gris foncé : couleur d'un texte basique -->
+    <color name="darkGrayForFont">#444444</color>
+
+    <!-- gris medium : pour les formes géométriques : cerles.. -->
+    <color name="grayForGeometricals">#cccccc</color>
+
+    <!-- gris très clair : (pour le background d'un texte basique) -->
+    <color name="lighterGrayForClassicTextBackground">#dddddd</color>
+
+    <!--gris clair : pour le fond d'une zone de texte qui ressort -->
+    <color name="lightGrayForSpecialTextBackground">#999999</color>
+
+    <!-- gris-blanc : pour le background -->
+    <color name="whiteGrayForBackground">#eeeeee</color>
+
+    <!-- Fin des nuances de gris -->
+    <!-- ************************************************************** -->
+
 </resources>
