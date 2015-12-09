@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Castor et Pollux"
+        android:id="@+id/name_restaurant"
+        tools:text="Castor et Pollux"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/list_margin_left"
+
+         />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:layout_below="@+id/name_restaurant"
+        android:layout_alignStart="@+id/name_restaurant"
+        android:src="@drawable/ic_person_black_24dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="3"
+        tools:text="3"
+        android:id="@+id/nb_friends_eating"
+        android:layout_below="@+id/name_restaurant"
+        android:layout_toEndOf="@+id/imageView2" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/i_go"
+        android:id="@+id/button_go_restaurant"
+        android:layout_alignBottom="@+id/nb_friends_eating"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="24dp" />
+</RelativeLayout>
