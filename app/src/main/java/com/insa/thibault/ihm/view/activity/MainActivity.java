@@ -1,9 +1,8 @@
-package com.insa.thibault.ihm.view;
+package com.insa.thibault.ihm.view.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,6 +13,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.insa.thibault.ihm.R;
+import com.insa.thibault.ihm.view.fragment.FriendsFragment;
+import com.insa.thibault.ihm.view.fragment.InvitationsFragment;
+import com.insa.thibault.ihm.view.fragment.ListRestaurantFragment;
+import com.insa.thibault.ihm.view.fragment.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,6 +36,12 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //set up the first fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, ListRestaurantFragment.newInstance(new Bundle()))//TODO use tags
+                .commit();
 
 
     }
@@ -75,18 +84,39 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        Fragment fragment = null;
+
+        Class fragmentClass = null;
+
+        Bundle bundle = new Bundle();
+
         if (id == R.id.nav_restaurants) {
-            // Handle the camera action
+
+            fragment = ListRestaurantFragment.newInstance(bundle);
+
         } else if (id == R.id.nav_invitations) {
+            fragment = InvitationsFragment.newInstance(bundle);
 
         } else if (id == R.id.nav_friends) {
+            fragment = FriendsFragment.newInstance(bundle);
 
         } else if (id == R.id.nav_settings) {
+            fragment = SettingsFragment.newInstance(bundle);
 
         }
 
+
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)//TODO use tags
+                .commit();
+
         return true;
     }
 }

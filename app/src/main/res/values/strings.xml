@@ -8,4 +8,9 @@
     <string name="my_friends">Mes Amis</string>
     <string name="settings">Paramètres</string>
     <string name="i_go">J\'y vais</string>
+    <string name="title_friends">Amis</string>
+    <string name="title_invitations_fragment">Invitations</string>
+    <string name="title_friends_fragment">Amis</string>
+    <string name="title_List_restaurant_fragment">Restaurants</string>
+    <string name="title_settings_fragment">Paramètres</string>
 </resources>
