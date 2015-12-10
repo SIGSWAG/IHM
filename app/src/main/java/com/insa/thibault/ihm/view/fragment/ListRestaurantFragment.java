@@ -1,12 +1,16 @@
 package com.insa.thibault.ihm.view.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.insa.thibault.ihm.R;
 import com.insa.thibault.ihm.adapter.RestaurantAdapter;
@@ -23,8 +27,11 @@ import butterknife.ButterKnife;
 /**
  * Created by Thibault on 09/12/2015.
  */
-public class ListRestaurantFragment extends Fragment{
+public class ListRestaurantFragment extends Fragment implements AdapterView.OnItemClickListener {
 
+
+
+    private OnRestaurantSelectedListener mCallback;
 
     @BindString(R.string.title_List_restaurant_fragment)
     protected String title;
@@ -43,6 +50,21 @@ public class ListRestaurantFragment extends Fragment{
 
         return fragment;
 
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (OnRestaurantSelectedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement OnHeadlineSelectedListener");
+        }
     }
 
 
@@ -65,6 +87,9 @@ public class ListRestaurantFragment extends Fragment{
         restaurantAdapter = new RestaurantAdapter(this.getContext(), restaurantList);
 
         listRestaurants.setAdapter(restaurantAdapter);
+        restaurantAdapter.notifyDataSetChanged();
+        listRestaurants.setOnItemClickListener(this);
+
 
 
 
@@ -74,5 +99,13 @@ public class ListRestaurantFragment extends Fragment{
 
 
 
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if(mCallback != null){
+            mCallback.onRestaurantSelected(restaurantList.get(position));
+        }
     }
 }

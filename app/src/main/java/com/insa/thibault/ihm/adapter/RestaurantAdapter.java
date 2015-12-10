@@ -37,7 +37,7 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_restaurant, parent, false);
 
             viewHolder = new ViewHolder();
-            viewHolder.igoButton = (Button) convertView.findViewById(R.id.button_go_restaurant);
+
             viewHolder.name = (TextView) convertView.findViewById(R.id.name_restaurant);
             viewHolder.nbFriends = (TextView) convertView.findViewById(R.id.nb_friends_eating);
             convertView.setTag(viewHolder);
@@ -48,20 +48,12 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
         Restaurant currentRestaurant = getItem(position);
         viewHolder.name.setText(currentRestaurant.getName());
         viewHolder.nbFriends.setText(" "+currentRestaurant.getNbFriends()+" ");
-        viewHolder.igoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Friend invitation",Toast.LENGTH_LONG).show();
-
-            }
-        });
 
         return convertView;
     }
 
 
     static class ViewHolder {
-        Button igoButton;
         TextView name;
         TextView nbFriends;
 

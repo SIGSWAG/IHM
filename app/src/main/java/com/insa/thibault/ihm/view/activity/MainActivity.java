@@ -13,13 +13,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.insa.thibault.ihm.R;
+import com.insa.thibault.ihm.business.Restaurant;
+import com.insa.thibault.ihm.view.fragment.DetailsRestaurantFragment;
 import com.insa.thibault.ihm.view.fragment.FriendsFragment;
 import com.insa.thibault.ihm.view.fragment.InvitationsFragment;
 import com.insa.thibault.ihm.view.fragment.ListRestaurantFragment;
+import com.insa.thibault.ihm.view.fragment.OnRestaurantSelectedListener;
 import com.insa.thibault.ihm.view.fragment.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnRestaurantSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +110,6 @@ public class MainActivity extends AppCompatActivity
 
 
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
@@ -118,5 +120,19 @@ public class MainActivity extends AppCompatActivity
                 .commit();
 
         return true;
+    }
+
+    @Override
+    public void onRestaurantSelected(Restaurant restaurant) {
+
+        DetailsRestaurantFragment  detailsRestaurantFragment = DetailsRestaurantFragment.newInstance(new Bundle(), restaurant);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, detailsRestaurantFragment)//TODO use tags
+                .addToBackStack(null)
+                .commit();
+
+
     }
 }
