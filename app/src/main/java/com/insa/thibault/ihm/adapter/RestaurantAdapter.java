@@ -40,6 +40,8 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
 
             viewHolder.name = (TextView) convertView.findViewById(R.id.name_restaurant);
             viewHolder.nbFriends = (TextView) convertView.findViewById(R.id.nb_friends_eating);
+            viewHolder.distance = (TextView) convertView.findViewById(R.id.distance_restaurant);
+            viewHolder.nbNotifs = (TextView) convertView.findViewById(R.id.nb_notifs);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -47,7 +49,9 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
 
         Restaurant currentRestaurant = getItem(position);
         viewHolder.name.setText(currentRestaurant.getName());
-        viewHolder.nbFriends.setText(" "+currentRestaurant.getNbFriends()+" ");
+        viewHolder.nbFriends.setText(" " + currentRestaurant.getNbFriends() + " ");
+        viewHolder.distance.setText(currentRestaurant.getDistanceMetres());
+        viewHolder.nbNotifs.setText("" + currentRestaurant.getNbInvitations());
 
         return convertView;
     }
@@ -56,8 +60,9 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
     static class ViewHolder {
         TextView name;
         TextView nbFriends;
-
+        TextView nbNotifs;
+        TextView distance;
     }
 
 
-    }
+}

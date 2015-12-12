@@ -52,7 +52,6 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
 
     }
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -67,8 +66,6 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
         }
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -82,7 +79,7 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
         restaurantList = new ArrayList<>();
         restaurantList.add(new Restaurant("Beurk"));
         restaurantList.add(new Restaurant("Prévert"));
-        restaurantList.add(new Restaurant("Olivier"));
+        restaurantList.add(new Restaurant("Snoop doog"));
 
         restaurantAdapter = new RestaurantAdapter(this.getContext(), restaurantList);
 
@@ -90,15 +87,7 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
         restaurantAdapter.notifyDataSetChanged();
         listRestaurants.setOnItemClickListener(this);
 
-
-
-
-
-
         return v;
-
-
-
     }
 
 
