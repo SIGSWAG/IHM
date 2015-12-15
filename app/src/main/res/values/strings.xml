@@ -13,9 +13,13 @@
     <string name="title_friends_fragment">Amis</string>
     <string name="title_List_restaurant_fragment">Restaurants</string>
     <string name="title_settings_fragment">Paramètres</string>
+
     <string name="title_activity_details_restaurant">DetailsRestaurantActivity</string>
     <string name="action_settings">Settings</string>
     <string name="menu">Menu</string>
     <string name="invite">Inviter</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="place">Lieu : </string>
+    <string name="date">Date : </string>
+
 </resources>
