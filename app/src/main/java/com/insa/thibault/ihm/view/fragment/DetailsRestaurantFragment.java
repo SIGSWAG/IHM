@@ -1,5 +1,6 @@
 package com.insa.thibault.ihm.view.fragment;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.insa.thibault.ihm.R;
 import com.insa.thibault.ihm.business.Restaurant;
+import com.insa.thibault.ihm.databinding.FragmentDetailsRestaurantBinding;
 
 import butterknife.Bind;
 import butterknife.BindString;
@@ -23,10 +25,7 @@ public class DetailsRestaurantFragment extends Fragment{
 
     public static String KEY_RESTAURANT = "key_restaurant";
 
-
-    @Bind(R.id.restaurant_name)
-    TextView name;
-
+    private FragmentDetailsRestaurantBinding binding;
     private Restaurant restaurant;
 
     public static DetailsRestaurantFragment newInstance(Bundle bundleArg, Restaurant restaurant){
@@ -50,8 +49,9 @@ public class DetailsRestaurantFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_details_restaurant, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_details_restaurant, container, false);
 
+        View v = binding.getRoot();
         ButterKnife.bind(this, v);
 
         if (getArguments() != null && getArguments().getParcelable(KEY_RESTAURANT) != null) { //we are in a new acti
@@ -59,7 +59,8 @@ public class DetailsRestaurantFragment extends Fragment{
 
             restaurant = (Restaurant) getArguments().getParcelable(KEY_RESTAURANT); //we get the fortecast we want to
             ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(restaurant.getName());
-            name.setText(restaurant.getName());
+
+            binding.setRestaurant(restaurant);
         }
 
 
