@@ -13,4 +13,6 @@
     <string name="title_friends_fragment">Amis</string>
     <string name="title_List_restaurant_fragment">Restaurants</string>
     <string name="title_settings_fragment">Paramètres</string>
+    <string name="place">Lieu : </string>
+    <string name="date">Date : </string>
 </resources>
