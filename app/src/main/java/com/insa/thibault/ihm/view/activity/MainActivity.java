@@ -1,5 +1,6 @@
 package com.insa.thibault.ihm.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -125,13 +126,17 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onRestaurantSelected(Restaurant restaurant) {
 
-        DetailsRestaurantFragment  detailsRestaurantFragment = DetailsRestaurantFragment.newInstance(new Bundle(), restaurant);
+        /**DetailsRestaurantFragment  detailsRestaurantFragment = DetailsRestaurantFragment.newInstance(new Bundle(), restaurant);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, detailsRestaurantFragment)//TODO use tags
                 .addToBackStack(null)
-                .commit();
+                .commit();*/
+
+        Intent intent = DetailsRestaurantActivity.newIntent(this, restaurant);
+        startActivity(intent);
+
 
 
     }

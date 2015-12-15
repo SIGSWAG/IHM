@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,6 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
 
     }
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -67,8 +67,6 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
         }
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -82,7 +80,7 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
         restaurantList = new ArrayList<>();
         restaurantList.add(new Restaurant("Beurk"));
         restaurantList.add(new Restaurant("Prévert"));
-        restaurantList.add(new Restaurant("Olivier"));
+        restaurantList.add(new Restaurant("Snoop doog"));
 
         restaurantAdapter = new RestaurantAdapter(this.getContext(), restaurantList);
 
@@ -90,20 +88,13 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
         restaurantAdapter.notifyDataSetChanged();
         listRestaurants.setOnItemClickListener(this);
 
-
-
-
-
-
         return v;
-
-
-
     }
 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.d("List","Click");
         if(mCallback != null){
             mCallback.onRestaurantSelected(restaurantList.get(position));
         }

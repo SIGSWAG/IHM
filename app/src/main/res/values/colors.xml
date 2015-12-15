@@ -31,6 +31,8 @@
 
     <!-- gris-blanc : pour le background -->
     <color name="whiteGrayForBackground">#eeeeee</color>
+    <color name="black">#000</color>
+    <color name="green_invit">#4CAF50</color>
 
     <!-- Fin des nuances de gris -->
     <!-- ************************************************************** -->

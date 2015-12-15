@@ -1,6 +1,7 @@
 package com.insa.thibault.ihm.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,9 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
 
             viewHolder.name = (TextView) convertView.findViewById(R.id.name_restaurant);
             viewHolder.nbFriends = (TextView) convertView.findViewById(R.id.nb_friends_eating);
+            viewHolder.distance = (TextView) convertView.findViewById(R.id.distance_restaurant);
+            viewHolder.nbNotifs = (TextView) convertView.findViewById(R.id.nb_notifs);
+            viewHolder.boutonManger = (Button) convertView.findViewById(R.id.boutonManger);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -47,7 +51,15 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
 
         Restaurant currentRestaurant = getItem(position);
         viewHolder.name.setText(currentRestaurant.getName());
-        viewHolder.nbFriends.setText(" "+currentRestaurant.getNbFriends()+" ");
+        viewHolder.nbFriends.setText(" " + currentRestaurant.getNbFriends() + " ");
+        viewHolder.distance.setText(currentRestaurant.getDistanceMetres());
+        viewHolder.nbNotifs.setText("" + currentRestaurant.getNbInvitations());
+        viewHolder.boutonManger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Button ", "Click");
+            }
+        });
 
         return convertView;
     }
@@ -56,8 +68,10 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
     static class ViewHolder {
         TextView name;
         TextView nbFriends;
-
+        TextView nbNotifs;
+        TextView distance;
+        Button boutonManger;
     }
 
 
-    }
+}
