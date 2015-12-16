@@ -9,4 +9,10 @@
 
     <!-- Margins for lists -->
     <dimen name="list_margin_left">16dp</dimen>
+
+
+    <!-- Margins for title -->
+    <dimen name="title_margin_left">16dp</dimen>
+    <dimen name="title_separator_margin_top">16dp</dimen>
+
 </resources>
