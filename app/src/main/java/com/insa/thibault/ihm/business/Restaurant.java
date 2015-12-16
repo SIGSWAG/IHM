@@ -57,7 +57,7 @@ public class Restaurant implements Parcelable {
     }
 
     public String getDistanceMetres() {
-        return "- " + distanceMetres + "m";
+        return "~" + distanceMetres + "m";
     }
 
     public String getPlat() {
