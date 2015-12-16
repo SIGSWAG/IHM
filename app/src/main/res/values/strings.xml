@@ -22,4 +22,9 @@
     <string name="place">Lieu : </string>
     <string name="date">Date : </string>
 
+    <string name="my_meals">Mes repas : </string>
+    <string name="friends_meals">Repas de mes amis : </string>
+
+
+
 </resources>
