@@ -19,10 +19,7 @@
     tools:layout_height="100dp"
     android:descendantFocusability="blocksDescendants" />
 <View
-    android:layout_width="match_parent"
-    android:layout_height="2dp"
-    android:minHeight="1dp"
-    android:background="?android:attr/listDivider"/>
+    style="@style/separator"/>
 
 <TextView
     android:layout_width="wrap_content"
@@ -30,8 +27,7 @@
     android:text="@string/friends_meals"
     android:id="@+id/textView5"
     style="@style/Base.TextAppearance.AppCompat.Headline"
-    android:layout_marginLeft="@dimen/title_margin_left"
-    android:layout_marginTop="@dimen/title_separator_margin_top" />
+    android:layout_marginLeft="@dimen/title_margin_left" />
 
 <ListView
     android:layout_width="match_parent"
