@@ -10,13 +10,17 @@ public class Invitation {
     private User sender;
     private User receiver;
     private Restaurant restaurant;
-    private Date datetime;
+    private Date dateTime;
+    private int nbFriends;
+    private int nbPeople;
 
-    public Invitation(User sender, User receiver, Restaurant restaurant, Date datetime) {
+    public Invitation(User sender, User receiver, Restaurant restaurant, Date datetime, int nbFriends, int nbPeople) {
         this.sender = sender;
         this.receiver = receiver;
         this.restaurant = restaurant;
-        this.datetime = datetime;
+        this.dateTime = datetime;
+        this.nbFriends = nbFriends;
+        this.nbPeople = nbPeople;
     }
 
 
@@ -44,12 +48,27 @@ public class Invitation {
         this.restaurant = restaurant;
     }
 
-    public Date getDatetime() {
-        return datetime;
+    public Date getDateTime() {
+        return dateTime;
     }
 
-    public void setDatetime(Date datetime) {
-        this.datetime = datetime;
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
     }
 
+    public int getNbFriends() {
+        return nbFriends;
+    }
+
+    public void setNbFriends(int nbFriends) {
+        this.nbFriends = nbFriends;
+    }
+
+    public int getNbPeople() {
+        return nbPeople;
+    }
+
+    public void setNbPeople(int nbPeople) {
+        this.nbPeople = nbPeople;
+    }
 }

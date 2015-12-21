@@ -31,8 +31,6 @@ import butterknife.ButterKnife;
  */
 public class ListRestaurantFragment extends Fragment implements AdapterView.OnItemClickListener {
 
-
-
     private OnRestaurantSelectedListener mCallback;
 
     @BindString(R.string.title_List_restaurant_fragment)
@@ -43,15 +41,13 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
 
     private RestaurantAdapter restaurantAdapter;
 
-    private List<Restaurant> restaurantList ;
-
+    private List<Restaurant> restaurantList;
 
     public static ListRestaurantFragment newInstance(Bundle bundle){
         ListRestaurantFragment fragment = new ListRestaurantFragment();
         fragment.setArguments(bundle);
 
         return fragment;
-
     }
 
     @Override
@@ -64,7 +60,7 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
             mCallback = (OnRestaurantSelectedListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement OnHeadlineSelectedListener");
+                    + " must implement OnRestaurantSelectedListener");
         }
     }
 

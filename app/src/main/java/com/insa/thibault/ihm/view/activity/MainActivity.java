@@ -2,7 +2,6 @@ package com.insa.thibault.ihm.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
@@ -13,20 +12,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import com.insa.thibault.ihm.R;
+import com.insa.thibault.ihm.business.Invitation;
 import com.insa.thibault.ihm.business.Restaurant;
-import com.insa.thibault.ihm.view.fragment.DetailsRestaurantFragment;
 import com.insa.thibault.ihm.view.fragment.FriendsFragment;
-import com.insa.thibault.ihm.view.fragment.InvitationsFragment;
+import com.insa.thibault.ihm.view.fragment.ListInvitationFragment;
 import com.insa.thibault.ihm.view.fragment.ListRestaurantFragment;
+import com.insa.thibault.ihm.view.fragment.OnInvitationSelectedListener;
 import com.insa.thibault.ihm.view.fragment.OnRestaurantSelectedListener;
 import com.insa.thibault.ihm.view.fragment.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnRestaurantSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnRestaurantSelectedListener, OnInvitationSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +104,7 @@ public class MainActivity extends AppCompatActivity
             fragment = ListRestaurantFragment.newInstance(bundle);
 
         } else if (id == R.id.nav_invitations) {
-            fragment = InvitationsFragment.newInstance(bundle);
+            fragment = ListInvitationFragment.newInstance(bundle);
 
         } else if (id == R.id.nav_friends) {
             fragment = FriendsFragment.newInstance(bundle);
@@ -146,5 +144,10 @@ public class MainActivity extends AppCompatActivity
 
 
 
+    }
+
+    @Override
+    public void onInvitationSelected(Invitation invitation) {
+        // TODO
     }
 }
