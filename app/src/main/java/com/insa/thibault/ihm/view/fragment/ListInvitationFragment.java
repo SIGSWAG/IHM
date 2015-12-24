@@ -36,6 +36,9 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
     protected String title;
 
     @Bind(R.id.list_my_meals)
+    protected ListView myMealsList;
+
+    @Bind(R.id.list_friends_meals)
     protected ListView invitationsList;
 
     private List<Invitation> invitations;
@@ -77,12 +80,12 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
 
         invitations = new ArrayList<>();
 
-        User sender = new User("Hex", "SIGSWAG");
-        User receiver = new User("Hex", "SIGSWAG");
+        User sender = new User("Damien", "Gallet");
+        User receiver = new User("Aziz", "SIGSWAG");
         Restaurant restaurant = new Restaurant("Beurk", 12, 2, 30, "Brocoli");
-        Date date = new Date(System.currentTimeMillis());
 
-        invitations.add(new Invitation(sender, receiver, restaurant, date, 3, 12));
+        invitations.add(new Invitation(sender, receiver, restaurant, 12, 45, 3, 12));
+        invitations.add(new Invitation(sender, receiver, restaurant, 11, 30, 3, 12));
 
         invitationAdapter = new InvitationAdapter(this.getContext(), invitations);
 

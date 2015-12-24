@@ -41,7 +41,7 @@
         android:layout_alignBottom="@+id/accept_invite"
         android:layout_alignParentEnd="true"
         android:backgroundTint="@color/materialRed"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="6dp"
         />
 
     <ImageView
@@ -50,10 +50,9 @@
         android:id="@+id/imageView2"
         android:src="@drawable/ic_person_black_24dp"
         android:adjustViewBounds="true"
-        android:layout_below="@+id/restaurant_name"
-        android:layout_toStartOf="@+id/restaurant_name"
         android:layout_marginLeft="16dp"
-        />
+        android:layout_below="@+id/invite_datetime"
+        android:layout_toStartOf="@+id/invite_datetime" />
 
     <TextView
         style="@style/Base.TextAppearance.AppCompat.Body1"
@@ -63,9 +62,9 @@
         tools:text="3 amis y vont"
         android:id="@+id/invite_nb_friends_eating"
         android:adjustViewBounds="true"
+        android:textColor="@color/darkGrayForFont"
         android:layout_alignBottom="@+id/imageView2"
-        android:layout_alignStart="@+id/restaurant_name"
-        android:textColor="@color/darkGrayForFont" />
+        android:layout_toEndOf="@+id/imageView2" />
 
     <TextView
         style="@style/Base.TextAppearance.AppCompat.Subhead"
@@ -75,7 +74,7 @@
         android:id="@+id/sender_full_name"
         android:layout_alignTop="@+id/accept_invite"
         android:layout_toEndOf="@+id/info_invite_layout"
-        android:paddingLeft="16dp"/>
+        android:paddingLeft="6dp"/>
 
     <ImageView
         android:layout_width="18dp"
@@ -84,7 +83,7 @@
         android:src="@drawable/ic_place_black_24dp"
         android:layout_below="@+id/sender_full_name"
         android:layout_alignStart="@+id/info_invite_layout"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="6dp"
         />
 
     <TextView
@@ -99,21 +98,21 @@
         android:textColor="@color/darkGrayForFont"/>
 
     <TextView
-        style="@style/Base.TextAppearance.AppCompat.Subhead"
+        style="@style/Base.TextAppearance.AppCompat.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="12h"
         android:id="@+id/invite_datetime"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/imageView7" />
+        android:layout_below="@+id/eat_invite"
+        android:layout_toEndOf="@+id/eat_invite" />
 
     <ImageView
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:id="@+id/imageView7"
         android:src="@drawable/ic_access_time_black_24dp"
-        android:layout_above="@+id/restaurant_name"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignTop="@+id/invite_datetime"
+        android:layout_toStartOf="@+id/restaurant_invite_name" />
 
 </RelativeLayout>
