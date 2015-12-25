@@ -9,6 +9,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,11 +49,6 @@ public class MainActivity extends AppCompatActivity
                 .replace(R.id.fragment_container, ListRestaurantFragment.newInstance(new Bundle()))//TODO use tags
                 .commit();
 
-
-
-
-
-
     }
 
     @Override
@@ -81,6 +77,17 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Bundle bundle = new Bundle();
+            Fragment fragment = SettingsFragment.newInstance(bundle);
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)//TODO use tags
+                    .commit();
             return true;
         }
 
