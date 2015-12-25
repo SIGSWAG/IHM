@@ -54,14 +54,16 @@ public class InvitationAdapter extends ArrayAdapter<Invitation> {
 
         final Invitation currentInvitation = getItem(position);
         User sender = currentInvitation.getSender();
-        viewHolder.inviterName.setText(sender.getFirstName() + sender.getLastName());
+        viewHolder.inviterName.setText(sender.getFirstName() + " " + sender.getLastName());
         // TODO Handle profile image
         //viewHolder.inviterImage.setImageDrawable(sender.getImage());
-        viewHolder.nbFriends.setText(currentInvitation.getNbFriends() + " y vont");
+        viewHolder.nbFriends.setText(currentInvitation.getNbFriends() + " amis y vont");
         viewHolder.location.setText(currentInvitation.getRestaurant().getName());
-        Calendar calendar = GregorianCalendar.getInstance();
-        calendar.setTime(currentInvitation.getDateTime());
-        viewHolder.time.setText(calendar.get(Calendar.HOUR) + "h" + calendar.get(Calendar.MINUTE));
+        String time = currentInvitation.getTimeHour() + "h";
+        if(currentInvitation.getTimeMinutes() != 0) {
+            time += currentInvitation.getTimeMinutes();
+        }
+        viewHolder.time.setText(time);
         // TODO Buttons
         viewHolder.acceptInvite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +75,7 @@ public class InvitationAdapter extends ArrayAdapter<Invitation> {
         viewHolder.declineInvite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Vous avez décliner l'invitation, pas cool ! ", Snackbar.LENGTH_LONG)
+                Snackbar.make(v, "Vous avez décliné l'invitation, pas cool ! ", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });

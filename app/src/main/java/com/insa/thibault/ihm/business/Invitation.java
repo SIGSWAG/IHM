@@ -1,7 +1,5 @@
 package com.insa.thibault.ihm.business;
 
-import java.util.Date;
-
 /**
  * Created by loict on 15/12/2015.
  */
@@ -10,15 +8,17 @@ public class Invitation {
     private User sender;
     private User receiver;
     private Restaurant restaurant;
-    private Date dateTime;
+    private int timeHour;
+    private int timeMinutes;
     private int nbFriends;
     private int nbPeople;
 
-    public Invitation(User sender, User receiver, Restaurant restaurant, Date datetime, int nbFriends, int nbPeople) {
+    public Invitation(User sender, User receiver, Restaurant restaurant, int timeHour, int timeMinutes, int nbFriends, int nbPeople) {
         this.sender = sender;
         this.receiver = receiver;
         this.restaurant = restaurant;
-        this.dateTime = datetime;
+        this.timeHour = timeHour;
+        this.timeMinutes = timeMinutes;
         this.nbFriends = nbFriends;
         this.nbPeople = nbPeople;
     }
@@ -48,12 +48,20 @@ public class Invitation {
         this.restaurant = restaurant;
     }
 
-    public Date getDateTime() {
-        return dateTime;
+    public int getTimeHour() {
+        return timeHour;
     }
 
-    public void setDateTime(Date dateTime) {
-        this.dateTime = dateTime;
+    public void setTimeHour(int timeHour) {
+        this.timeHour = timeHour;
+    }
+
+    public int getTimeMinutes() {
+        return timeMinutes;
+    }
+
+    public void setTimeMinutes(int timeMinutes) {
+        this.timeMinutes = timeMinutes;
     }
 
     public int getNbFriends() {
