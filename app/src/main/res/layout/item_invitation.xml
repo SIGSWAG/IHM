@@ -11,7 +11,6 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/rounded_image"
-        android:layout_marginLeft="@dimen/left_avatar_padding_invite_profile_image"
         />
 
     <RelativeLayout
@@ -45,7 +44,7 @@
         android:layout_alignBottom="@+id/accept_invite"
         android:layout_alignParentEnd="true"
         android:backgroundTint="@color/materialRed"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="0dp"
         android:paddingRight="16dp"
         android:paddingLeft="16dp"
         />

@@ -19,7 +19,7 @@
         android:id="@+id/list_my_meals"
         tools:layout_height="100dp"
         android:descendantFocusability="blocksDescendants" />
-        
+
     <View
         style="@style/separator"/>
 
