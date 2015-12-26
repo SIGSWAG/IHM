@@ -9,21 +9,23 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.insa.thibault.ihm.R;
+import com.insa.thibault.ihm.business.Invitation;
 import com.insa.thibault.ihm.business.Restaurant;
-import com.insa.thibault.ihm.view.fragment.DetailsRestaurantFragment;
 import com.insa.thibault.ihm.view.fragment.FriendsFragment;
-import com.insa.thibault.ihm.view.fragment.InvitationsFragment;
+import com.insa.thibault.ihm.view.fragment.ListInvitationFragment;
 import com.insa.thibault.ihm.view.fragment.ListRestaurantFragment;
+import com.insa.thibault.ihm.view.fragment.OnInvitationSelectedListener;
 import com.insa.thibault.ihm.view.fragment.OnRestaurantSelectedListener;
 import com.insa.thibault.ihm.view.fragment.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnRestaurantSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnRestaurantSelectedListener, OnInvitationSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,6 @@ public class MainActivity extends AppCompatActivity
         fragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, ListRestaurantFragment.newInstance(new Bundle()))//TODO use tags
                 .commit();
-
 
     }
 
@@ -76,6 +77,17 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Bundle bundle = new Bundle();
+            Fragment fragment = SettingsFragment.newInstance(bundle);
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)//TODO use tags
+                    .commit();
             return true;
         }
 
@@ -99,7 +111,7 @@ public class MainActivity extends AppCompatActivity
             fragment = ListRestaurantFragment.newInstance(bundle);
 
         } else if (id == R.id.nav_invitations) {
-            fragment = InvitationsFragment.newInstance(bundle);
+            fragment = ListInvitationFragment.newInstance(bundle);
 
         } else if (id == R.id.nav_friends) {
             fragment = FriendsFragment.newInstance(bundle);
@@ -139,5 +151,10 @@ public class MainActivity extends AppCompatActivity
 
 
 
+    }
+
+    @Override
+    public void onInvitationSelected(Invitation invitation) {
+        // TODO
     }
 }

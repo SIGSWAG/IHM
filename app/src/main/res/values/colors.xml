@@ -7,6 +7,8 @@
     <!-- LE rouge utilisé de partout -->
     <color name="insaRed">#E42618</color>
 
+    <color name="materialRed">#dd2c00</color>
+
 
     <!-- ************************************************************** -->
     <!-- Toutes les nuances de gris utilisés pour le texte et les fonds -->

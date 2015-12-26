@@ -1,47 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_tile_item_invitation"
+    android:paddingTop="16dp"
+    android:paddingBottom="20dp"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <ImageView
+        android:id="@+id/inviter_profile_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_image"
+        android:layout_marginLeft="@dimen/left_avatar_padding_invite_profile_image"
+        />
+
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Damien Gallet"
+        android:layout_alignBottom="@+id/inviter_profile_image"
+        android:layout_toEndOf="@+id/inviter_profile_image"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/info_invite_layout">
+
+    </RelativeLayout>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/accept_invite"
+        android:src="@drawable/ic_done_black_24dp"
+        android:layout_alignBottom="@+id/info_invite_layout"
+        android:layout_toStartOf="@+id/decline_invite"
+        android:backgroundTint="@color/green_invit"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/decline_invite"
+        android:src="@drawable/ic_clear_black_24dp"
+        android:layout_alignBottom="@+id/accept_invite"
+        android:layout_alignParentEnd="true"
+        android:backgroundTint="@color/materialRed"
+        android:layout_marginRight="6dp"
+        />
+
+    <ImageView
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:id="@+id/imageView2"
+        android:src="@drawable/ic_person_black_24dp"
+        android:adjustViewBounds="true"
+        android:layout_marginLeft="16dp"
+        android:layout_below="@+id/invite_datetime"
+        android:layout_toStartOf="@+id/invite_datetime" />
+
+    <TextView
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        tools:text="3 amis y vont"
+        android:id="@+id/invite_nb_friends_eating"
+        android:adjustViewBounds="true"
+        android:textColor="@color/darkGrayForFont"
+        android:layout_alignBottom="@+id/imageView2"
+        android:layout_toEndOf="@+id/imageView2" />
+
+    <TextView
+        style="@style/Base.TextAppearance.AppCompat.Subhead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Damien Gallet"
         android:id="@+id/sender_full_name"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignTop="@+id/accept_invite"
+        android:layout_toEndOf="@+id/info_invite_layout"
+        android:paddingLeft="6dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView8"
-        android:text="@string/place"
+    <ImageView
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:id="@+id/eat_invite"
+        android:src="@drawable/ic_place_black_24dp"
         android:layout_below="@+id/sender_full_name"
-        android:layout_alignParentStart="true" />
+        android:layout_alignStart="@+id/info_invite_layout"
+        android:layout_marginLeft="6dp"
+        />
 
     <TextView
+        style="@style/Base.TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Restaurant Universitaire"
-        android:id="@+id/restaurant_name"
-        android:layout_alignTop="@+id/textView8"
-        android:layout_toEndOf="@+id/textView8"
-        android:layout_marginLeft="5dp" />
+        tools:text="Beurk"
+        android:id="@+id/restaurant_invite_name"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/sender_full_name"
+        android:layout_toEndOf="@+id/eat_invite"
+        android:textColor="@color/darkGrayForFont"/>
 
     <TextView
+        style="@style/Base.TextAppearance.AppCompat.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/date"
-        android:id="@+id/textView9"
-        android:layout_below="@+id/textView8"
-        android:layout_alignParentStart="true" />
+        tools:text="12h"
+        android:id="@+id/invite_datetime"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_below="@+id/eat_invite"
+        android:layout_toEndOf="@+id/eat_invite" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Aujourd&apos;hui à 12h"
-        android:id="@+id/datetime"
-        android:layout_below="@+id/restaurant_name"
-        android:layout_alignStart="@+id/restaurant_name"
-        android:layout_marginLeft="5pt" />
+    <ImageView
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:id="@+id/imageView7"
+        android:src="@drawable/ic_access_time_black_24dp"
+        android:layout_alignTop="@+id/invite_datetime"
+        android:layout_toStartOf="@+id/restaurant_invite_name" />
+
 </RelativeLayout>

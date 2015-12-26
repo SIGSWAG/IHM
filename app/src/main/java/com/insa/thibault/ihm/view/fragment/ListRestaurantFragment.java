@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.insa.thibault.ihm.R;
 import com.insa.thibault.ihm.adapter.RestaurantAdapter;
 import com.insa.thibault.ihm.business.Restaurant;
+import com.insa.thibault.ihm.business.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +31,6 @@ import butterknife.ButterKnife;
  */
 public class ListRestaurantFragment extends Fragment implements AdapterView.OnItemClickListener {
 
-
-
     private OnRestaurantSelectedListener mCallback;
 
     @BindString(R.string.title_List_restaurant_fragment)
@@ -42,15 +41,13 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
 
     private RestaurantAdapter restaurantAdapter;
 
-    private List<Restaurant> restaurantList ;
-
+    private List<Restaurant> restaurantList;
 
     public static ListRestaurantFragment newInstance(Bundle bundle){
         ListRestaurantFragment fragment = new ListRestaurantFragment();
         fragment.setArguments(bundle);
 
         return fragment;
-
     }
 
     @Override
@@ -63,7 +60,7 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
             mCallback = (OnRestaurantSelectedListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement OnHeadlineSelectedListener");
+                    + " must implement OnRestaurantSelectedListener");
         }
     }
 
@@ -78,11 +75,13 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
 
         restaurantList = new ArrayList<>();
-        restaurantList.add(new Restaurant("Beurk"));
-        restaurantList.add(new Restaurant("Prévert"));
-        restaurantList.add(new Restaurant("Snoop doog"));
+        restaurantList.add(new Restaurant("Beurk", 1, 3, 800, "épinards"));
+        restaurantList.add(new Restaurant("Prévert", 2, 5, 300, "tacos"));
+        restaurantList.add(new Restaurant("Snoop doog", 7, 1, 500, "frites"));
 
-        restaurantAdapter = new RestaurantAdapter(this.getContext(), restaurantList);
+        User theUser = new User("Hex", "SIGSWAG");
+
+        restaurantAdapter = new RestaurantAdapter(this.getContext(), restaurantList, theUser);
 
         listRestaurants.setAdapter(restaurantAdapter);
         restaurantAdapter.notifyDataSetChanged();

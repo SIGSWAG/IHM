@@ -14,7 +14,8 @@ public class User {
     private List<User> friends;
     private List<Invitation> receivedInvitations;
     private List<Invitation> sentInvitations;
-    // date  ?
+    private List<Invitation> acceptedInvitations;
+    private List<Restaurant> favoritesRestaurant;
 
     public User(String firstName, String lastName) {
         this.firstName = firstName;
@@ -23,15 +24,21 @@ public class User {
         this.friends = new ArrayList<>();
         this.receivedInvitations = new ArrayList<>();
         this.sentInvitations = new ArrayList<>();
+        this.acceptedInvitations = new ArrayList<>();
+        this.favoritesRestaurant = new ArrayList<>();
     }
 
-    public User(String firstName, String lastName, Restaurant currentRestaurant, List<User> friends, List<Invitation> receivedInvitations, List<Invitation> sentInvitations) {
+    public User(String firstName, String lastName, Restaurant currentRestaurant, List<User> friends,
+                List<Invitation> receivedInvitations, List<Invitation> sentInvitations,
+                List<Invitation> acceptedInvitations, List<Restaurant> favoritesRestaurant) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.currentRestaurant = currentRestaurant;
         this.friends = friends;
         this.receivedInvitations = receivedInvitations;
         this.sentInvitations = sentInvitations;
+        this.acceptedInvitations = acceptedInvitations;
+        this.favoritesRestaurant = favoritesRestaurant;
     }
 
     public String getFirstName() {
@@ -105,4 +112,47 @@ public class User {
     public void removeSentInvitations(Invitation invitation) {
         this.sentInvitations.remove(invitation);
     }
+
+    public List<Invitation> getAcceptedInvitations() {
+        return acceptedInvitations;
+    }
+
+    public void setAcceptedInvitations(List<Invitation> acceptedInvitations) {
+        this.acceptedInvitations = acceptedInvitations;
+    }
+
+    public void addAcceptedInvitation(Invitation invitation) {
+        acceptedInvitations.add(invitation);
+    }
+
+    public void removeAcceptedInvitation(Invitation invitation) {
+        acceptedInvitations.remove(invitation);
+    }
+
+    public List<Restaurant> getFavoritesRestaurant() {
+        return favoritesRestaurant;
+    }
+
+    public void setFavoritesRestaurant(List<Restaurant> favoritesRestaurant) {
+        this.favoritesRestaurant = favoritesRestaurant;
+    }
+
+    public void addFavoritesRestaurant(Restaurant favoriteRestaurant) {
+        this.favoritesRestaurant.add(favoriteRestaurant);
+    }
+
+    public void removeFavoritesRestaurant(Restaurant favoriteRestaurant) {
+        this.favoritesRestaurant.remove(favoriteRestaurant);
+    }
+
+    public boolean addOrRemove(Restaurant favoriteRestaurant) {
+        if(this.favoritesRestaurant.indexOf(favoriteRestaurant) != -1){
+            this.favoritesRestaurant.remove(favoriteRestaurant);
+            return false;
+        }else{
+            this.favoritesRestaurant.add(favoriteRestaurant);
+            return true;
+        }
+    }
+
 }
