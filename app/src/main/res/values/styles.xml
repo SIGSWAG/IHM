@@ -21,7 +21,8 @@
     <style name="separator">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/separator_height</item>
-        <item name="android:layout_margin">@dimen/separator_margin</item>
+        <item name="android:layout_marginBottom">@dimen/separator_margin</item>
+        <item name="android:layout_marginTop">@dimen/separator_margin</item>
         <item name="android:minHeight">@dimen/separator_height</item>
         <item name="android:background">@color/lighterGrayForClassicTextBackground</item>
     </style>
