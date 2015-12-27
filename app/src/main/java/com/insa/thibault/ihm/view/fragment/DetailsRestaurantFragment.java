@@ -2,12 +2,14 @@ package com.insa.thibault.ihm.view.fragment;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.insa.thibault.ihm.R;
@@ -21,7 +23,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Thibault on 10/12/2015.
  */
-public class DetailsRestaurantFragment extends Fragment{
+public class DetailsRestaurantFragment extends Fragment implements View.OnClickListener {
 
 
     public static String KEY_RESTAURANT = "key_restaurant";
@@ -30,6 +32,9 @@ public class DetailsRestaurantFragment extends Fragment{
     private FragmentDetailsRestaurantBinding binding;
     private Restaurant restaurant;
 
+
+    @Bind(R.id.button_invit)
+    Button buttonInvit;
 
 
 
@@ -57,7 +62,7 @@ public class DetailsRestaurantFragment extends Fragment{
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_details_restaurant, container, false);
 
         View v = binding.getRoot();
-        //ButterKnife.bind(this, v);
+        ButterKnife.bind(this, v);
 
         if (getArguments() != null && getArguments().getParcelable(KEY_RESTAURANT) != null) { //we are in a new acti
             restaurant = getArguments().getParcelable(KEY_RESTAURANT);
@@ -66,6 +71,14 @@ public class DetailsRestaurantFragment extends Fragment{
 
         }
 
+        buttonInvit.setOnClickListener(this);
+
         return v;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Snackbar.make(v, "Invitons des amis", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
     }
 }

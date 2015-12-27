@@ -69,7 +69,6 @@
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 card_view:cardCornerRadius="4dp">
                 <LinearLayout
                     android:orientation="vertical"
@@ -113,9 +112,9 @@
                 android:id="@+id/card_view_friends"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
+                card_view:cardUseCompatPadding="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 card_view:cardCornerRadius="4dp">
                 <RelativeLayout
 
@@ -134,13 +133,13 @@
 
                     <Button
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/button"
+                        android:layout_height="28dp"
+                        android:id="@+id/button_invit"
                         android:text="@string/invite"
                         android:background="@color/green_invit"
                         android:textColor="@color/whiteForTitle"
                         android:layout_gravity="right"
-                        android:layout_centerVertical="true"
+                        android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true" />
 
                     <ImageView
