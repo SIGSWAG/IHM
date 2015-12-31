@@ -8,4 +8,6 @@
         android:layout_height="match_parent"
         android:dividerHeight="2dp"
         android:divider="@drawable/list_divider"/>
+
+
 </RelativeLayout>

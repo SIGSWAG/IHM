@@ -1,37 +1,92 @@
 package com.insa.thibault.ihm.business;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by loict on 15/12/2015.
  */
-public class User {
+public class User implements Parcelable{
 
     private String firstName;
     private String lastName;
     private Restaurant currentRestaurant;
-    private List<User> friends;
+    private Map<String,User> friends;
     private List<Invitation> receivedInvitations;
     private List<Invitation> sentInvitations;
-    // date  ?
+    private List<Invitation> acceptedInvitations;
+    private List<Restaurant> favoritesRestaurant;
+    boolean isAppUser;
+
+
+    //Parcelable
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel source) {
+            return new User(source);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
+
+    public User(Parcel source) {
+        firstName = source.readString();
+        lastName = source.readString();
+        currentRestaurant = source.readParcelable(getClass().getClassLoader());
+        friends = new HashMap<>();
+        User[] users =  source.createTypedArray(User.CREATOR);
+
+        for(User user : users){
+            friends.put(user.getFirstName()+user.getLastName(), user);
+        }
+        receivedInvitations =  source.createTypedArrayList(Invitation.CREATOR);
+        sentInvitations =  source.createTypedArrayList(Invitation.CREATOR);
+        acceptedInvitations = source.createTypedArrayList(Invitation.CREATOR);
+
+
+        favoritesRestaurant = source.createTypedArrayList(Restaurant.CREATOR);
+        boolean[] app = new boolean[1];
+        source.readBooleanArray(app);
+        isAppUser =  app[0];
+    }
+
+
+
+
 
     public User(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.currentRestaurant = null;
-        this.friends = new ArrayList<>();
+        this.friends = new HashMap<>();
         this.receivedInvitations = new ArrayList<>();
         this.sentInvitations = new ArrayList<>();
+        this.acceptedInvitations = new ArrayList<>();
+        this.favoritesRestaurant = new ArrayList<>();
     }
 
-    public User(String firstName, String lastName, Restaurant currentRestaurant, List<User> friends, List<Invitation> receivedInvitations, List<Invitation> sentInvitations) {
+    public User(String firstName, String lastName, Restaurant currentRestaurant, Map<String, User> friends,
+                List<Invitation> receivedInvitations, List<Invitation> sentInvitations,
+                List<Invitation> acceptedInvitations, List<Restaurant> favoritesRestaurant) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.currentRestaurant = currentRestaurant;
         this.friends = friends;
         this.receivedInvitations = receivedInvitations;
         this.sentInvitations = sentInvitations;
+        this.acceptedInvitations = acceptedInvitations;
+        this.favoritesRestaurant = favoritesRestaurant;
     }
 
     public String getFirstName() {
@@ -58,16 +113,18 @@ public class User {
         this.currentRestaurant = currentRestaurant;
     }
 
-    public List<User> getFriends() {
+    public Map<String, User> getFriends() {
+
+
         return friends;
     }
 
-    public void setFriends(List<User> friends) {
+    public void setFriends(Map<String,User> friends) {
         this.friends = friends;
     }
 
     public void addFriend(User friend) {
-        this.friends.add(friend);
+        this.friends.put(friend.getFirstName()+friend.getLastName(), friend);
     }
 
     public void removeFriend(User friend) {
@@ -105,4 +162,96 @@ public class User {
     public void removeSentInvitations(Invitation invitation) {
         this.sentInvitations.remove(invitation);
     }
+
+    public List<Invitation> getAcceptedInvitations() {
+        return acceptedInvitations;
+    }
+
+    public void setAcceptedInvitations(List<Invitation> acceptedInvitations) {
+        this.acceptedInvitations = acceptedInvitations;
+    }
+
+    public void addAcceptedInvitation(Invitation invitation) {
+        acceptedInvitations.add(invitation);
+    }
+
+    public void removeAcceptedInvitation(Invitation invitation) {
+        acceptedInvitations.remove(invitation);
+    }
+
+    public List<Restaurant> getFavoritesRestaurant() {
+        return favoritesRestaurant;
+    }
+
+    public void setFavoritesRestaurant(List<Restaurant> favoritesRestaurant) {
+        this.favoritesRestaurant = favoritesRestaurant;
+    }
+
+    public void addFavoritesRestaurant(Restaurant favoriteRestaurant) {
+        this.favoritesRestaurant.add(favoriteRestaurant);
+    }
+
+    public void removeFavoritesRestaurant(Restaurant favoriteRestaurant) {
+        this.favoritesRestaurant.remove(favoriteRestaurant);
+    }
+
+    public boolean addOrRemove(Restaurant favoriteRestaurant) {
+        if(this.favoritesRestaurant.indexOf(favoriteRestaurant) != -1){
+            this.favoritesRestaurant.remove(favoriteRestaurant);
+            return false;
+        }else{
+            this.favoritesRestaurant.add(favoriteRestaurant);
+            return true;
+        }
+    }
+
+    public boolean isAppUser() {
+        return isAppUser;
+    }
+
+    public void setAppUser(boolean appUser) {
+        isAppUser = appUser;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags){
+        dest.writeString(firstName);
+        dest.writeString(lastName);
+        dest.writeParcelable(currentRestaurant,0);
+
+        if(friends==null){
+            friends = new HashMap<>();
+        }
+        if(receivedInvitations == null){
+            receivedInvitations = new ArrayList<>();
+        }
+        if(sentInvitations == null){
+            sentInvitations = new ArrayList<>();
+        }
+        if(acceptedInvitations == null){
+            acceptedInvitations = new ArrayList<>();
+        }
+        if(favoritesRestaurant == null){
+            favoritesRestaurant = new ArrayList<>();
+        }
+
+
+        dest.writeTypedArray( friends.values().toArray(new User[friends.size()]),0);
+        dest.writeTypedList( receivedInvitations);
+        dest.writeTypedList( sentInvitations);
+        dest.writeTypedList( acceptedInvitations);
+        dest.writeTypedList( favoritesRestaurant);
+        boolean[] userApp = new boolean[1];
+        userApp[0]=isAppUser;
+        dest.writeBooleanArray(userApp);
+
+    }
+
+
+
 }

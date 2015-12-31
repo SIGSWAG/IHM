@@ -28,12 +28,12 @@ public class Restaurant implements Parcelable {
     };
 
 
-    public Restaurant(String name) {
+    public Restaurant(String name, int nbFriends, int nbInvitations, int distanceMetres, String plat) {
         this.name = name;
-        this.nbFriends = 1;
-        this.nbInvitations = 4;
-        this.distanceMetres = 700;
-        this.plat = "épinards";
+        this.nbFriends = nbFriends;
+        this.nbInvitations = nbInvitations;
+        this.distanceMetres = distanceMetres;
+        this.plat = plat;
     }
 
     public Restaurant(Parcel source) {
@@ -57,7 +57,7 @@ public class Restaurant implements Parcelable {
     }
 
     public String getDistanceMetres() {
-        return "- " + distanceMetres + "m";
+        return "~" + distanceMetres + "m";
     }
 
     public String getPlat() {

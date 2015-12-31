@@ -2,6 +2,7 @@ package com.insa.thibault.ihm.view.fragment;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -24,7 +25,19 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.insa.thibault.ihm.R;
+import com.insa.thibault.ihm.RestaurantApplication;
+import com.insa.thibault.ihm.adapter.ContactAdapter;
+import com.insa.thibault.ihm.adapter.FriendAdapter;
+import com.insa.thibault.ihm.adapter.InviteListener;
+import com.insa.thibault.ihm.business.User;
 
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.BindString;
@@ -34,11 +47,20 @@ import butterknife.ButterKnife;
  * Created by Thibault on 09/12/2015.
  */
 public class FriendsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>,
-        AdapterView.OnItemClickListener{
+        AdapterView.OnItemClickListener {
 
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 1 ;
+    private static final String INVITATION_FRAGMENT = "invitation_fragment";
     @BindString(R.string.title_friends_fragment)
     protected String title;
+
+
+
+    @Inject
+    protected User currentUser;
+
+
+    private List<User> contacts;
 
     // The column index for the _ID column
     private static final int CONTACT_ID_INDEX = 0;
@@ -77,7 +99,7 @@ public class FriendsFragment extends Fragment implements LoaderManager.LoaderCal
     // A content URI for the selected contact
     Uri mContactUri;
     // An adapter that binds the result Cursor to the ListView
-    private SimpleCursorAdapter mCursorAdapter;
+    private ContactAdapter mContactAdapter;
 
 
     // Defines the text expression
@@ -102,36 +124,54 @@ public class FriendsFragment extends Fragment implements LoaderManager.LoaderCal
                             ContactsContract.Contacts.DISPLAY_NAME,
 
             };
+    private InviteListener mCallback;
+    private boolean isInvitationFragment;
 
 
-    public static FriendsFragment newInstance(Bundle bundle){
+    public static FriendsFragment newInstance(Bundle bundle, boolean isInvitationFragment){
         FriendsFragment fragment = new FriendsFragment();
+
+        bundle.putBoolean(INVITATION_FRAGMENT, isInvitationFragment);
         fragment.setArguments(bundle);
 
         return fragment;
 
     }
 
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        ((RestaurantApplication) getActivity().getApplication()).getAppComponent().inject(this);
+
+
+
+        if(getArguments() != null){
+
+            isInvitationFragment = getArguments().getBoolean(INVITATION_FRAGMENT);
+
+            if(isInvitationFragment) {
+                try {
+                    mCallback = (InviteListener) getContext();
+                } catch (ClassCastException e) {
+                    throw new ClassCastException(getContext().toString()
+                            + " must implement InviteListener");
+                }
+            }
+        }
+
+
+
         View v = inflater.inflate(R.layout.fragment_friends, container, false);
         ButterKnife.bind(this, v);
+
+
+
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(getActivity(),
                 Manifest.permission.READ_CONTACTS)
                 != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
-            /** if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
-             Manifest.permission.READ_CONTACTS)) {
-
-             // Show an expanation to the user *asynchronously* -- don't block
-             // this thread waiting for the user's response! After the user
-             // sees the explanation, try again to request the permission.
-
-             } else {*/
 
             // No explanation needed, we can request the permission.
             Log.d("permission","contacts not granted");
@@ -147,6 +187,8 @@ public class FriendsFragment extends Fragment implements LoaderManager.LoaderCal
 
             launchSearch();
         }
+
+
 
 
 
@@ -178,31 +220,35 @@ public class FriendsFragment extends Fragment implements LoaderManager.LoaderCal
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         // Put the result Cursor in the adapter for the ListView
-        mCursorAdapter.swapCursor(data);
+        contacts = new ArrayList<>();
+        contacts.addAll(currentUser.getFriends().values());
+        while (data.moveToNext()) {
+            String name = data.getString(2);
+            if(!currentUser.getFriends().containsKey(name)){
+                User user = new User(name, "",null, null,
+                       null, null,
+                       null, null);
+                user.setAppUser(false);
+                contacts.add(user);
+
+            }
+        }
+        mContactAdapter.setContacts(contacts);
+        mContactAdapter.notifyDataSetChanged();
+
+
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         // Delete the reference to the existing Cursor
-        mCursorAdapter.swapCursor(null);
+        mContactAdapter.notifyDataSetChanged();
+
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        // Get the Cursor
-        Cursor cursor = mCursorAdapter.getCursor();
-        // Move to the selected contact
-        cursor.moveToPosition(position);
-        // Get the _ID value
-        mContactId = cursor.getLong(CONTACT_ID_INDEX);
-        // Get the selected LOOKUP KEY
-        mContactKey = cursor.getString(LOOKUP_KEY_INDEX);
-        // Create the contact's content Uri
-        mContactUri = ContactsContract.Contacts.getLookupUri(mContactId, mContactKey);
-        /*
-         * You can use mContactUri as the content URI for retrieving
-         * the details for a contact.
-         */
+
 
     }
 
@@ -235,14 +281,20 @@ public class FriendsFragment extends Fragment implements LoaderManager.LoaderCal
         // permission was granted, yay! Do the
         // contacts-related task you need to do.
         getLoaderManager().initLoader(0, null, this);
-        mCursorAdapter = new SimpleCursorAdapter(
+        contacts = new ArrayList<>();
+        mContactAdapter =  new ContactAdapter(getActivity(),contacts, isInvitationFragment, mCallback);
+
+        /**new SimpleCursorAdapter(
                 getActivity(),
                 R.layout.item_friend,
                 null,
                 FROM_COLUMNS, TO_IDS,
-                0);
+                0);*/
         // Sets the adapter for the ListView
-        mContactsList.setAdapter(mCursorAdapter);
+        mContactsList.setAdapter(mContactAdapter);
         mContactsList.setOnItemClickListener(this);
     }
+
+
+   
 }

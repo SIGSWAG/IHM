@@ -1,27 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="16dp"
-    android:orientation="horizontal">
-
+    xmlns:tools="http://schemas.android.com/tools"
+    android:minHeight="72dp"
+    android:weightSum="1">
 
     <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:id="@+id/imageView3"
+        android:src="@drawable/ic_person_black_24dp"
+    />
+
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView7"
-        android:src="@drawable/ic_person_black_24dp" />
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:layout_gravity="center_vertical"
+        >
 
-    <TextView
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            tools:text="Jean Louis Matriciel"
+            android:id="@+id/friend_name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:layout_gravity="center_vertical"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="mange au Beurk"
+            android:id="@+id/restaurant_name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_gravity="center_vertical"
+            />
+    </LinearLayout>
+
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Jean Louis Matriciel"
-        android:layout_marginLeft="8dp"
-        style="@style/Base.TextAppearance.AppCompat.Headline"
-        android:id="@+id/friend_name"
-        android:layout_gravity="bottom"
-        />
+        android:layout_height="match_parent"
+        android:gravity="center_vertical|right"
+        android:orientation="vertical" >
 
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inviter"
+            android:id="@+id/invite_check"
+            android:checked="false"
+            android:layout_marginRight="8dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Inviter dans Restaurants"
+            android:id="@+id/invite_in_app"
+            android:textColor="@color/whiteForTitle"
+            android:backgroundTint="@color/green_invit"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
 
 </LinearLayout>

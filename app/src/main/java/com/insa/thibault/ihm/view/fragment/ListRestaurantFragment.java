@@ -14,11 +14,15 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.insa.thibault.ihm.R;
+import com.insa.thibault.ihm.RestaurantApplication;
 import com.insa.thibault.ihm.adapter.RestaurantAdapter;
 import com.insa.thibault.ihm.business.Restaurant;
+import com.insa.thibault.ihm.business.User;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.BindString;
@@ -30,8 +34,6 @@ import butterknife.ButterKnife;
  */
 public class ListRestaurantFragment extends Fragment implements AdapterView.OnItemClickListener {
 
-
-
     private OnRestaurantSelectedListener mCallback;
 
     @BindString(R.string.title_List_restaurant_fragment)
@@ -42,15 +44,15 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
 
     private RestaurantAdapter restaurantAdapter;
 
-    private List<Restaurant> restaurantList ;
 
+    @Inject
+    protected List<Restaurant> restaurantList;
 
     public static ListRestaurantFragment newInstance(Bundle bundle){
         ListRestaurantFragment fragment = new ListRestaurantFragment();
         fragment.setArguments(bundle);
 
         return fragment;
-
     }
 
     @Override
@@ -63,7 +65,7 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
             mCallback = (OnRestaurantSelectedListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement OnHeadlineSelectedListener");
+                    + " must implement OnRestaurantSelectedListener");
         }
     }
 
@@ -71,18 +73,21 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        ((RestaurantApplication) getActivity().getApplication()).getAppComponent().inject(this);
+
+
+
         View v = inflater.inflate(R.layout.fragment_list_restaurants, container, false);
 
         ButterKnife.bind(this, v);
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
 
-        restaurantList = new ArrayList<>();
-        restaurantList.add(new Restaurant("Beurk"));
-        restaurantList.add(new Restaurant("Prévert"));
-        restaurantList.add(new Restaurant("Snoop doog"));
 
-        restaurantAdapter = new RestaurantAdapter(this.getContext(), restaurantList);
+
+        User theUser = new User("Hex", "SIGSWAG");
+
+        restaurantAdapter = new RestaurantAdapter(this.getContext(), restaurantList, theUser);
 
         listRestaurants.setAdapter(restaurantAdapter);
         restaurantAdapter.notifyDataSetChanged();

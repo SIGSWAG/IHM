@@ -9,4 +9,17 @@
 
     <!-- Margins for lists -->
     <dimen name="list_margin_left">16dp</dimen>
+
+
+    <!-- Separator -->
+    <dimen name="separator_margin">16dp</dimen>
+    <dimen name="separator_height">1dp</dimen>
+
+    <!-- Margins for title -->
+    <dimen name="title_margin_left">16dp</dimen>
+
+    <!-- Item invitation dimensions -->
+    <dimen name="height_tile_item_invitation">118dp</dimen>
+    <dimen name="left_avatar_padding_invite_profile_image">16dp</dimen>
+    <dimen name="title_separator_margin_top">16dp</dimen>
 </resources>
