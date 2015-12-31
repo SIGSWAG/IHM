@@ -8,6 +8,12 @@ import android.os.Parcelable;
  */
 public class Invitation implements Parcelable{
 
+
+    public static int ACCEPTED = 0;
+    public static int PENDING = 1;
+    public static int DENIED = 2;
+
+
     private User sender;
     private User receiver;
     private Restaurant restaurant;
@@ -15,8 +21,9 @@ public class Invitation implements Parcelable{
     private int timeMinutes;
     private int nbFriends;
     private int nbPeople;
+    private int status;
 
-    public Invitation(User sender, User receiver, Restaurant restaurant, int timeHour, int timeMinutes, int nbFriends, int nbPeople) {
+    public Invitation(User sender, User receiver, Restaurant restaurant, int timeHour, int timeMinutes, int nbFriends, int nbPeople, int status) {
         this.sender = sender;
         this.receiver = receiver;
         this.restaurant = restaurant;
@@ -24,6 +31,7 @@ public class Invitation implements Parcelable{
         this.timeMinutes = timeMinutes;
         this.nbFriends = nbFriends;
         this.nbPeople = nbPeople;
+        this.status = status;
     }
 
 
@@ -51,6 +59,7 @@ public class Invitation implements Parcelable{
         timeMinutes = source.readInt();
         nbFriends = source.readInt();
         nbPeople = source.readInt();
+        status = source.readInt();
 
     }
 
@@ -111,6 +120,14 @@ public class Invitation implements Parcelable{
         this.nbPeople = nbPeople;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -126,7 +143,10 @@ public class Invitation implements Parcelable{
         dest.writeInt(timeMinutes);
         dest.writeInt(nbFriends);
         dest.writeInt(nbPeople);
+        dest.writeInt(status);
 
 
     }
+
+
 }

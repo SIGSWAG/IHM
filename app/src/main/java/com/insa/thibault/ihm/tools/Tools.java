@@ -22,7 +22,8 @@ public class Tools {
         if(restaurantList ==  null) {
 
             restaurantList = new ArrayList<>();
-            restaurantList.add(new Restaurant("Beurk", 1, 3, 800, "épinards"));
+            Restaurant restaurant = new Restaurant("Beurk", 12, 2, 30, "Brocoli");
+            restaurantList.add(restaurant);
             restaurantList.add(new Restaurant("Prévert", 2, 5, 300, "tacos"));
             restaurantList.add(new Restaurant("Snoop doog", 7, 1, 500, "frites"));
 
@@ -31,10 +32,10 @@ public class Tools {
 
             User sender = new User("Damien", "Gallet");
             User receiver = new User("Aziz", "SIGSWAG");
-            Restaurant restaurant = new Restaurant("Beurk", 12, 2, 30, "Brocoli");
 
-            invitations.add(new Invitation(sender, receiver, restaurant, 12, 45, 3, 12));
-            invitations.add(new Invitation(sender, receiver, restaurant, 11, 30, 3, 12));
+
+            invitations.add(new Invitation(sender, receiver, restaurant, 12, 45, 3, 12,Invitation.PENDING));
+            invitations.add(new Invitation(sender, receiver, restaurant, 11, 30, 3, 12, Invitation.PENDING));
 
 
             User user1 = new User("Adam", "Rivault", null, null,

@@ -51,6 +51,7 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
     private List<Invitation> invitations;
 
     private InvitationAdapter invitationAdapter;
+    private InvitationAdapter mealAdapter;
 
     public static ListInvitationFragment newInstance(Bundle bundle){
         ListInvitationFragment fragment = new ListInvitationFragment();
@@ -91,15 +92,18 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
 
         invitations = new ArrayList<>();
         invitations.addAll(currentUser.getReceivedInvitations());
-        invitations.addAll(currentUser.getAcceptedInvitations());
 
         invitationAdapter = new InvitationAdapter(this.getContext(), invitations);
+        mealAdapter = new InvitationAdapter(this.getContext(), currentUser.getAcceptedInvitations());
+
+        myMealsList.setAdapter(mealAdapter);
+        mealAdapter.notifyDataSetChanged();
 
         invitationsList.setAdapter(invitationAdapter);
         invitationAdapter.notifyDataSetChanged();
 
         invitationsList.setOnItemClickListener(this);
-
+        myMealsList.setOnItemClickListener(this);
         return v;
     }
 

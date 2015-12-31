@@ -1,24 +1,36 @@
 package com.insa.thibault.ihm.view.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.insa.thibault.ihm.R;
+import com.insa.thibault.ihm.RestaurantApplication;
 import com.insa.thibault.ihm.business.Restaurant;
+import com.insa.thibault.ihm.business.User;
 import com.insa.thibault.ihm.view.fragment.DetailsRestaurantFragment;
+
+import javax.inject.Inject;
 
 public class DetailsRestaurantActivity extends AppCompatActivity {
 
     public static String KEY_RESTAURANT = "key_restaurant";
+
+    @Inject
+    protected User currentUser;
+
+    private Restaurant restaurant;
+
 
     public static Intent newIntent(Context context, Restaurant restaurant){
 
@@ -30,6 +42,8 @@ public class DetailsRestaurantActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ((RestaurantApplication)getApplication()).getAppComponent().inject(this);
         setContentView(R.layout.activity_details_restaurant);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -42,7 +56,7 @@ public class DetailsRestaurantActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        Restaurant restaurant = intent.getParcelableExtra(KEY_RESTAURANT);
+        final Restaurant restaurant = intent.getParcelableExtra(KEY_RESTAURANT);
 
         collapsingToolbar.setTitle(restaurant.getName());
 
@@ -54,14 +68,7 @@ public class DetailsRestaurantActivity extends AppCompatActivity {
                 .commit();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Ok, on vous voit tout à l'heure !", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
+        fab.setOnClickListener(detailsRestaurantFragment);
 
     }
 

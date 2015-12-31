@@ -8,7 +8,7 @@
             android:title="@string/restaurants" />
         <item
             android:id="@+id/nav_invitations"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_event_black_24dp"
             android:title="@string/my_invitations" />
         <item
             android:id="@+id/nav_friends"

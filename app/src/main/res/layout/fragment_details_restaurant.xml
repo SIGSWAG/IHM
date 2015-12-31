@@ -11,11 +11,62 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
+
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="16dp">
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_viewli"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardCornerRadius="4dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/imageView7"
+                            android:src="@drawable/ic_event_black_24dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/black"
+                            android:layout_height="match_parent"
+                            android:text="Invitations"
+                            style="@style/Base.TextAppearance.AppCompat.Body1"
+                            android:gravity="bottom"
+                            tools:text="Invitations"
+                            android:layout_marginLeft="8dp" />
+                    </LinearLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+
+                        android:id="@+id/list_invit"
+                        />
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
             <android.support.v7.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/card_view"
@@ -47,7 +98,7 @@
                             android:textColor="@color/black"
                             android:layout_height="match_parent"
                             android:text="@{restaurant.name}"
-
+                            style="@style/Base.TextAppearance.AppCompat.Body1"
                             android:gravity="bottom"
                             tools:text="Le beurk"
                             android:layout_marginLeft="8dp" />
@@ -92,6 +143,7 @@
                             android:textColor="@color/black"
                             android:gravity="bottom"
                             android:layout_height="match_parent"
+                            style="@style/Base.TextAppearance.AppCompat.Body1"
                             android:text="@string/menu"
                             android:layout_marginLeft="8dp" />
                     </LinearLayout>
@@ -129,6 +181,8 @@
                         android:text="@string/my_friends"
                         android:layout_alignBottom="@+id/imageView4"
                         android:layout_toEndOf="@+id/imageView4"
+
+                        style="@style/Base.TextAppearance.AppCompat.Body1"
                         android:layout_marginLeft="8dp" />
 
                     <Button

@@ -1,6 +1,8 @@
 package com.insa.thibault.ihm.config;
 
 
+import com.insa.thibault.ihm.view.activity.DetailsRestaurantActivity;
+import com.insa.thibault.ihm.view.fragment.DetailsRestaurantFragment;
 import com.insa.thibault.ihm.view.fragment.FriendsFragment;
 import com.insa.thibault.ihm.view.fragment.ListInvitationFragment;
 import com.insa.thibault.ihm.view.fragment.ListRestaurantFragment;
@@ -22,4 +24,8 @@ public interface AppComponent {
     void inject(ListRestaurantFragment listRestaurantFragment);
 
     void inject(ListInvitationFragment listInvitationFragment);
+
+    void inject(DetailsRestaurantActivity detailsRestaurantActivity);
+
+    void inject(DetailsRestaurantFragment detailsRestaurantFragment);
 }
