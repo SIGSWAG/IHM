@@ -44,9 +44,15 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
 
     private RestaurantAdapter restaurantAdapter;
 
+    @Inject
+    protected User user;
 
     @Inject
     protected List<Restaurant> restaurantList;
+
+    public ListRestaurantFragment() {
+
+    }
 
     public static ListRestaurantFragment newInstance(Bundle bundle){
         ListRestaurantFragment fragment = new ListRestaurantFragment();
@@ -83,11 +89,7 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
 
-
-
-        User theUser = new User("Hex", "SIGSWAG");
-
-        restaurantAdapter = new RestaurantAdapter(this.getContext(), restaurantList, theUser);
+        restaurantAdapter = new RestaurantAdapter(this.getContext(), restaurantList, user);
 
         listRestaurants.setAdapter(restaurantAdapter);
         restaurantAdapter.notifyDataSetChanged();
@@ -95,7 +97,6 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
 
         return v;
     }
-
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

@@ -1,8 +1,6 @@
 package com.insa.thibault.ihm.adapter;
 
 import android.content.Context;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.insa.thibault.ihm.R;
 import com.insa.thibault.ihm.business.Restaurant;
 import com.insa.thibault.ihm.business.User;
+import com.insa.thibault.ihm.utils.SnackbarUtils;
 
 import java.util.List;
 
@@ -23,21 +21,17 @@ import java.util.List;
  */
 public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
 
-
     private List<Restaurant> restaurants;
-    private User utilisateur;
-
+    private User user;
 
     public RestaurantAdapter(Context context, List<Restaurant> restaurants, User utilisateur) {
         super(context, 0, restaurants);
         this.restaurants =  restaurants;
-        this.utilisateur = utilisateur;
-
+        this.user = utilisateur;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         final ViewHolder viewHolder;
 
         if (convertView == null) {
@@ -49,33 +43,42 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
             viewHolder.nbFriends = (TextView) convertView.findViewById(R.id.nb_friends_eating);
             viewHolder.distance = (TextView) convertView.findViewById(R.id.distance_restaurant);
             viewHolder.nbNotifs = (TextView) convertView.findViewById(R.id.nb_notifs);
-            viewHolder.boutonManger = (Button) convertView.findViewById(R.id.boutonManger);
-            viewHolder.boutonStar = (ImageButton) convertView.findViewById(R.id.imageFavoris);
+            viewHolder.buttonEat = (Button) convertView.findViewById(R.id.boutonManger);
+            viewHolder.buttonStar = (ImageButton) convertView.findViewById(R.id.imageFavoris);
             convertView.setTag(viewHolder);
-        } else {
+        }
+        else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        final Restaurant currentRestaurant = getItem(position);
-        viewHolder.name.setText(currentRestaurant.getName());
-        viewHolder.nbFriends.setText(" " + currentRestaurant.getNbFriends() + " ");
-        viewHolder.distance.setText(currentRestaurant.getDistanceMetres());
-        viewHolder.nbNotifs.setText("" + currentRestaurant.getNbInvitations());
-        viewHolder.boutonManger.setOnClickListener(new View.OnClickListener() {
+        final Restaurant restaurant = getItem(position);
+        viewHolder.name.setText(restaurant.getName());
+        viewHolder.nbFriends.setText(" " + restaurant.getNbFriends() + " ");
+        viewHolder.distance.setText(restaurant.getDistanceMetres());
+        viewHolder.nbNotifs.setText("" + restaurant.getNbInvitations());
+        viewHolder.buttonEat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Ok, on vous voit tout à l'heure !", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                SnackbarUtils.showSnackbarLong(v, "Ok, on vous voit tout à l'heure !");
             }
         });
-        viewHolder.boutonStar.setOnClickListener(new View.OnClickListener() {
+
+        if(user.isRestaurantFavorite(restaurant)) {
+            viewHolder.buttonStar.setImageResource(R.drawable.ic_star_black_24dp);
+        }
+        else {
+            viewHolder.buttonStar.setImageResource(R.drawable.ic_star_border_black_24dp);
+        }
+
+        viewHolder.buttonStar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(utilisateur.addOrRemove(currentRestaurant)){
-                    viewHolder.boutonStar.setImageResource(R.drawable.ic_star_black_24dp);
-                }
-                else{
-                    viewHolder.boutonStar.setImageResource(R.drawable.ic_star_border_black_24dp);
+                if (user.addOrRemove(restaurant)) {
+                    viewHolder.buttonStar.setImageResource(R.drawable.ic_star_black_24dp);
+                    SnackbarUtils.showFavoriteAdded(v, restaurant);
+                } else {
+                    viewHolder.buttonStar.setImageResource(R.drawable.ic_star_border_black_24dp);
+                    SnackbarUtils.showFavoriteRemoved(v, restaurant);
                 }
             }
         });
@@ -84,13 +87,15 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
     }
 
 
+
+
     static class ViewHolder {
         TextView name;
         TextView nbFriends;
         TextView nbNotifs;
         TextView distance;
-        Button boutonManger;
-        ImageButton boutonStar;
+        Button buttonEat;
+        ImageButton buttonStar;
     }
 
 

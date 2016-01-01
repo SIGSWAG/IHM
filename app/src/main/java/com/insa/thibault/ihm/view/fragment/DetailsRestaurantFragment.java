@@ -10,7 +10,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +26,7 @@ import com.insa.thibault.ihm.business.User;
 
 
 import com.insa.thibault.ihm.databinding.FragmentDetailsRestaurantBinding;
-import com.insa.thibault.ihm.view.activity.DetailsRestaurantActivity;
+import com.insa.thibault.ihm.utils.SnackbarUtils;
 import com.insa.thibault.ihm.view.activity.FriendsActivity;
 
 import java.util.ArrayList;
@@ -51,7 +50,7 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
     private RecyclerInvitationAdapter recyclerInvitationAdapter;
 
     @Inject
-    protected User currentUser;
+    protected User user;
 
     @Bind(R.id.button_invit)
     Button buttonInvit;
@@ -76,7 +75,6 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -95,17 +93,15 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
         }
 
         List<Invitation> invitations = new ArrayList<>();
-        for(Invitation invitation :  currentUser.getReceivedInvitations()){
+        for(Invitation invitation :  user.getReceivedInvitations()){
             if(invitation.getRestaurant().getName().compareTo(restaurant.getName()) == 0 && invitation.getStatus()==Invitation.PENDING){
                 invitations.add(invitation);
             }
         }
-        recyclerInvitationAdapter = new RecyclerInvitationAdapter(getActivity(), invitations, this, currentUser);
 
-
+        recyclerInvitationAdapter = new RecyclerInvitationAdapter(getActivity(), invitations, this, user);
         recyclerViewInvitations.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerViewInvitations.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-
 
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -115,7 +111,6 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-
                 int pos = viewHolder.getAdapterPosition();
                 recyclerInvitationAdapter.getItemAt(pos).setStatus(Invitation.DENIED);
                 recyclerInvitationAdapter.remove(pos);
@@ -139,17 +134,22 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
             }
         });
 
+        if(user.isRestaurantFavorite(restaurant)) {
+            buttonFavorite.setImageResource(R.drawable.ic_star_black_24dp);
+        }
+        else {
+            buttonFavorite.setImageResource(R.drawable.ic_star_border_black_24dp);
+        }
+
         buttonFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentUser.addOrRemove(restaurant)) {
+                if (user.addOrRemove(restaurant)) {
                     buttonFavorite.setImageResource(R.drawable.ic_star_black_24dp);
-                    Snackbar.make(v, restaurant.getName() + " a été ajouté à vos favoris", Snackbar.LENGTH_SHORT)
-                            .setAction("Action", null).show();
+                    SnackbarUtils.showFavoriteAdded(v, restaurant);
                 } else {
                     buttonFavorite.setImageResource(R.drawable.ic_star_border_black_24dp);
-                    Snackbar.make(v, restaurant.getName() + " a été retiré de vos favoris", Snackbar.LENGTH_SHORT)
-                            .setAction("Action", null).show();
+                    SnackbarUtils.showFavoriteRemoved(v, restaurant);
                 }
             }
         });
@@ -160,7 +160,7 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
     @Override
     public void onClick(View v) {
         final View view = v;
-        if (currentUser.getCurrentRestaurant() != null ) {
+        if (user.getCurrentRestaurant() != null ) {
             AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
             alertDialog.setTitle("Etes vous sûr ?");
             alertDialog.setMessage("Vous avez indiqué vouloir manger dans un autre restaurant ou à une autre heure ce midi. Voulez vous vraiment" +
@@ -169,9 +169,9 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
 
-                            currentUser.setCurrentRestaurant(restaurant);
-                            currentUser.getAcceptedInvitations().clear();
-                            currentUser.addAcceptedInvitation(new Invitation(currentUser, currentUser, restaurant, 12, 45, 3, 12, Invitation.ACCEPTED));
+                            user.setCurrentRestaurant(restaurant);
+                            user.getAcceptedInvitations().clear();
+                            user.addAcceptedInvitation(new Invitation(user, user, restaurant, 12, 45, 3, 12, Invitation.ACCEPTED));
                             Snackbar.make(view, "Votre repas a été enregistré", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                             dialog.dismiss();
@@ -186,10 +186,10 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
 
             alertDialog.show();
         }
-        else if(currentUser.getCurrentRestaurant() == null){
-            currentUser.setCurrentRestaurant(restaurant);
+        else if(user.getCurrentRestaurant() == null){
+            user.setCurrentRestaurant(restaurant);
 
-            currentUser.addAcceptedInvitation(new Invitation(currentUser, currentUser, restaurant, 12, 45, 3, 12, Invitation.ACCEPTED));
+            user.addAcceptedInvitation(new Invitation(user, user, restaurant, 12, 45, 3, 12, Invitation.ACCEPTED));
             Snackbar.make(view, "Votre repas a été enregistré", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }

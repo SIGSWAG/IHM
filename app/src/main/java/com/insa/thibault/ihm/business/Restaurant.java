@@ -94,7 +94,29 @@ public class Restaurant implements Parcelable {
         dest.writeString(name);
         dest.writeString(plat);
         dest.writeInt(nbFriends);
+        dest.writeInt(nbInvitations);
         dest.writeInt(distanceMetres);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof Restaurant) {
+            Restaurant restaurant = (Restaurant) o;
+            if(!name.equals(restaurant.name)) {
+                return false;
+            }
+            if(!plat.equals(restaurant.plat)) {
+                return false;
+            }
+            if(nbFriends != restaurant.nbFriends) {
+                return false;
+            }
+            if(distanceMetres != restaurant.distanceMetres) {
+                return false;
+            }
+            return true;
+        }
+        return false;
     }
 
 }

@@ -244,4 +244,12 @@ public class User implements Parcelable{
         dest.writeBooleanArray(userApp);
     }
 
+    public boolean isRestaurantFavorite(Restaurant currentRestaurant) {
+        for(Restaurant favoriteRestaurant : favoritesRestaurant) {
+            if(favoriteRestaurant.equals(currentRestaurant)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
