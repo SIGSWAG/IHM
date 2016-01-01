@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.insa.thibault.ihm.R;
@@ -53,14 +54,14 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
     @Inject
     protected User currentUser;
 
-
     @Bind(R.id.button_invit)
     Button buttonInvit;
 
     @Bind(R.id.list_invit)
     RecyclerView recyclerViewInvitations;
 
-
+    @Bind(R.id.restaurant_favorite_icon)
+    ImageButton buttonFavorite;
 
     public static DetailsRestaurantFragment newInstance(Bundle bundleArg, Restaurant restaurant){
         DetailsRestaurantFragment fragment = new DetailsRestaurantFragment();
@@ -145,13 +146,26 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
             }
         });
 
+        buttonFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentUser.addOrRemove(restaurant)) {
+                    buttonFavorite.setImageResource(R.drawable.ic_star_black_24dp);
+                    Snackbar.make(v, restaurant.getName() + " a été ajouté à vos favoris", Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
+                } else {
+                    buttonFavorite.setImageResource(R.drawable.ic_star_border_black_24dp);
+                    Snackbar.make(v, restaurant.getName() + " a été retiré de vos favoris", Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
+                }
+            }
+        });
+
         return v;
     }
 
     @Override
     public void onClick(View v) {
-
-
         final View view = v;
         if (currentUser.getCurrentRestaurant() != null ) {
             AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();

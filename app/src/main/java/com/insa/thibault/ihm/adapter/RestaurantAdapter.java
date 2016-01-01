@@ -73,12 +73,12 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
             public void onClick(View v) {
                 if(utilisateur.addOrRemove(currentRestaurant)){
                     viewHolder.boutonStar.setImageResource(R.drawable.ic_star_black_24dp);
-                }else{
+                }
+                else{
                     viewHolder.boutonStar.setImageResource(R.drawable.ic_star_border_black_24dp);
                 }
             }
         });
-
 
         return convertView;
     }
