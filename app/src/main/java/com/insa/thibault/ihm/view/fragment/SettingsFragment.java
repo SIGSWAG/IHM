@@ -57,15 +57,12 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(listener);
     }
 
-
-
     @Override
     public void onPause() {
         super.onPause();
         getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(listener);
 
     }
-
 
 //    @Override
 //    public View onCreateView(LayoutInflater inflater, ViewGroup container,

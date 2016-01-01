@@ -8,5 +8,6 @@ import com.insa.thibault.ihm.business.User;
 public interface InviteListener {
 
     void invite(User user);
+
     void cancelInvite(User user);
 }

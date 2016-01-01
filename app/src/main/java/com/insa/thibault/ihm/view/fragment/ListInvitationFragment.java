@@ -58,7 +58,6 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
         fragment.setArguments(bundle);
 
         return fragment;
-
     }
 
     @Override
@@ -79,7 +78,6 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         ((RestaurantApplication) getActivity().getApplication()).getAppComponent().inject(this);
 
         // Inflate the layout for this fragment
@@ -88,7 +86,6 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
         ButterKnife.bind(this, v);
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
-
 
         invitations = new ArrayList<>();
         invitations.addAll(currentUser.getReceivedInvitations());

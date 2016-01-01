@@ -80,7 +80,6 @@ public class DetailsRestaurantActivity extends AppCompatActivity {
                 break;
             default:
                 break;
-
         }
         return (super.onOptionsItemSelected(menuItem));
     }

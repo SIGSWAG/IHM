@@ -28,8 +28,11 @@ import java.util.List;
 public class ContactAdapter extends ArrayAdapter<User> {
 
     private List<User> contacts;
+
     boolean inviteAdapter;
-    InviteListener listener;
+
+    private InviteListener listener;
+
     public ContactAdapter(Context context, List<User> invitations, boolean inviteAdapter, InviteListener listener) {
         super(context, 0, invitations);
         this.contacts = invitations;
@@ -69,6 +72,7 @@ public class ContactAdapter extends ArrayAdapter<User> {
 
             }
         });
+
         viewHolder.friendName.setText(currentUser.getFirstName()+" "+currentUser.getLastName());
 
         if(restaurant != null) {
@@ -79,17 +83,19 @@ public class ContactAdapter extends ArrayAdapter<User> {
 
             viewHolder.invite.setVisibility(View.VISIBLE);
             viewHolder.inviteInApp.setVisibility(View.GONE);
-        }else if (currentUser.isAppUser()){
+        }
+        else if (currentUser.isAppUser()){
             viewHolder.inviteInApp.setVisibility(View.GONE);
             viewHolder.invite.setVisibility(View.GONE);
 
-        }else{
+        }
+        else{
             viewHolder.inviteInApp.setVisibility(View.VISIBLE);
             viewHolder.invite.setVisibility(View.GONE);
         }
+
         return convertView;
     }
-
 
     private static class ViewHolder {
         TextView friendName;

@@ -23,7 +23,6 @@ import butterknife.ButterKnife;
 
 public class FriendsActivity extends AppCompatActivity implements InviteListener, View.OnClickListener {
 
-
     public static String FRIENDS_LIST =  "friends_list";
 
     Map<String, User> invitedFriends;
@@ -34,7 +33,6 @@ public class FriendsActivity extends AppCompatActivity implements InviteListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
-
 
         ButterKnife.bind(this);
 
@@ -51,7 +49,6 @@ public class FriendsActivity extends AppCompatActivity implements InviteListener
         fragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, friendsFragment)//TODO use tags
                 .commit();
-
     }
 
     @Override
@@ -66,13 +63,11 @@ public class FriendsActivity extends AppCompatActivity implements InviteListener
 
     @Override
     public void onClick(View v) {
-
         Intent intent = new Intent();
         ArrayList<User> friends = new ArrayList();
         friends.addAll(invitedFriends.values());
         intent.putParcelableArrayListExtra(FRIENDS_LIST, friends);
         setResult(RESULT_OK, intent);
         finish();
-
     }
 }

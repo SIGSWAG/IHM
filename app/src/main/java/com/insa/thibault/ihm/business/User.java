@@ -25,7 +25,6 @@ public class User implements Parcelable{
     private List<Restaurant> favoritesRestaurant;
     boolean isAppUser;
 
-
     //Parcelable
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
         @Override
@@ -50,20 +49,16 @@ public class User implements Parcelable{
         for(User user : users){
             friends.put(user.getFirstName()+user.getLastName(), user);
         }
+
         receivedInvitations =  source.createTypedArrayList(Invitation.CREATOR);
         sentInvitations =  source.createTypedArrayList(Invitation.CREATOR);
         acceptedInvitations = source.createTypedArrayList(Invitation.CREATOR);
-
 
         favoritesRestaurant = source.createTypedArrayList(Restaurant.CREATOR);
         boolean[] app = new boolean[1];
         source.readBooleanArray(app);
         isAppUser =  app[0];
     }
-
-
-
-
 
     public User(String firstName, String lastName) {
         this.firstName = firstName;
@@ -114,8 +109,6 @@ public class User implements Parcelable{
     }
 
     public Map<String, User> getFriends() {
-
-
         return friends;
     }
 
@@ -196,11 +189,12 @@ public class User implements Parcelable{
     }
 
     public boolean addOrRemove(Restaurant favoriteRestaurant) {
-        if(this.favoritesRestaurant.indexOf(favoriteRestaurant) != -1){
-            this.favoritesRestaurant.remove(favoriteRestaurant);
+        if(favoritesRestaurant.indexOf(favoriteRestaurant) != -1){
+            favoritesRestaurant.remove(favoriteRestaurant);
             return false;
-        }else{
-            this.favoritesRestaurant.add(favoriteRestaurant);
+        }
+        else{
+            favoritesRestaurant.add(favoriteRestaurant);
             return true;
         }
     }
@@ -240,7 +234,6 @@ public class User implements Parcelable{
             favoritesRestaurant = new ArrayList<>();
         }
 
-
         dest.writeTypedArray( friends.values().toArray(new User[friends.size()]),0);
         dest.writeTypedList( receivedInvitations);
         dest.writeTypedList( sentInvitations);
@@ -249,9 +242,6 @@ public class User implements Parcelable{
         boolean[] userApp = new boolean[1];
         userApp[0]=isAppUser;
         dest.writeBooleanArray(userApp);
-
     }
-
-
 
 }

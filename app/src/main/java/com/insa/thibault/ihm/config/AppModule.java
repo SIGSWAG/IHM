@@ -20,12 +20,7 @@ public class AppModule {
 
     public AppModule(RestaurantApplication application) throws IOException {
         this.application = application;
-
-
-
-
     }
-
 
     @Provides
     @Singleton

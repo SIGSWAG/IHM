@@ -19,20 +19,15 @@ import dagger.Provides;
 @Module
 public class RestaurantModule {
 
-
     @Provides
     @Singleton
     User provideUser(Context context) {
-
         return Tools.getCurrentUser();
     }
 
     @Provides
     @Singleton
     List<Restaurant> provideRestaurants(Context context) {
-
         return Tools.getRestaurants();
     }
-
-
 }

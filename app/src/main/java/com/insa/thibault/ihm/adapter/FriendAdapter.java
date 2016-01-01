@@ -14,23 +14,16 @@ import com.insa.thibault.ihm.R;
  */
 public class FriendAdapter extends ResourceCursorAdapter {
 
-
-
     public FriendAdapter(Context context, int layout, Cursor c, boolean autoRequery) {
         super(context, layout, c, autoRequery);
     }
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-
         String nameF  = cursor.getString(2);
-
 
         TextView name = (TextView) view.findViewById(R.id.friend_name);
 
-
         name.setText(nameF);
-
-
     }
 }

@@ -8,11 +8,9 @@ import android.os.Parcelable;
  */
 public class Invitation implements Parcelable{
 
-
     public static int ACCEPTED = 0;
     public static int PENDING = 1;
     public static int DENIED = 2;
-
 
     private User sender;
     private User receiver;
@@ -48,9 +46,6 @@ public class Invitation implements Parcelable{
         }
     };
 
-
-
-
     public Invitation(Parcel source){
         sender = source.readParcelable(getClass().getClassLoader());
         receiver = source.readParcelable(getClass().getClassLoader());
@@ -60,9 +55,7 @@ public class Invitation implements Parcelable{
         nbFriends = source.readInt();
         nbPeople = source.readInt();
         status = source.readInt();
-
     }
-
 
     public User getSender() {
         return sender;
@@ -135,7 +128,6 @@ public class Invitation implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
         dest.writeParcelable(sender, 0);
         dest.writeParcelable(receiver, 0);
         dest.writeParcelable(restaurant, 0);
@@ -144,9 +136,6 @@ public class Invitation implements Parcelable{
         dest.writeInt(nbFriends);
         dest.writeInt(nbPeople);
         dest.writeInt(status);
-
-
     }
-
 
 }

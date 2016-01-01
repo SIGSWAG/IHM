@@ -43,7 +43,6 @@ import butterknife.ButterKnife;
  */
 public class DetailsRestaurantFragment extends Fragment implements View.OnClickListener, RecyclerInvitationAdapter.OnItemClickListener {
 
-
     public static String KEY_RESTAURANT = "key_restaurant";
     private int FRIENDS_ACTIVITY = 0;
 
@@ -81,7 +80,6 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         ((RestaurantApplication)getActivity().getApplication()).getAppComponent().inject(this);
 
         //View v = inflater.inflate(R.layout.fragment_details_restaurant, container, false);
@@ -93,14 +91,11 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
 
         if (getArguments() != null && getArguments().getParcelable(KEY_RESTAURANT) != null) { //we are in a new acti
             restaurant = getArguments().getParcelable(KEY_RESTAURANT);
-
             binding.setRestaurant(restaurant);
-
         }
 
         List<Invitation> invitations = new ArrayList<>();
         for(Invitation invitation :  currentUser.getReceivedInvitations()){
-
             if(invitation.getRestaurant().getName().compareTo(restaurant.getName()) == 0 && invitation.getStatus()==Invitation.PENDING){
                 invitations.add(invitation);
             }
@@ -131,10 +126,8 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerViewInvitations);
 
-
         recyclerViewInvitations.setAdapter(recyclerInvitationAdapter);
         recyclerInvitationAdapter.notifyDataSetChanged();
-
 
         buttonInvit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,29 +175,24 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
                             Snackbar.make(view, "Votre repas a été enregistré", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                             dialog.dismiss();
-                        }
-                    });
+                    }
+                                  });
             alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Annuler",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
-                        }
-                    });
+                }
+                              });
 
             alertDialog.show();
-
-
-        }else if(currentUser.getCurrentRestaurant() == null){
-
+        }
+        else if(currentUser.getCurrentRestaurant() == null){
             currentUser.setCurrentRestaurant(restaurant);
 
             currentUser.addAcceptedInvitation(new Invitation(currentUser, currentUser, restaurant, 12, 45, 3, 12, Invitation.ACCEPTED));
             Snackbar.make(view, "Votre repas a été enregistré", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
-
-
-
     }
 
 
@@ -225,6 +213,6 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
 
     @Override
     public void onItemClick(View v, int position, Invitation invitation) {
-
+        // TODO
     }
 }

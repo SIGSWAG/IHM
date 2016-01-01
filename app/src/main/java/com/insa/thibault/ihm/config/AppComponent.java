@@ -18,7 +18,6 @@ import dagger.Component;
 @Component(modules = {RestaurantModule.class, AppModule.class})
 public interface AppComponent {
 
-
     void inject(FriendsFragment friendsFragment);
 
     void inject(ListRestaurantFragment listRestaurantFragment);

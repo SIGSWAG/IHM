@@ -51,14 +51,12 @@ public class FriendsFragment extends Fragment implements LoaderManager.LoaderCal
 
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 1 ;
     private static final String INVITATION_FRAGMENT = "invitation_fragment";
+
     @BindString(R.string.title_friends_fragment)
     protected String title;
 
-
-
     @Inject
     protected User currentUser;
-
 
     private List<User> contacts;
 
@@ -83,7 +81,6 @@ public class FriendsFragment extends Fragment implements LoaderManager.LoaderCal
      * the Android framework, so it is prefaced with "android.R.id"
      */
     private final static int[] TO_IDS = {
-
             R.id.friend_name
 
     };
@@ -100,7 +97,6 @@ public class FriendsFragment extends Fragment implements LoaderManager.LoaderCal
     Uri mContactUri;
     // An adapter that binds the result Cursor to the ListView
     private ContactAdapter mContactAdapter;
-
 
     // Defines the text expression
     @SuppressLint("InlinedApi")
@@ -125,8 +121,8 @@ public class FriendsFragment extends Fragment implements LoaderManager.LoaderCal
 
             };
     private InviteListener mCallback;
-    private boolean isInvitationFragment;
 
+    private boolean isInvitationFragment;
 
     public static FriendsFragment newInstance(Bundle bundle, boolean isInvitationFragment){
         FriendsFragment fragment = new FriendsFragment();
@@ -135,38 +131,29 @@ public class FriendsFragment extends Fragment implements LoaderManager.LoaderCal
         fragment.setArguments(bundle);
 
         return fragment;
-
     }
 
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         ((RestaurantApplication) getActivity().getApplication()).getAppComponent().inject(this);
 
-
-
         if(getArguments() != null){
-
             isInvitationFragment = getArguments().getBoolean(INVITATION_FRAGMENT);
-
             if(isInvitationFragment) {
                 try {
                     mCallback = (InviteListener) getContext();
-                } catch (ClassCastException e) {
+                }
+                catch (ClassCastException e) {
                     throw new ClassCastException(getContext().toString()
                             + " must implement InviteListener");
                 }
             }
         }
 
-
-
         View v = inflater.inflate(R.layout.fragment_friends, container, false);
         ButterKnife.bind(this, v);
-
-
 
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(getActivity(),
@@ -183,20 +170,14 @@ public class FriendsFragment extends Fragment implements LoaderManager.LoaderCal
             // app-defined int constant. The callback method gets the
             // result of the request.
             //}
-        } else{
-
+        }
+        else {
             launchSearch();
         }
 
-
-
-
-
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
 
-
         return v;
-
     }
 
     @Override
@@ -230,26 +211,21 @@ public class FriendsFragment extends Fragment implements LoaderManager.LoaderCal
                        null, null);
                 user.setAppUser(false);
                 contacts.add(user);
-
             }
         }
         mContactAdapter.setContacts(contacts);
         mContactAdapter.notifyDataSetChanged();
-
-
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         // Delete the reference to the existing Cursor
         mContactAdapter.notifyDataSetChanged();
-
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
+        // TODO
     }
 
 
@@ -263,14 +239,13 @@ public class FriendsFragment extends Fragment implements LoaderManager.LoaderCal
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     launchSearch();
 
-                } else {
-
-                    // permission denied, boo! Disable the
+                }
+                else {
+                    // TODO permission denied, boo! Disable the
                     // functionality that depends on this permission.
                 }
                 return;
             }
-
             // other 'case' lines to check for other
             // permissions this app might request
         }
@@ -295,6 +270,4 @@ public class FriendsFragment extends Fragment implements LoaderManager.LoaderCal
         mContactsList.setOnItemClickListener(this);
     }
 
-
-   
 }
