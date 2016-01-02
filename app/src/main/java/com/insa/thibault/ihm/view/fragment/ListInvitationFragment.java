@@ -88,16 +88,16 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
         invitations.addAll(currentUser.getReceivedInvitations());
 
         invitationAdapter = new InvitationAdapter(this.getContext(), invitations);
-        //mealAdapter = new InvitationAdapter(this.getContext(), currentUser.getAcceptedInvitations());
+        mealAdapter = new InvitationAdapter(this.getContext(), currentUser.getAcceptedInvitations());
 
-        //myMeal.setAdapter(mealAdapter);
+        myMeal.setAdapter(mealAdapter);
         invitationsList.setAdapter(invitationAdapter);
 
-        //mealAdapter.notifyDataSetChanged();
+        mealAdapter.notifyDataSetChanged();
         invitationAdapter.notifyDataSetChanged();
 
         invitationsList.setOnItemClickListener(this);
-        //myMeal.setOnItemClickListener(this);
+        myMeal.setOnItemClickListener(this);
 
         return v;
     }

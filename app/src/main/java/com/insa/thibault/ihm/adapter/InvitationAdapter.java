@@ -85,7 +85,6 @@ public class InvitationAdapter extends ArrayAdapter<Invitation> {
         return convertView;
     }
 
-
     private static class ViewHolder {
         TextView inviterName;
         TextView nbFriends;
