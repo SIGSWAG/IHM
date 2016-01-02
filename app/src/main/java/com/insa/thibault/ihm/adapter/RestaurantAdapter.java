@@ -86,9 +86,6 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
         return convertView;
     }
 
-
-
-
     static class ViewHolder {
         TextView name;
         TextView nbFriends;

@@ -46,6 +46,8 @@ public class InvitationAdapter extends ArrayAdapter<Invitation> {
             viewHolder.time = (TextView) convertView.findViewById(R.id.invite_datetime);
             viewHolder.acceptInvite = (ImageButton) convertView.findViewById(R.id.accept_invite);
             viewHolder.declineInvite = (ImageButton) convertView.findViewById(R.id.decline_invite);
+            viewHolder.acceptInvite.setFocusable(false);
+            viewHolder.declineInvite.setFocusable(false);
 
             convertView.setTag(viewHolder);
         } else {

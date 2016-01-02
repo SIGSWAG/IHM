@@ -17,7 +17,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/list_my_meals"
+        android:id="@+id/my_meal"
         tools:layout_height="100dp"
         android:descendantFocusability="blocksDescendants" />
 

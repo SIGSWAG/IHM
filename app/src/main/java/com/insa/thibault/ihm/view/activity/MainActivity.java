@@ -153,6 +153,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onInvitationSelected(Invitation invitation) {
-        // TODO
+        Intent intent = DetailsRestaurantActivity.newIntent(this, invitation.getRestaurant());
+        startActivity(intent);
     }
 }

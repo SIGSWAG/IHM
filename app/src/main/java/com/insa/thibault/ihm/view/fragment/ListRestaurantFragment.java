@@ -81,8 +81,6 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
         // Inflate the layout for this fragment
         ((RestaurantApplication) getActivity().getApplication()).getAppComponent().inject(this);
 
-
-
         View v = inflater.inflate(R.layout.fragment_list_restaurants, container, false);
 
         ButterKnife.bind(this, v);
