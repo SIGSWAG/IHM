@@ -8,8 +8,14 @@
     <color name="colorAccent">#FF4081</color>
 
 
-    <!-- LE rouge utilisé de partout -->
+    <!-- Charte Graphique INSA -->
     <color name="insaRed">#E42618</color>
+    <color name="insaRedDarker">#B61E13</color>
+    <color name="insaGrayLight">#F2F2F2</color>
+    <color name="insaGray">#D8D8D8</color>
+    <color name="insaGrayDark">#49545A</color>
+    <color name="insaFontLight">#FFF</color>
+    <color name="insaFontDark">#666</color>
 
     <color name="materialRed">#dd2c00</color>
 
