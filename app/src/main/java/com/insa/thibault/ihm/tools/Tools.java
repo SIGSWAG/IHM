@@ -24,7 +24,7 @@ public class Tools {
             restaurantList.add(restaurant);
             restaurantList.add(new Restaurant("Prévert", 2, 5, 300, "tacos"));
             restaurantList.add(new Restaurant("Snoop doog", 7, 1, 500, "frites"));
-
+            restaurant.setOpened(true);
             List<Invitation> invitations = new ArrayList<>();
 
             User sender = new User("Damien", "Gallet");

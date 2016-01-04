@@ -13,6 +13,7 @@ public class Restaurant implements Parcelable {
     private int nbInvitations;
     private String plat;
     private int distanceMetres;
+    private boolean opened;
 
     //Parcelable
     public static final Parcelable.Creator<Restaurant> CREATOR = new Parcelable.Creator<Restaurant>() {
@@ -34,6 +35,7 @@ public class Restaurant implements Parcelable {
         this.nbInvitations = nbInvitations;
         this.distanceMetres = distanceMetres;
         this.plat = plat;
+        opened = false;
     }
 
     public Restaurant(Parcel source) {
@@ -42,6 +44,9 @@ public class Restaurant implements Parcelable {
         this.nbFriends = source.readInt();
         this.nbInvitations = source.readInt();
         this.distanceMetres = source.readInt();
+        boolean[] app = new boolean[1];
+        source.readBooleanArray(app);
+        opened =  app[0];
     }
 
     public String getName() {
@@ -89,6 +94,15 @@ public class Restaurant implements Parcelable {
         return 0;
     }
 
+
+    public boolean isOpened() {
+        return opened;
+    }
+
+    public void setOpened(boolean opened) {
+        this.opened = opened;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags){
         dest.writeString(name);
@@ -96,6 +110,9 @@ public class Restaurant implements Parcelable {
         dest.writeInt(nbFriends);
         dest.writeInt(nbInvitations);
         dest.writeInt(distanceMetres);
+        boolean[] open = new boolean[1];
+        open[0]=opened;
+        dest.writeBooleanArray(open);
     }
 
     @Override
@@ -118,5 +135,7 @@ public class Restaurant implements Parcelable {
         }
         return false;
     }
+
+
 
 }

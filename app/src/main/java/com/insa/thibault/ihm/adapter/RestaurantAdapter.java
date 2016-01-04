@@ -1,12 +1,14 @@
 package com.insa.thibault.ihm.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.insa.thibault.ihm.R;
@@ -45,6 +47,10 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
             viewHolder.nbNotifs = (TextView) convertView.findViewById(R.id.nb_notifs);
 
             viewHolder.buttonStar = (ImageButton) convertView.findViewById(R.id.imageFavoris);
+            viewHolder.plat = (TextView) convertView.findViewById(R.id.main_plat);
+            viewHolder.info = (TextView) convertView.findViewById(R.id.info);
+            viewHolder.layoutMeal = (LinearLayout) convertView.findViewById(R.id.layout_meal);
+
             convertView.setTag(viewHolder);
         }
         else {
@@ -77,6 +83,19 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
             }
         });
 
+        if(restaurant.isOpened()){
+
+            viewHolder.layoutMeal.setVisibility(View.VISIBLE);
+            viewHolder.plat.setText(restaurant.getPlat());
+            viewHolder.info.setText(R.string.opened);
+            viewHolder.info.setTextColor(getContext().getResources().getColor(R.color.green_invit));
+        }else{
+            viewHolder.layoutMeal.setVisibility(View.INVISIBLE);
+            viewHolder.info.setText(R.string.closed);
+            viewHolder.info.setTextColor(getContext().getResources().getColor(R.color.materialRed));
+
+        }
+
         return convertView;
     }
 
@@ -84,6 +103,9 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
         TextView name;
         TextView nbFriends;
         TextView nbNotifs;
+        LinearLayout layoutMeal;
+        TextView info;
+        TextView plat;
 
 
         ImageButton buttonStar;
