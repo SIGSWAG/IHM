@@ -15,7 +15,8 @@
     <color name="insaGray">#D8D8D8</color>
     <color name="insaGrayDark">#49545A</color>
     <color name="insaFontLight">#FFF</color>
-    <color name="insaFontDark">#666</color>
+    <color name="insaFontGray">#666</color>
+    <color name="insaFontDark">#444</color>
 
     <color name="materialRed">#dd2c00</color>
 

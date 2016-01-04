@@ -26,4 +26,6 @@
     <!-- Material Design -->
     <dimen name="material_space_small">8dp</dimen>
     <dimen name="material_space_medium">16dp</dimen>
+    <dimen name="material_simple_item_min_height">42dp</dimen>
+
 </resources>

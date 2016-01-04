@@ -2,9 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
+    android:paddingTop="@dimen/material_space_small"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginStart="@dimen/list_margin_left"
+    android:paddingStart="@dimen/material_space_medium"
+    android:paddingEnd="@dimen/material_space_medium"
+    android:background="@color/insaGrayLight"
     >
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,6 +21,7 @@
             android:id="@+id/name_restaurant"
             tools:text="Castor et Pollux "
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
+            android:textColor="@color/insaFontDark"
             />
 
     </RelativeLayout>
@@ -55,7 +58,8 @@
             android:adjustViewBounds="true"
             android:layout_toEndOf="@+id/imageView2"
             android:layout_above="@+id/info"
-            android:layout_alignParentTop="true" />
+            android:layout_alignParentTop="true"
+            android:textColor="@color/insaFontGray"/>
 
         <Button
             android:layout_width="35dp"
@@ -79,7 +83,8 @@
             android:adjustViewBounds="true"
             android:layout_alignTop="@+id/nb_friends_eating"
             android:layout_toEndOf="@+id/imageNotif"
-            android:layout_above="@+id/info" />
+            android:layout_above="@+id/info"
+            android:textColor="@color/insaFontGray"/>
 
         <ImageButton
             android:id="@+id/imageFavoris"
@@ -97,7 +102,7 @@
             android:layout_height="wrap_content"
             android:text="@string/closed"
             android:id="@+id/info"
-            android:textColor="@color/materialRed"
+            android:textColor="@color/insaRed"
             android:layout_below="@+id/imageView2"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
             android:layout_alignParentStart="true" />
@@ -116,15 +121,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/plat"
                 android:id="@+id/textView6"
-
-                android:layout_marginStart="10dp" />
+                android:layout_marginStart="10dp"
+                android:textColor="@color/insaFontGray"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Epinards"
                 android:id="@+id/main_plat"
-                android:layout_marginStart="4dp" />
+                android:layout_marginStart="4dp"
+                android:textColor="@color/insaFontGray"/>
         </LinearLayout>
 
 
