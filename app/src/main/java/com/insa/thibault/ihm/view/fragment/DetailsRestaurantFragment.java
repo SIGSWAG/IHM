@@ -16,13 +16,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+
 import android.widget.TextView;
 import android.widget.TimePicker;
+
+import android.widget.ListView;
+
 import android.widget.Toast;
 
 import com.insa.thibault.ihm.R;
 import com.insa.thibault.ihm.RestaurantApplication;
 import com.insa.thibault.ihm.adapter.RecyclerInvitationAdapter;
+import com.insa.thibault.ihm.adapter.FriendAtRestaurantAdapter;
 import com.insa.thibault.ihm.business.Invitation;
 import com.insa.thibault.ihm.business.Restaurant;
 import com.insa.thibault.ihm.business.User;
@@ -60,6 +65,9 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
 
     @Bind(R.id.list_invit)
     RecyclerView recyclerViewInvitations;
+
+    @Bind(R.id.list_friends_eating)
+    ListView listFriendsEating;
 
     @Bind(R.id.restaurant_favorite_icon)
     ImageButton buttonFavorite;
@@ -172,6 +180,20 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
                 }
             }
         });
+
+
+        List<User> friends = new ArrayList<>();
+        for(User friend : user.getFriends().values()) {
+            if(friend.isEatingIn(restaurant)) {
+                friends.add(friend);
+            }
+        }
+
+        FriendAtRestaurantAdapter friendAtRestaurantAdapter =
+                new FriendAtRestaurantAdapter(getContext(), friends, restaurant);
+
+        listFriendsEating.setAdapter(friendAtRestaurantAdapter);
+        friendAtRestaurantAdapter.notifyDataSetChanged();
 
         return v;
     }

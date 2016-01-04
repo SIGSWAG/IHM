@@ -37,6 +37,7 @@ public class Tools {
                     null, null,
                     null, null);
             user1.setAppUser(true);
+            user1.setCurrentRestaurant(restaurant);
 
             User user2 = new User("Adelin", "Ricaud", null, null,
                     null, null,

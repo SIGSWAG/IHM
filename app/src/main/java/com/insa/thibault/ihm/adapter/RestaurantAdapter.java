@@ -41,9 +41,9 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
 
             viewHolder.name = (TextView) convertView.findViewById(R.id.name_restaurant);
             viewHolder.nbFriends = (TextView) convertView.findViewById(R.id.nb_friends_eating);
-            viewHolder.distance = (TextView) convertView.findViewById(R.id.distance_restaurant);
+
             viewHolder.nbNotifs = (TextView) convertView.findViewById(R.id.nb_notifs);
-            viewHolder.buttonEat = (Button) convertView.findViewById(R.id.boutonManger);
+
             viewHolder.buttonStar = (ImageButton) convertView.findViewById(R.id.imageFavoris);
             convertView.setTag(viewHolder);
         }
@@ -54,14 +54,8 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
         final Restaurant restaurant = getItem(position);
         viewHolder.name.setText(restaurant.getName());
         viewHolder.nbFriends.setText(" " + restaurant.getNbFriends() + " ");
-        viewHolder.distance.setText(restaurant.getDistanceMetres());
         viewHolder.nbNotifs.setText("" + restaurant.getNbInvitations());
-        viewHolder.buttonEat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SnackbarUtils.showSnackbarLong(v, "Ok, on vous voit tout à l'heure !");
-            }
-        });
+
 
         if(user.isRestaurantFavorite(restaurant)) {
             viewHolder.buttonStar.setImageResource(R.drawable.ic_star_black_24dp);
@@ -86,15 +80,12 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
         return convertView;
     }
 
-
-
-
     static class ViewHolder {
         TextView name;
         TextView nbFriends;
         TextView nbNotifs;
-        TextView distance;
-        Button buttonEat;
+
+
         ImageButton buttonStar;
     }
 

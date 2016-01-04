@@ -23,6 +23,7 @@ public class User implements Parcelable{
     private List<Invitation> sentInvitations;
     private List<Invitation> acceptedInvitations;
     private List<Restaurant> favoritesRestaurant;
+    private int timeEating;
     boolean isAppUser;
 
     //Parcelable
@@ -106,6 +107,14 @@ public class User implements Parcelable{
 
     public void setCurrentRestaurant(Restaurant currentRestaurant) {
         this.currentRestaurant = currentRestaurant;
+    }
+
+    public int getTimeEating() {
+        return timeEating;
+    }
+
+    public void setTimeEating(int timeEating) {
+        this.timeEating = timeEating;
     }
 
     public Map<String, User> getFriends() {
@@ -251,5 +260,9 @@ public class User implements Parcelable{
             }
         }
         return false;
+    }
+
+    public boolean isEatingIn(Restaurant restaurant) {
+        return restaurant!=null && currentRestaurant!=null && currentRestaurant.equals(restaurant);
     }
 }

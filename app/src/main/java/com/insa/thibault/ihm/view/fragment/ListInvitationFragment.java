@@ -15,11 +15,9 @@ import com.insa.thibault.ihm.R;
 import com.insa.thibault.ihm.RestaurantApplication;
 import com.insa.thibault.ihm.adapter.InvitationAdapter;
 import com.insa.thibault.ihm.business.Invitation;
-import com.insa.thibault.ihm.business.Restaurant;
 import com.insa.thibault.ihm.business.User;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -38,15 +36,14 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
     @BindString(R.string.title_invitations_fragment)
     protected String title;
 
-    @Bind(R.id.list_my_meals)
-    protected ListView myMealsList;
+    @Bind(R.id.my_meal)
+    protected ListView myMeal;
 
     @Bind(R.id.list_friends_meals)
     protected ListView invitationsList;
 
     @Inject
     protected User currentUser;
-
 
     private List<Invitation> invitations;
 
@@ -93,14 +90,15 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
         invitationAdapter = new InvitationAdapter(this.getContext(), invitations);
         mealAdapter = new InvitationAdapter(this.getContext(), currentUser.getAcceptedInvitations());
 
-        myMealsList.setAdapter(mealAdapter);
-        mealAdapter.notifyDataSetChanged();
-
+        myMeal.setAdapter(mealAdapter);
         invitationsList.setAdapter(invitationAdapter);
+
+        mealAdapter.notifyDataSetChanged();
         invitationAdapter.notifyDataSetChanged();
 
         invitationsList.setOnItemClickListener(this);
-        myMealsList.setOnItemClickListener(this);
+        myMeal.setOnItemClickListener(this);
+
         return v;
     }
 
