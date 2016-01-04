@@ -24,6 +24,11 @@
 
     <string name="my_meals">Mon repas : </string>
     <string name="friends_meals">Invitations reçues : </string>
-
+    <string name="sure">Etes vous sûr ?</string>
+    <string name="change">Vous avez indiqué vouloir manger dans un autre restaurant ou à une autre heure ce midi. Voulez vous vraiment annuler votre repas dans l\'autre restaurant ?</string>
+    <string name="confirm">Confirmer</string>
+    <string name="saved">Votre repas a été enregistré</string>
+    <string name="cancel">Annuler</string>
+    <string name="which_time">A quelle heure voulez vous manger ?</string>
 
 </resources>

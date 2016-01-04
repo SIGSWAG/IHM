@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -15,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.insa.thibault.ihm.R;
@@ -61,6 +64,12 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
     @Bind(R.id.restaurant_favorite_icon)
     ImageButton buttonFavorite;
 
+    @Bind(R.id.card_view_restaurant)
+    protected CardView cardRestaurant;
+
+    @Bind(R.id.hour_meal)
+    protected TextView mealTextView;
+
     public static DetailsRestaurantFragment newInstance(Bundle bundleArg, Restaurant restaurant){
         DetailsRestaurantFragment fragment = new DetailsRestaurantFragment();
 
@@ -91,6 +100,16 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
             restaurant = getArguments().getParcelable(KEY_RESTAURANT);
             binding.setRestaurant(restaurant);
         }
+
+        if(user.getAcceptedInvitations() !=  null && user.getAcceptedInvitations().size()>0 && user.getAcceptedInvitations().get(0).getRestaurant().getName().compareTo(restaurant.getName())==0){
+            cardRestaurant.setVisibility(View.VISIBLE);
+            mealTextView.setText(user.getAcceptedInvitations().get(0).getTimeHour()+"h"+user.getAcceptedInvitations().get(0).getTimeMinutes());
+
+        }else{
+            cardRestaurant.setVisibility(View.GONE);
+        }
+
+
 
         List<Invitation> invitations = new ArrayList<>();
         for(Invitation invitation :  user.getReceivedInvitations()){
@@ -162,22 +181,17 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
         final View view = v;
         if (user.getCurrentRestaurant() != null ) {
             AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-            alertDialog.setTitle("Etes vous sûr ?");
-            alertDialog.setMessage("Vous avez indiqué vouloir manger dans un autre restaurant ou à une autre heure ce midi. Voulez vous vraiment" +
-                    " annuler votre repas dans l'autre restaurant ?");
-            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Confirmer",
+            alertDialog.setTitle(R.string.sure);
+            alertDialog.setMessage(getString(R.string.change));
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.confirm),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
 
-                            user.setCurrentRestaurant(restaurant);
-                            user.getAcceptedInvitations().clear();
-                            user.addAcceptedInvitation(new Invitation(user, user, restaurant, 12, 45, 3, 12, Invitation.ACCEPTED));
-                            Snackbar.make(view, "Votre repas a été enregistré", Snackbar.LENGTH_LONG)
-                                    .setAction("Action", null).show();
+                            displayTimePicker(view);
                             dialog.dismiss();
                     }
                                   });
-            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Annuler",
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.cancel),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -189,9 +203,9 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
         else if(user.getCurrentRestaurant() == null){
             user.setCurrentRestaurant(restaurant);
 
-            user.addAcceptedInvitation(new Invitation(user, user, restaurant, 12, 45, 3, 12, Invitation.ACCEPTED));
-            Snackbar.make(view, "Votre repas a été enregistré", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            //user.addAcceptedInvitation(new Invitation(user, user, restaurant, 12, 45, 3, 12, Invitation.ACCEPTED));
+            displayTimePicker(v);
+
         }
     }
 
@@ -215,4 +229,96 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
     public void onItemClick(View v, int position, Invitation invitation) {
         // TODO
     }
+
+    @Override
+    public void acceptedInvitation(View v, final RecyclerInvitationAdapter recyclerInvitationAdapter, final Invitation currentInvitation) {
+        final View view = v;
+        if (user.getCurrentRestaurant() != null) {
+            AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+            alertDialog.setTitle(R.string.sure);
+            alertDialog.setMessage(getString(R.string.change));
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.confirm),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            user.setCurrentRestaurant(currentInvitation.getRestaurant());
+                            user.getAcceptedInvitations().get(0).setStatus(Invitation.PENDING);
+                            user.getAcceptedInvitations().clear();
+                            recyclerInvitationAdapter.remove(currentInvitation);
+                            currentInvitation.setStatus(Invitation.ACCEPTED);
+                            user.addAcceptedInvitation(currentInvitation);
+                            cardRestaurant.setVisibility(View.VISIBLE);
+                            mealTextView.setText(user.getAcceptedInvitations().get(0).getTimeHour()+"h"+user.getAcceptedInvitations().get(0).getTimeMinutes());
+                            Snackbar.make(view, R.string.saved, Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.cancel),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+            alertDialog.show();
+
+
+        }else if(user.getCurrentRestaurant() == null){
+
+            user.setCurrentRestaurant(currentInvitation.getRestaurant());
+            recyclerInvitationAdapter.remove(currentInvitation);
+            currentInvitation.setStatus(Invitation.ACCEPTED);
+            user.addAcceptedInvitation(currentInvitation);
+            cardRestaurant.setVisibility(View.VISIBLE);
+            mealTextView.setText(user.getAcceptedInvitations().get(0).getTimeHour()+"h"+user.getAcceptedInvitations().get(0).getTimeMinutes());
+            Snackbar.make(view, R.string.saved, Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
+    }
+
+
+    void displayTimePicker(final View v){
+
+
+
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        View dialog_layout = inflater.inflate(R.layout.dialog_time_picker, null);
+        AlertDialog dialog;
+        AlertDialog.Builder db = new AlertDialog.Builder(getContext());
+        final TimePicker timePicker = (TimePicker) dialog_layout.findViewById(R.id.time_picker);
+        timePicker.setIs24HourView(true);
+        db.setView(dialog_layout);
+        db.setTitle(R.string.which_time);
+        db.setPositiveButton(getString(R.string.confirm), new
+                DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Invitation invitation = new Invitation(user, user, restaurant, timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 3, 12, Invitation.ACCEPTED);
+                        user.setCurrentRestaurant(restaurant);
+                        user.getAcceptedInvitations().clear();
+                        user.addAcceptedInvitation(invitation);
+                        cardRestaurant.setVisibility(View.VISIBLE);
+                        mealTextView.setText(user.getAcceptedInvitations().get(0).getTimeHour()+"h"+user.getAcceptedInvitations().get(0).getTimeMinutes());
+
+                        Snackbar.make(v, R.string.saved, Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                        dialog.dismiss();
+
+
+                    }
+                });
+        db.setNegativeButton(getString(R.string.cancel),new DialogInterface.OnClickListener(){
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog = db.show();
+
+
+    }
 }
+
+

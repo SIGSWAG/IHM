@@ -74,57 +74,13 @@ public class RecyclerInvitationAdapter extends RecyclerView.Adapter<RecyclerInvi
         holder.friendName.setText(currentInvitation.getSender().getFirstName());
         holder.hour.setText(currentInvitation.getTimeHour()+":"+currentInvitation.getTimeMinutes());
 
+
         holder.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                final View view = v;
-                if (currentUser.getCurrentRestaurant() != null) {
-                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-                    alertDialog.setTitle("Etes vous sûr ?");
-                    alertDialog.setMessage("Vous avez indiqué vouloir manger dans un autre restaurant ou à une autre heure ce midi. Voulez vous vraiment\" +\n" +
-                            "                     annuler votre repas dans l'autre restaurant ?");
-                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Confirmer",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                    currentUser.setCurrentRestaurant(currentInvitation.getRestaurant());
-                                    currentUser.getAcceptedInvitations().get(0).setStatus(Invitation.PENDING);
-                                    currentUser.getAcceptedInvitations().clear();
-
-
-
-
-                                    RecyclerInvitationAdapter.this.remove(position);
-                                    currentInvitation.setStatus(Invitation.ACCEPTED);
-                                    currentUser.addAcceptedInvitation(currentInvitation);
-                                    Snackbar.make(view, "Votre repas a été enregistré", Snackbar.LENGTH_LONG)
-                                            .setAction("Action", null).show();
-                                    dialog.dismiss();
-                                }
-                            });
-                    alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Annuler",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-
-                    alertDialog.show();
-
-
-                }else if(currentUser.getCurrentRestaurant() == null){
-
-                    currentUser.setCurrentRestaurant(currentInvitation.getRestaurant());
-                    RecyclerInvitationAdapter.this.remove(position);
-                    currentInvitation.setStatus(Invitation.ACCEPTED);
-                    currentUser.addAcceptedInvitation(currentInvitation);
-                    Snackbar.make(view, "Votre repas a été enregistré", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
-
-
+                mCallBack.get().acceptedInvitation(v, RecyclerInvitationAdapter.this, currentInvitation );
 
             }
         });
@@ -132,7 +88,7 @@ public class RecyclerInvitationAdapter extends RecyclerView.Adapter<RecyclerInvi
         holder.decline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RecyclerInvitationAdapter.this.remove(position);
+                RecyclerInvitationAdapter.this.remove(currentInvitation);
                 currentInvitation.setStatus(Invitation.DENIED);
 
             }
@@ -158,6 +114,16 @@ public class RecyclerInvitationAdapter extends RecyclerView.Adapter<RecyclerInvi
         notifyItemRemoved(position);
     }
 
+    public void remove(Invitation invitation) {
+
+        for(int i=0; i<invitations.size(); i++){
+            Invitation curr = invitations.get(i);
+            if(invitation ==  curr){
+                this.remove(i);
+            }
+        }
+    }
+
 
     public Invitation getItemAt(int position)
     {
@@ -170,8 +136,8 @@ public class RecyclerInvitationAdapter extends RecyclerView.Adapter<RecyclerInvi
     }
 
     public interface OnItemClickListener {
-
-        public void onItemClick(View v, int position, Invitation invitation);
+        void onItemClick(View v, int position, Invitation invitation);
+        void acceptedInvitation(View v, RecyclerInvitationAdapter onClickListener, Invitation currentInvitation);
     }
 
 
