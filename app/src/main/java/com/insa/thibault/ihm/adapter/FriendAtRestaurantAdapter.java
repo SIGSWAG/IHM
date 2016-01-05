@@ -46,6 +46,7 @@ public class FriendAtRestaurantAdapter extends ArrayAdapter<User> {
             viewHolder.inviteFriendProfileIcon = (ImageView) convertView.findViewById(R.id.invite_friend_profile_icon);
             viewHolder.inviteFriendClockIcon = (ImageView) convertView.findViewById(R.id.invite_friend_clock_icon);
             viewHolder.timeEating = (TextView) convertView.findViewById(R.id.invite_friend_datetime);
+            viewHolder.inviteFriendInviteIcon = (ImageView) convertView.findViewById(R.id.invite_friend_invite_icon);
             viewHolder.invited = (TextView) convertView.findViewById(R.id.invite_friend_text);
 
             convertView.setTag(viewHolder);
@@ -60,12 +61,13 @@ public class FriendAtRestaurantAdapter extends ArrayAdapter<User> {
         //viewHolder.inviteFriendProfileIcon.setImageDrawable(friend.getImage());
 
         if(isInFriendsEating(friend)) {
-            viewHolder.invited.setVisibility(View.INVISIBLE);
+            viewHolder.invited.setVisibility(View.GONE);
+            viewHolder.inviteFriendInviteIcon.setVisibility(View.GONE);
             viewHolder.timeEating.setText(""+friend.getTimeEating());
         }
         else if(isInvited(friend)) {
-            viewHolder.inviteFriendClockIcon.setVisibility(View.INVISIBLE);
-            viewHolder.timeEating.setVisibility(View.INVISIBLE);
+            viewHolder.inviteFriendClockIcon.setVisibility(View.GONE);
+            viewHolder.timeEating.setVisibility(View.GONE);
         }
         else {
             // TODO
@@ -99,6 +101,7 @@ public class FriendAtRestaurantAdapter extends ArrayAdapter<User> {
         ImageView inviteFriendClockIcon;
         TextView timeEating;
 
+        ImageView inviteFriendInviteIcon;
         TextView invited;
     }
 

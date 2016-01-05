@@ -39,6 +39,15 @@
             android:layout_marginRight="8dp"
             android:id="@+id/invite_friend_clock_icon"
             android:src="@drawable/ic_access_time_black_24dp"/>
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:id="@+id/invite_friend_invite_icon"
+            android:src="@drawable/ic_event_black_24dp"
+            android:layout_marginRight="8dp"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:clickable="false" />
         <TextView
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
             android:layout_width="wrap_content"
@@ -48,7 +57,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="INVITE"
+            android:text="Invité"
             android:textColor="@color/darkGrayForFont"
             android:textStyle="italic"
             android:id="@+id/invite_friend_text"

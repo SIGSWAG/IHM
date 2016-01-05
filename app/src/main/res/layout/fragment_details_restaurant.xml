@@ -273,7 +273,7 @@
 
                     <ListView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="200dp"
                         android:layout_below="@+id/imageView4"
                         android:id="@+id/list_friends_eating"
                         android:layout_marginTop="10dp"
