@@ -27,14 +27,10 @@ public class FriendAtRestaurantAdapter extends ArrayAdapter<User> {
     private List<User> friendsEating;
     private List<User> friendsInvited;
 
-    public FriendAtRestaurantAdapter(Context context, List<User> friends, Restaurant restaurant) {
+    public FriendAtRestaurantAdapter(Context context, List<User> friends) {
         super(context, 0, friends);
-        friendsEating = friends;
-        friendsInvited = new ArrayList<>();
-        for(User friend : friends) {
-            // TODO
-        }
-
+        friendsEating = friends.subList(0, friends.size()/2);
+        friendsInvited = friends.subList(friends.size()/2, friends.size());
     }
 
     @Override

@@ -5,9 +5,8 @@
     android:paddingTop="@dimen/material_space_small"
     xmlns:tools="http://schemas.android.com/tools"
     android:paddingStart="@dimen/material_space_medium"
-    android:paddingEnd="@dimen/material_space_medium"
-    android:background="@color/insaGrayLight"
-    >
+    android:backgroundTintMode="screen"
+    android:background="@drawable/insabar">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -22,19 +21,30 @@
             tools:text="Castor et Pollux "
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
             android:textColor="@color/insaFontDark"
-            />
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageButton
+            android:id="@+id/imageFavoris"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:src="@drawable/ic_star_border_black_24dp"
+            android:background="@null"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/name_restaurant" />
 
     </RelativeLayout>
-
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/premiereLigne"
-        android:layout_marginTop="4dp"
         android:descendantFocusability="blocksDescendants"
         android:id="@+id/deuxiemeLigne"
-        xmlns:tools="http://schemas.android.com/tools">
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_below="@+id/premiereLigne"
+        android:layout_alignParentStart="true">
 
         <Button
             android:layout_width="35dp"
@@ -86,17 +96,6 @@
             android:layout_above="@+id/info"
             android:textColor="@color/insaFontGray"/>
 
-        <ImageButton
-            android:id="@+id/imageFavoris"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:src="@drawable/ic_star_border_black_24dp"
-            android:background="@null"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -135,4 +134,15 @@
 
 
     </RelativeLayout>
+
+
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="104dp"
+        android:id="@+id/imageView10"
+        android:src="@drawable/restaurant_insa"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:scaleType="centerCrop"/>
 </RelativeLayout>

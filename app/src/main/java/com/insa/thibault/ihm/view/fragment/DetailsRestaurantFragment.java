@@ -34,6 +34,7 @@ import com.insa.thibault.ihm.business.User;
 
 
 import com.insa.thibault.ihm.databinding.FragmentDetailsRestaurantBinding;
+import com.insa.thibault.ihm.tools.Tools;
 import com.insa.thibault.ihm.utils.SnackbarUtils;
 import com.insa.thibault.ihm.view.activity.FriendsActivity;
 
@@ -182,15 +183,9 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
         });
 
 
-        List<User> friends = new ArrayList<>();
-        for(User friend : user.getFriends().values()) {
-            if(friend.isEatingIn(restaurant)) {
-                friends.add(friend);
-            }
-        }
+        List<User> friends = Tools.getSomeUsers(4);
 
-        FriendAtRestaurantAdapter friendAtRestaurantAdapter =
-                new FriendAtRestaurantAdapter(getContext(), friends, restaurant);
+        FriendAtRestaurantAdapter friendAtRestaurantAdapter = new FriendAtRestaurantAdapter(getContext(), friends);
 
         listFriendsEating.setAdapter(friendAtRestaurantAdapter);
         friendAtRestaurantAdapter.notifyDataSetChanged();
