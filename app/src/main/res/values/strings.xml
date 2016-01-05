@@ -31,7 +31,7 @@
     <string name="cancel">Annuler</string>
     <string name="which_time">A quelle heure voulez vous manger ?</string>
     <string name="closed">Fermé ce midi</string>
-    <string name="plat">Plat principal : </string>
+    <string name="plat">Plat : </string>
     <string name="opened">Ouvert ce midi</string>
 
 </resources>
