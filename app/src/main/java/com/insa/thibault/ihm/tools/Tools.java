@@ -36,10 +36,10 @@ public class Tools {
     public static void init() {
         if(restaurantList == null) {
             restaurantList = new ArrayList<>();
-            Restaurant restaurant = new Restaurant("Beurk", 12, 2, 30, "Brocoli");
+            Restaurant restaurant = new Restaurant("Beurk", 12, 2, 30, "Brocoli", "20 Avenue Jean Capelle O, 69100 Villeurbanne, France");
             restaurantList.add(restaurant);
-            restaurantList.add(new Restaurant("Prévert", 2, 5, 300, "tacos"));
-            restaurantList.add(new Restaurant("Snoop doog", 7, 1, 500, "frites"));
+            restaurantList.add(new Restaurant("Prévert", 2, 5, 300, "tacos", "620 Eighth avenue New York, NY 10018"));
+            restaurantList.add(new Restaurant("Snoop Dogg", 7, 1, 500, "frites", "620 Eighth avenue New York, NY 10018"));
             restaurant.setOpened(true);
             List<Invitation> invitations = new ArrayList<>();
 
