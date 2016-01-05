@@ -2,11 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/material_space_small"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:descendantFocusability="blocksDescendants"
     xmlns:tools="http://schemas.android.com/tools"
     android:paddingStart="@dimen/material_space_medium"
-    android:backgroundTintMode="screen"
-    android:background="@drawable/insabar">
+    android:backgroundTintMode="screen">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -53,6 +53,7 @@
             android:drawableEnd="@drawable/ic_person_black_24dp"
             android:adjustViewBounds="true"
             android:background="@null"
+            android:clickable="false"
             android:gravity="center"
             style="?android:attr/borderlessButtonStyle"
             android:layout_alignParentTop="true"
@@ -78,6 +79,7 @@
             android:drawableEnd="@drawable/ic_event_black_24dp"
             android:adjustViewBounds="true"
             android:background="@null"
+            android:clickable="false"
             style="?android:attr/borderlessButtonStyle"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/nb_friends_eating" />
@@ -137,12 +139,14 @@
 
 
 
-    <ImageView
-        android:layout_width="70dp"
-        android:layout_height="104dp"
+    <com.insa.thibault.ihm.view.custom.RectImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:id="@+id/imageView10"
+        app:angle="14"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:src="@drawable/restaurant_insa"
-        android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
         android:scaleType="centerCrop"/>
 </RelativeLayout>

@@ -11,5 +11,6 @@
         android:id="@+id/imageView10"
         app:angle="14"
         android:layout_gravity="center_horizontal"
+        android:elevation="14dp"
         android:src="@drawable/restaurant_insa" />
 </LinearLayout>
