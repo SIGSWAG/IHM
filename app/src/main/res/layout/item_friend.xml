@@ -39,11 +39,28 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="mange au Beurk"
+            tools:text="Mange au Beurk"
             android:id="@+id/restaurant_name"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:layout_gravity="center_vertical"
             />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left">
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginRight="1dp"
+            android:id="@+id/friend_clock_icon"
+            android:src="@drawable/ic_access_time_black_24dp" />
+        <TextView
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="12h"
+            android:id="@+id/friend_datetime" />
+        </LinearLayout>
     </LinearLayout>
 
     <RelativeLayout

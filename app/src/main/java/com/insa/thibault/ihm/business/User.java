@@ -267,4 +267,8 @@ public class User implements Parcelable{
     public boolean isEatingIn(Restaurant restaurant) {
         return restaurant!=null && currentRestaurant!=null && currentRestaurant.equals(restaurant);
     }
+
+    public void setTimeEating(String timeEating) {
+        this.timeEating = timeEating;
+    }
 }

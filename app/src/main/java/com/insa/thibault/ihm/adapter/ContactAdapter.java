@@ -18,9 +18,13 @@ import com.insa.thibault.ihm.business.Invitation;
 import com.insa.thibault.ihm.business.Restaurant;
 import com.insa.thibault.ihm.business.User;
 
+import org.apache.commons.codec.binary.StringUtils;
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Jonathan on 21/12/2015.
@@ -32,6 +36,8 @@ public class ContactAdapter extends ArrayAdapter<User> {
     boolean inviteAdapter;
 
     private InviteListener listener;
+
+    private static Random r = new Random();
 
     public ContactAdapter(Context context, List<User> invitations, boolean inviteAdapter, InviteListener listener) {
         super(context, 0, invitations);
@@ -53,6 +59,8 @@ public class ContactAdapter extends ArrayAdapter<User> {
             viewHolder.friendName = (TextView) convertView.findViewById(R.id.friend_name);
             viewHolder.location = (TextView) convertView.findViewById(R.id.restaurant_name);
             viewHolder.inviteInApp = (Button) convertView.findViewById(R.id.invite_in_app);
+            viewHolder.clockIcon = (ImageView) convertView.findViewById(R.id.friend_clock_icon);
+            viewHolder.timeEating = (TextView) convertView.findViewById(R.id.friend_datetime);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -73,23 +81,34 @@ public class ContactAdapter extends ArrayAdapter<User> {
             }
         });
 
-        viewHolder.friendName.setText(currentUser.getFirstName()+" "+currentUser.getLastName());
+        viewHolder.friendName.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
+
+        viewHolder.clockIcon.setVisibility(View.GONE);
+        viewHolder.timeEating.setVisibility(View.GONE);
 
         if(restaurant != null) {
-            viewHolder.location.setText(restaurant.getName());
+            viewHolder.location.setText("Mange au " + restaurant.getName());
+            viewHolder.clockIcon.setVisibility(View.VISIBLE);
+            viewHolder.timeEating.setVisibility(View.VISIBLE);
+            String timeEating = currentUser.getTimeEating();
+            if(timeEating == null || timeEating.isEmpty()) {
+                int hour = r.nextInt(2) + 12;
+                int minutes = r.nextInt(4) * 15;
+                timeEating = String.format("%02dh%02d", hour, minutes);
+                currentUser.setTimeEating(timeEating);
+            }
+            viewHolder.timeEating.setText(timeEating);
         }
 
-        if(inviteAdapter && currentUser.isAppUser()){
-
+        if(inviteAdapter && currentUser.isAppUser()) {
             viewHolder.invite.setVisibility(View.VISIBLE);
             viewHolder.inviteInApp.setVisibility(View.GONE);
         }
         else if (currentUser.isAppUser()){
             viewHolder.inviteInApp.setVisibility(View.GONE);
             viewHolder.invite.setVisibility(View.GONE);
-
         }
-        else{
+        else {
             viewHolder.inviteInApp.setVisibility(View.VISIBLE);
             viewHolder.invite.setVisibility(View.GONE);
         }
@@ -102,7 +121,8 @@ public class ContactAdapter extends ArrayAdapter<User> {
         CheckBox invite;
         Button inviteInApp;
         TextView location;
-
+        ImageView clockIcon;
+        TextView timeEating;
     }
 
     public void setContacts(List<User> contacts) {
