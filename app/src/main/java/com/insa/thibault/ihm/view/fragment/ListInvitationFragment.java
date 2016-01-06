@@ -47,6 +47,8 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
 
     private List<Invitation> invitations;
 
+    private List<Invitation> myMeals;
+
     private InvitationAdapter invitationAdapter;
     private InvitationAdapter mealAdapter;
 
@@ -87,8 +89,10 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
         invitations = new ArrayList<>();
         invitations.addAll(currentUser.getReceivedInvitations());
 
-        invitationAdapter = new InvitationAdapter(this.getContext(), invitations);
-        mealAdapter = new InvitationAdapter(this.getContext(), currentUser.getAcceptedInvitations());
+        invitationAdapter = new InvitationAdapter(this.getContext(), invitations, this);
+
+        myMeals = currentUser.getAcceptedInvitations();
+        mealAdapter = new InvitationAdapter(this.getContext(), myMeals, this);
 
         myMeal.setAdapter(mealAdapter);
         invitationsList.setAdapter(invitationAdapter);
@@ -108,5 +112,19 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
         if(mCallback != null) {
             mCallback.onInvitationSelected(invitations.get(position));
         }
+    }
+
+    public void acceptInvite(Invitation invitation) {
+        invitations.remove(invitation);
+        currentUser.addAcceptedInvitation(invitation);
+        currentUser.removeReceivedInvitation(invitation);
+        mealAdapter.notifyDataSetChanged();
+        invitationAdapter.notifyDataSetChanged();
+    }
+
+    public void declineInvite(Invitation invitation) {
+        invitations.remove(invitation);
+        mealAdapter.notifyDataSetChanged();
+        invitationAdapter.notifyDataSetChanged();
     }
 }
