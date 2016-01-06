@@ -37,18 +37,24 @@ public class Tools {
         if(restaurantList == null) {
             restaurantList = new ArrayList<>();
             Restaurant restaurant = new Restaurant("Beurk", 12, 2, 30, "Brocoli", "20 Avenue Jean Capelle O, 69100 Villeurbanne, France");
-            restaurantList.add(restaurant);
-            restaurantList.add(new Restaurant("Prévert", 2, 5, 300, "tacos", "620 Eighth avenue New York, NY 10018"));
-            restaurantList.add(new Restaurant("Snoop Dogg", 7, 1, 500, "frites", "620 Eighth avenue New York, NY 10018"));
             restaurant.setOpened(true);
-            List<Invitation> invitations = new ArrayList<>();
+            restaurantList.add(restaurant);
+            restaurantList.add(new Restaurant("Le Prévert", 2, 5, 300, "Gras", "14 avenue Beurk, 69100 Villeurbanne, France"));
+            restaurantList.add(new Restaurant("Snack du campus", 7, 1, 500, "Tacos", "18 avenue Einstein, 69100 Villeurbanne, France"));
+            restaurantList.add(new Restaurant("Panorama", 0, 3, 200, "Frites - Omelette", "12 rue Sigmond, 69100 Villeurbanne, France"));
+            restaurantList.add(new Restaurant("Ninkasi", 14, 0, 1500, "Quiche", "20 Avenue Jean Capelle O, 69100 Villeurbanne, France"));
+            restaurantList.add(new Restaurant("Grand RU", 4, 3, 400, "Falafel - Petits pois", "14 avenue Beurk, 69100 Villeurbanne, France"));
+            restaurantList.add(new Restaurant("Petit RU", 2, 6, 10, "Pizzas", "18 avenue Einstein, 69100 Villeurbanne, France"));
+            restaurantList.add(new Restaurant("Auberge de la Doua", 10, 0, 400, "Purée - Courgettes", "18 rue de SIGSWAG, 69100 Villeurbanne, France"));
+            restaurantList.add(new Restaurant("Mozaïque", 0, 1, 400, "Yaourt aux fruits", "620 avenue Mona Liza, NY 10018"));
 
+
+
+            List<Invitation> invitations = new ArrayList<>();
             User sender = new User("Damien", "Gallet");
             User receiver = new User("Aziz", "SIGSWAG");
-
             invitations.add(new Invitation(sender, receiver, restaurant, 12, 45, 3, 12,Invitation.PENDING));
             invitations.add(new Invitation(sender, receiver, restaurant, 11, 30, 3, 12, Invitation.PENDING));
-
             User user1 = new User("Adam", "Rivault", null, null,
                     null, null,
                     null, null);

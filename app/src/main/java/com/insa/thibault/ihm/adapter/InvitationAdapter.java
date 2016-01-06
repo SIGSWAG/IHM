@@ -70,7 +70,7 @@ public class InvitationAdapter extends ArrayAdapter<Invitation> {
         viewHolder.acceptInvite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Vous avez accepter l'invitation ! ", Snackbar.LENGTH_LONG)
+                Snackbar.make(v, "Vous avez accepté l'invitation ! ", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
