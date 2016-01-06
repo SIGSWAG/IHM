@@ -91,7 +91,7 @@ public class DetailsRestaurantActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case android.R.id.home:
-                finish();
+                super.onBackPressed();
                 break;
             default:
                 break;
