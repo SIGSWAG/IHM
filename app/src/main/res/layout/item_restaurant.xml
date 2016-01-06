@@ -143,6 +143,7 @@
     <com.insa.thibault.ihm.view.custom.RectImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:transitionName="@string/activity_image_trans"
         android:id="@+id/img_restau"
         app:angle="14"
         android:focusable="false"

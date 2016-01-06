@@ -151,7 +151,6 @@ public class MainActivity extends AppCompatActivity
 
         ActivityOptionsCompat options = ActivityOptionsCompat.
                 makeSceneTransitionAnimation(this, v.findViewById(R.id.img_restau), getString(R.string.activity_image_trans));
-
         Intent intent = DetailsRestaurantActivity.newIntent(this, restaurant);
 
 

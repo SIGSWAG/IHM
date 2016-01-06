@@ -44,8 +44,7 @@ public class Tools {
 
 
     public static Bitmap getRestaurantBitmap(Context context, Restaurant restaurant){
-        Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
-                R.drawable.restaurant_insa);
+        Bitmap icon = null;
         switch (restaurantList.indexOf(restaurant)){
             case 0:
                 icon = BitmapFactory.decodeResource(context.getResources(),
@@ -96,15 +95,15 @@ public class Tools {
             restaurantList = new ArrayList<>();
 
 
-            restaurantList.add(new Restaurant("Beurk", 12, 2, 30, "Brocoli", "20 Avenue Jean Capelle O, 69100 Villeurbanne, France"));
-            restaurantList.add(new Restaurant("Le Prévert", 2, 5, 300, "Gras", "14 avenue Beurk, 69100 Villeurbanne, France"));
-            restaurantList.add(new Restaurant("Snack du campus", 7, 1, 500, "Tacos", "18 avenue Einstein, 69100 Villeurbanne, France"));
-            restaurantList.add(new Restaurant("Panorama", 0, 3, 200, "Frites - Omelette", "12 rue Sigmond, 69100 Villeurbanne, France"));
-            restaurantList.add(new Restaurant("Ninkasi", 14, 0, 1500, "Quiche", "20 Avenue Jean Capelle O, 69100 Villeurbanne, France"));
-            restaurantList.add(new Restaurant("Grand RU", 4, 3, 400, "Falafel - Petits pois", "14 avenue Beurk, 69100 Villeurbanne, France"));
-            restaurantList.add(new Restaurant("Petit RU", 2, 6, 10, "Pizzas", "18 avenue Einstein, 69100 Villeurbanne, France"));
-            restaurantList.add(new Restaurant("Auberge de la Doua", 10, 0, 400, "Purée - Courgettes", "18 rue de SIGSWAG, 69100 Villeurbanne, France"));
-            restaurantList.add(new Restaurant("Mozaïque", 0, 1, 400, "Yaourt aux fruits", "620 avenue Mona Liza, NY 10018"));
+            restaurantList.add(new Restaurant("Beurk", 12, 2, 30, "Brocoli", "20 Avenue Jean Capelle O, 69100 Villeurbanne, France",R.drawable.restaurant_insa));
+            restaurantList.add(new Restaurant("Le Prévert", 2, 5, 300, "Gras", "14 avenue Beurk, 69100 Villeurbanne, France",R.drawable.restau1));
+            restaurantList.add(new Restaurant("Snack du campus", 7, 1, 500, "Tacos", "18 avenue Einstein, 69100 Villeurbanne, France",R.drawable.restau2));
+            restaurantList.add(new Restaurant("Panorama", 0, 3, 200, "Frites - Omelette", "12 rue Sigmond, 69100 Villeurbanne, France",R.drawable.restau3));
+            restaurantList.add(new Restaurant("Ninkasi", 14, 0, 1500, "Quiche", "20 Avenue Jean Capelle O, 69100 Villeurbanne, France",R.drawable.restau4));
+            restaurantList.add(new Restaurant("Grand RU", 4, 3, 400, "Falafel - Petits pois", "14 avenue Beurk, 69100 Villeurbanne, France",R.drawable.restau5));
+            restaurantList.add(new Restaurant("Petit RU", 2, 6, 10, "Pizzas", "18 avenue Einstein, 69100 Villeurbanne, France",R.drawable.restau6));
+            restaurantList.add(new Restaurant("Auberge de la Doua", 10, 0, 400, "Purée - Courgettes", "18 rue de SIGSWAG, 69100 Villeurbanne, France",R.drawable.restau7));
+            restaurantList.add(new Restaurant("Mozaïque", 0, 1, 400, "Yaourt aux fruits", "620 avenue Mona Liza, NY 10018",R.drawable.restau8));
 
             restaurantList.get(0).setOpened(true);
             restaurantList.get(1).setOpened(true);

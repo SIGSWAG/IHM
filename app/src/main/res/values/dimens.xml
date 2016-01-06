@@ -28,4 +28,7 @@
     <dimen name="material_space_medium">16dp</dimen>
     <dimen name="material_simple_item_min_height">42dp</dimen>
 
+
+    <!-- Images item restaurant -->
+    <dimen name="size_img">100dp</dimen>
 </resources>

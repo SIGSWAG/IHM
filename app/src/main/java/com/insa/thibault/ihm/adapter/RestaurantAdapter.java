@@ -20,6 +20,7 @@ import com.insa.thibault.ihm.business.Restaurant;
 import com.insa.thibault.ihm.business.User;
 import com.insa.thibault.ihm.tools.Tools;
 import com.insa.thibault.ihm.utils.SnackbarUtils;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -101,34 +102,17 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
             viewHolder.info.setTextColor(getContext().getResources().getColor(R.color.materialRed));
 
         }
-        Bitmap imageRestaurant = Tools.getRestaurantBitmap(getContext(), restaurant);
-        Resources r = getContext().getResources();
-        int pixelsPour100DP = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, r.getDisplayMetrics());
-        int widhtImage = getWidthImageCarree(pixelsPour100DP, imageRestaurant);
-        int heightImage = getHeightImageCarree(pixelsPour100DP, imageRestaurant);
-        Bitmap imageRestaurantCarree = Bitmap.createBitmap(imageRestaurant, widhtImage, heightImage, pixelsPour100DP, pixelsPour100DP);
-        viewHolder.img.setImageBitmap(imageRestaurantCarree);
+
+        Picasso.with(getContext()).
+                load(restaurant.getImg())
+                .resizeDimen(R.dimen.size_img, R.dimen.size_img)
+                .centerCrop()
+                .into(viewHolder.img);
 
         return convertView;
     }
 
-    private int getHeightImageCarree(int pixelsPour100DP, Bitmap imageRestaurant) {
-        int res = imageRestaurant.getHeight()/2 - pixelsPour100DP;
-        if(res < 0){
-            return 0;
-        }else{
-            return res;
-        }
-    }
 
-    private int getWidthImageCarree(int pixelsPour100DP, Bitmap imageRestaurant) {
-        int res = imageRestaurant.getWidth()/2 - pixelsPour100DP;
-        if(res < 0){
-            return 0;
-        }else{
-            return res;
-        }
-    }
 
     static class ViewHolder {
         TextView name;
