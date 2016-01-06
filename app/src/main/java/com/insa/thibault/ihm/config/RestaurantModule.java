@@ -22,12 +22,12 @@ public class RestaurantModule {
     @Provides
     @Singleton
     User provideUser(Context context) {
-        return Tools.getCurrentUser();
+        return Tools.getCurrentUser(context);
     }
 
     @Provides
     @Singleton
     List<Restaurant> provideRestaurants(Context context) {
-        return Tools.getRestaurants();
+        return Tools.getRestaurants(context);
     }
 }

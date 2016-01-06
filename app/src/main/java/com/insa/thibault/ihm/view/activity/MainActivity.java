@@ -2,6 +2,7 @@ package com.insa.thibault.ihm.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
@@ -13,6 +14,7 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.insa.thibault.ihm.R;
 import com.insa.thibault.ihm.business.Invitation;
@@ -137,7 +139,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onRestaurantSelected(Restaurant restaurant) {
+    public void onRestaurantSelected(View v, Restaurant restaurant) {
 
         /**DetailsRestaurantFragment  detailsRestaurantFragment = DetailsRestaurantFragment.newInstance(new Bundle(), restaurant);
 
@@ -147,8 +149,14 @@ public class MainActivity extends AppCompatActivity
                 .addToBackStack(null)
                 .commit();*/
 
+        ActivityOptionsCompat options = ActivityOptionsCompat.
+                makeSceneTransitionAnimation(this, v.findViewById(R.id.img_restau), getString(R.string.activity_image_trans));
+
         Intent intent = DetailsRestaurantActivity.newIntent(this, restaurant);
-        startActivity(intent);
+
+
+
+        startActivity(intent, options.toBundle());
     }
 
     @Override

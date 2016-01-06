@@ -33,5 +33,6 @@
     <string name="closed">Fermé ce midi</string>
     <string name="plat">Plat : </string>
     <string name="opened">Ouvert ce midi</string>
+    <string name="activity_image_trans">image_trans</string>
 
 </resources>
