@@ -9,12 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.insa.thibault.ihm.R;
 import com.insa.thibault.ihm.RestaurantApplication;
 import com.insa.thibault.ihm.adapter.InvitationAdapter;
 import com.insa.thibault.ihm.business.Invitation;
+import com.insa.thibault.ihm.business.Restaurant;
 import com.insa.thibault.ihm.business.User;
 
 import java.util.ArrayList;
@@ -36,9 +40,6 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
     @BindString(R.string.title_invitations_fragment)
     protected String title;
 
-    @Bind(R.id.my_meal)
-    protected ListView myMeal;
-
     @Bind(R.id.list_friends_meals)
     protected ListView invitationsList;
 
@@ -47,10 +48,18 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
 
     private List<Invitation> invitations;
 
-    private List<Invitation> myMeals;
-
     private InvitationAdapter invitationAdapter;
-    private InvitationAdapter mealAdapter;
+
+    @Bind(R.id.item_invitation_accepted)
+    protected View myMeal;
+
+    @Bind(R.id.invitations_text_hint)
+    protected TextView invitationsTextHint;
+
+    protected LinearLayout invitationAcceptedNormalLayout;
+
+    protected TextView myMealTextHint;
+
 
     public static ListInvitationFragment newInstance(Bundle bundle){
         ListInvitationFragment fragment = new ListInvitationFragment();
@@ -90,20 +99,58 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
         invitations.addAll(currentUser.getReceivedInvitations());
 
         invitationAdapter = new InvitationAdapter(this.getContext(), invitations, this);
-
-        myMeals = currentUser.getAcceptedInvitations();
-        mealAdapter = new InvitationAdapter(this.getContext(), myMeals, this);
-
-        myMeal.setAdapter(mealAdapter);
         invitationsList.setAdapter(invitationAdapter);
-
-        mealAdapter.notifyDataSetChanged();
         invitationAdapter.notifyDataSetChanged();
-
         invitationsList.setOnItemClickListener(this);
-        myMeal.setOnItemClickListener(this);
+        invitationsList.setEmptyView(invitationsTextHint);
+
+        invitationAcceptedNormalLayout = (LinearLayout) myMeal.findViewById(R.id.invitation_accepted_normal);
+        myMealTextHint = (TextView) myMeal.findViewById(R.id.my_meal_text_hint);
+
+        Invitation acceptedInvitation = currentUser.getAcceptedInvitation();
+        if(acceptedInvitation == null) {
+            invitationAcceptedNormalLayout.setVisibility(View.GONE);
+            myMealTextHint.setVisibility(View.VISIBLE);
+        }
+        else {
+            setAcceptedInvitation(acceptedInvitation);
+        }
 
         return v;
+    }
+
+    private void setAcceptedInvitation(Invitation acceptedInvitation) {
+        invitationAcceptedNormalLayout.setVisibility(View.VISIBLE);
+        myMealTextHint.setVisibility(View.GONE);
+
+        TextView senderText = (TextView) myMeal.findViewById(R.id.sender_full_name);
+        TextView restaurant = (TextView) myMeal.findViewById(R.id.restaurant_invite_name);
+        TextView time = (TextView) myMeal.findViewById(R.id.invite_datetime);
+        TextView nbFriendsEating = (TextView) myMeal.findViewById(R.id.invite_nb_friends_eating);
+        ImageButton declineInvite = (ImageButton) myMeal.findViewById(R.id.decline_invite);
+
+        User sender = acceptedInvitation.getSender();
+        Restaurant acceptedRestaurant = acceptedInvitation.getRestaurant();
+        String acceptedTime = String.format("%02dh%02d", acceptedInvitation.getTimeHour(), acceptedInvitation.getTimeMinutes());
+
+        senderText.setText(sender.getFirstName() + " " + sender.getLastName());
+        restaurant.setText(acceptedRestaurant.getName());
+        time.setText(acceptedTime);
+        nbFriendsEating.setText(acceptedInvitation.getNbFriends() + " amis y vont");
+
+        declineInvite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                declineAcceptedInvitation();
+            }
+        });
+    }
+
+    private void declineAcceptedInvitation() {
+        // TODO Pop-up de confirmation
+        currentUser.setAcceptedInvitation(null);
+        invitationAcceptedNormalLayout.setVisibility(View.GONE);
+        myMealTextHint.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -116,15 +163,14 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
 
     public void acceptInvite(Invitation invitation) {
         invitations.remove(invitation);
-        currentUser.addAcceptedInvitation(invitation);
+        currentUser.setAcceptedInvitation(invitation);
         currentUser.removeReceivedInvitation(invitation);
-        mealAdapter.notifyDataSetChanged();
+        setAcceptedInvitation(invitation);
         invitationAdapter.notifyDataSetChanged();
     }
 
     public void declineInvite(Invitation invitation) {
         invitations.remove(invitation);
-        mealAdapter.notifyDataSetChanged();
         invitationAdapter.notifyDataSetChanged();
     }
 }

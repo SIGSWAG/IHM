@@ -14,15 +14,9 @@
         style="@style/TextAppearance.AppCompat.Headline"
         android:layout_marginLeft="@dimen/title_margin_left" />
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/my_meal"
-        tools:layout_height="100dp"
-        android:descendantFocusability="blocksDescendants" />
+    <include android:id="@+id/item_invitation_accepted" layout="@layout/item_invitation_accepted" />
 
-    <View
-        style="@style/separator"/>
+    <View style="@style/separator"/>
 
 
     <TextView
@@ -41,5 +35,21 @@
         tools:layout_height="100dp"
         android:descendantFocusability="blocksDescendants"
         android:layout_weight="1.06" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Demandez à vos amis de vous invitez ou invitez-les vous même !"
+            android:id="@+id/invitations_text_hint"
+            android:textStyle="italic"
+            android:textColor="@color/insaFontGray"
+            android:adjustViewBounds="true"/>
+
+    </LinearLayout>
 
 </LinearLayout>

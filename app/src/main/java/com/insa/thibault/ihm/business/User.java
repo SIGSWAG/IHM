@@ -21,7 +21,7 @@ public class User implements Parcelable{
     private Map<String,User> friends;
     private List<Invitation> receivedInvitations;
     private List<Invitation> sentInvitations;
-    private List<Invitation> acceptedInvitations;
+    private Invitation acceptedInvitation;
     private List<Restaurant> favoritesRestaurant;
     private String timeEating;
     boolean isAppUser;
@@ -53,7 +53,6 @@ public class User implements Parcelable{
 
         receivedInvitations =  source.createTypedArrayList(Invitation.CREATOR);
         sentInvitations =  source.createTypedArrayList(Invitation.CREATOR);
-        acceptedInvitations = source.createTypedArrayList(Invitation.CREATOR);
 
         favoritesRestaurant = source.createTypedArrayList(Restaurant.CREATOR);
         boolean[] app = new boolean[1];
@@ -68,7 +67,6 @@ public class User implements Parcelable{
         this.friends = new HashMap<>();
         this.receivedInvitations = new ArrayList<>();
         this.sentInvitations = new ArrayList<>();
-        this.acceptedInvitations = new ArrayList<>();
         this.favoritesRestaurant = new ArrayList<>();
     }
 
@@ -79,14 +77,14 @@ public class User implements Parcelable{
 
     public User(String firstName, String lastName, Restaurant currentRestaurant, Map<String, User> friends,
                 List<Invitation> receivedInvitations, List<Invitation> sentInvitations,
-                List<Invitation> acceptedInvitations, List<Restaurant> favoritesRestaurant) {
+                Invitation acceptedInvitation, List<Restaurant> favoritesRestaurant) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.currentRestaurant = currentRestaurant;
         this.friends = friends;
         this.receivedInvitations = receivedInvitations;
         this.sentInvitations = sentInvitations;
-        this.acceptedInvitations = acceptedInvitations;
+        this.acceptedInvitation = acceptedInvitation;
         this.favoritesRestaurant = favoritesRestaurant;
     }
 
@@ -167,20 +165,12 @@ public class User implements Parcelable{
         this.sentInvitations.remove(invitation);
     }
 
-    public List<Invitation> getAcceptedInvitations() {
-        return acceptedInvitations;
+    public Invitation getAcceptedInvitation() {
+        return acceptedInvitation;
     }
 
-    public void setAcceptedInvitations(List<Invitation> acceptedInvitations) {
-        this.acceptedInvitations = acceptedInvitations;
-    }
-
-    public void addAcceptedInvitation(Invitation invitation) {
-        acceptedInvitations.add(invitation);
-    }
-
-    public void removeAcceptedInvitation(Invitation invitation) {
-        acceptedInvitations.remove(invitation);
+    public void setAcceptedInvitation(Invitation acceptedInvitations) {
+        this.acceptedInvitation = acceptedInvitations;
     }
 
     public List<Restaurant> getFavoritesRestaurant() {
@@ -238,9 +228,7 @@ public class User implements Parcelable{
         if(sentInvitations == null){
             sentInvitations = new ArrayList<>();
         }
-        if(acceptedInvitations == null){
-            acceptedInvitations = new ArrayList<>();
-        }
+
         if(favoritesRestaurant == null){
             favoritesRestaurant = new ArrayList<>();
         }
@@ -248,7 +236,6 @@ public class User implements Parcelable{
         dest.writeTypedArray( friends.values().toArray(new User[friends.size()]),0);
         dest.writeTypedList( receivedInvitations);
         dest.writeTypedList( sentInvitations);
-        dest.writeTypedList( acceptedInvitations);
         dest.writeTypedList( favoritesRestaurant);
         boolean[] userApp = new boolean[1];
         userApp[0]=isAppUser;

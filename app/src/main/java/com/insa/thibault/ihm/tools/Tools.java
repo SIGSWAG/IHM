@@ -133,7 +133,7 @@ public class Tools {
 
             currentUser = new User("Thibault", "Halepian", null, friends,
                     invitations, new ArrayList<Invitation>(),
-                    new ArrayList<Invitation>(), new ArrayList<Restaurant>());
+                    null, new ArrayList<Restaurant>());
         }
     }
 

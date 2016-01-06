@@ -110,9 +110,9 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
             binding.setRestaurant(restaurant);
         }
 
-        if(user.getAcceptedInvitations() !=  null && user.getAcceptedInvitations().size()>0 && user.getAcceptedInvitations().get(0).getRestaurant().getName().compareTo(restaurant.getName())==0){
+        if(user.getAcceptedInvitation() !=  null && user.getAcceptedInvitation().getRestaurant().getName().compareTo(restaurant.getName())==0){
             cardRestaurant.setVisibility(View.VISIBLE);
-            mealTextView.setText(user.getAcceptedInvitations().get(0).getTimeHour()+"h"+user.getAcceptedInvitations().get(0).getTimeMinutes());
+            mealTextView.setText(user.getAcceptedInvitation().getTimeHour()+"h"+user.getAcceptedInvitation().getTimeMinutes());
 
         }else{
             cardRestaurant.setVisibility(View.GONE);
@@ -259,13 +259,13 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
                         public void onClick(DialogInterface dialog, int which) {
 
                             user.setCurrentRestaurant(currentInvitation.getRestaurant());
-                            user.getAcceptedInvitations().get(0).setStatus(Invitation.PENDING);
-                            user.getAcceptedInvitations().clear();
+                            user.getAcceptedInvitation().setStatus(Invitation.PENDING);
+                            //user.getAcceptedInvitation().clear();
                             recyclerInvitationAdapter.remove(currentInvitation);
                             currentInvitation.setStatus(Invitation.ACCEPTED);
-                            user.addAcceptedInvitation(currentInvitation);
+                            user.setAcceptedInvitation(currentInvitation);
                             cardRestaurant.setVisibility(View.VISIBLE);
-                            mealTextView.setText(user.getAcceptedInvitations().get(0).getTimeHour()+"h"+user.getAcceptedInvitations().get(0).getTimeMinutes());
+                            mealTextView.setText(user.getAcceptedInvitation().getTimeHour()+"h"+user.getAcceptedInvitation().getTimeMinutes());
                             Snackbar.make(view, R.string.saved, Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                             dialog.dismiss();
@@ -286,9 +286,9 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
             user.setCurrentRestaurant(currentInvitation.getRestaurant());
             recyclerInvitationAdapter.remove(currentInvitation);
             currentInvitation.setStatus(Invitation.ACCEPTED);
-            user.addAcceptedInvitation(currentInvitation);
+            user.setAcceptedInvitation(currentInvitation);
             cardRestaurant.setVisibility(View.VISIBLE);
-            mealTextView.setText(user.getAcceptedInvitations().get(0).getTimeHour()+"h"+user.getAcceptedInvitations().get(0).getTimeMinutes());
+            mealTextView.setText(user.getAcceptedInvitation().getTimeHour()+"h"+user.getAcceptedInvitation().getTimeMinutes());
             Snackbar.make(view, R.string.saved, Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
@@ -312,10 +312,10 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
                     public void onClick(DialogInterface dialog, int which) {
                         Invitation invitation = new Invitation(user, user, restaurant, timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 3, 12, Invitation.ACCEPTED);
                         user.setCurrentRestaurant(restaurant);
-                        user.getAcceptedInvitations().clear();
-                        user.addAcceptedInvitation(invitation);
+                        //user.getAcceptedInvitation().clear();
+                        user.setAcceptedInvitation(invitation);
                         cardRestaurant.setVisibility(View.VISIBLE);
-                        mealTextView.setText(user.getAcceptedInvitations().get(0).getTimeHour()+"h"+user.getAcceptedInvitations().get(0).getTimeMinutes());
+                        mealTextView.setText(user.getAcceptedInvitation().getTimeHour()+"h"+user.getAcceptedInvitation().getTimeMinutes());
 
                         Snackbar.make(v, R.string.saved, Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
