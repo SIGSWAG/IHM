@@ -96,15 +96,15 @@ public class Tools {
             restaurantList = new ArrayList<>();
 
 
-            restaurantList.add(new Restaurant("Beurk", 12, 2, 30, "Brocoli", "20 Avenue Jean Capelle O, 69100 Villeurbanne, France"));
-            restaurantList.add(new Restaurant("Le Prévert", 2, 5, 300, "Gras", "14 avenue Beurk, 69100 Villeurbanne, France"));
-            restaurantList.add(new Restaurant("Snack du campus", 7, 1, 500, "Tacos", "18 avenue Einstein, 69100 Villeurbanne, France"));
-            restaurantList.add(new Restaurant("Panorama", 0, 3, 200, "Frites - Omelette", "12 rue Sigmond, 69100 Villeurbanne, France"));
-            restaurantList.add(new Restaurant("Ninkasi", 14, 0, 1500, "Quiche", "20 Avenue Jean Capelle O, 69100 Villeurbanne, France"));
-            restaurantList.add(new Restaurant("Grand RU", 4, 3, 400, "Falafel - Petits pois", "14 avenue Beurk, 69100 Villeurbanne, France"));
-            restaurantList.add(new Restaurant("Petit RU", 2, 6, 10, "Pizzas", "18 avenue Einstein, 69100 Villeurbanne, France"));
-            restaurantList.add(new Restaurant("Auberge de la Doua", 10, 0, 400, "Purée - Courgettes", "18 rue de SIGSWAG, 69100 Villeurbanne, France"));
-            restaurantList.add(new Restaurant("Mozaïque", 0, 1, 400, "Yaourt aux fruits", "620 avenue Mona Liza, NY 10018"));
+            restaurantList.add(new Restaurant("Beurk", 12, 2, 30, "Soupe à l'oignon \n Brocolis & steak haché \n Fruits", "20 Avenue Albert Einstein, 69100 Villeurbanne, France"));
+            restaurantList.add(new Restaurant("Le Prévert", 2, 5, 300, "Salade \n Panini thon \n Eclair au café", "20 Avenue Albert Einstein, 69100 Villeurbanne, France"));
+            restaurantList.add(new Restaurant("Snack du campus", 7, 1, 500, "Tacos Kebab Maison", "29 rue de la Doua, 69100 Villeurbanne, France"));
+            restaurantList.add(new Restaurant("Panorama", 0, 3, 200, "Frites - Omelette ou Kebab", "63 avenue Roger Salengro, 69100 Villeurbanne, France"));
+            restaurantList.add(new Restaurant("Ninkasi", 14, 0, 1500, "Quiche Lorraine \n Purée de carottes", "2-4 rue Léon Fabre, 69100 Villeurbanne, France"));
+            restaurantList.add(new Restaurant("Grand RU", 4, 3, 400, "Jambon cru \n Falafel & Petits pois \n Tarte aux pommes", "3 avenue Albert Einstein, 69100 Villeurbanne, France"));
+            restaurantList.add(new Restaurant("Petit RU", 2, 6, 10, "Salade verte \n Pizza au saumon \n Fruits", "18 avenue Einstein, 69100 Villeurbanne, France"));
+            restaurantList.add(new Restaurant("Auberge de la Doua", 10, 0, 400, "Carottes rapées \n Purée & Courgettes \n Yaourts", "26 rue Marguerite, 69100 Villeurbanne, France"));
+            restaurantList.add(new Restaurant("Mozaïque", 0, 1, 400, "Foie gras \n Pates bolognaises \n Yaourt aux fruits", "8 rue Léon Fabre, 69100 Villeurbanne, France"));
 
             restaurantList.get(0).setOpened(true);
             restaurantList.get(1).setOpened(true);
