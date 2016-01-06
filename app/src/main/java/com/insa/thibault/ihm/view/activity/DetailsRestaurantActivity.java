@@ -61,17 +61,14 @@ public class DetailsRestaurantActivity extends AppCompatActivity {
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
 
-
-        restaurantImage.setTransitionName(getString(R.string.activity_image_trans));
-        restaurantImage.setImageBitmap(Tools.getRestaurantBitmap(this, restaurant));
-
-
         Intent intent = getIntent();
 
+        restaurant = intent.getParcelableExtra(KEY_RESTAURANT);
+
+        restaurantImage.setTransitionName(getString(R.string.activity_image_trans));
+        restaurantImage.setImageBitmap(Tools.getRestaurantBitmap(this.getBaseContext(), restaurant));
 
 
-
-        final Restaurant restaurant = intent.getParcelableExtra(KEY_RESTAURANT);
 
         collapsingToolbar.setTitle(restaurant.getName());
 

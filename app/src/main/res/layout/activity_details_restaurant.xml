@@ -32,7 +32,6 @@
                 android:scaleType="centerCrop"
                 app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
                 android:minHeight="0dp"
-                android:src="@drawable/restaurant_insa"
                 android:fitsSystemWindows="true"
                 app:layout_collapseMode="parallax" />
             <android.support.v7.widget.Toolbar
