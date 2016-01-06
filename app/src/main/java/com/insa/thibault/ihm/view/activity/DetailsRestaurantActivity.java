@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Transition;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,6 +22,7 @@ import com.insa.thibault.ihm.business.Restaurant;
 import com.insa.thibault.ihm.business.User;
 import com.insa.thibault.ihm.tools.Tools;
 import com.insa.thibault.ihm.view.fragment.DetailsRestaurantFragment;
+import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
@@ -39,6 +41,8 @@ public class DetailsRestaurantActivity extends AppCompatActivity {
     @Bind(R.id.backdrop)
     protected ImageView restaurantImage;
 
+    @Bind(R.id.fab)
+    protected FloatingActionButton fab;
 
     public static Intent newIntent(Context context, Restaurant restaurant){
 
@@ -53,6 +57,40 @@ public class DetailsRestaurantActivity extends AppCompatActivity {
         ((RestaurantApplication)getApplication()).getAppComponent().inject(this);
         setContentView(R.layout.activity_details_restaurant);
         ButterKnife.bind(this);
+
+        getWindow().getEnterTransition().addListener(new Transition.TransitionListener() {
+            @Override
+            public void onTransitionStart(Transition transition) {
+                    fab.hide();
+            }
+
+            @Override
+            public void onTransitionEnd(Transition transition) {
+                        fab.show();
+                        getWindow().getEnterTransition().removeListener(this);
+
+            }
+
+            @Override
+            public void onTransitionCancel(Transition transition) {
+
+            }
+
+            @Override
+            public void onTransitionPause(Transition transition) {
+
+            }
+
+            @Override
+            public void onTransitionResume(Transition transition) {
+
+            }
+        });
+
+
+
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -65,8 +103,14 @@ public class DetailsRestaurantActivity extends AppCompatActivity {
 
         restaurant = intent.getParcelableExtra(KEY_RESTAURANT);
 
-        restaurantImage.setTransitionName(getString(R.string.activity_image_trans));
-        restaurantImage.setImageBitmap(Tools.getRestaurantBitmap(this.getBaseContext(), restaurant));
+        //restaurantImage.setTransitionName(getString(R.string.activity_image_trans));
+
+
+        Picasso.with(this).
+                load(restaurant.getImg())
+                .into(restaurantImage);
+
+        //restaurantImage.setImageBitmap(Tools.getRestaurantBitmap(this.getBaseContext(), restaurant));
 
 
 
@@ -79,8 +123,10 @@ public class DetailsRestaurantActivity extends AppCompatActivity {
                 .replace(R.id.fragment_container, detailsRestaurantFragment)//TODO use tags
                 .commit();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(detailsRestaurantFragment);
+        fab.show();
+
+
 
     }
 
@@ -88,12 +134,21 @@ public class DetailsRestaurantActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case android.R.id.home:
-                finish();
+
+                onBackPressed();
                 break;
             default:
                 break;
         }
         return (super.onOptionsItemSelected(menuItem));
+    }
+
+    @Override
+    public void onBackPressed(){
+
+        fab.animate().alpha(0.0f);
+
+        super.onBackPressed();
     }
 
 }

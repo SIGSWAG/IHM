@@ -17,6 +17,7 @@ public class Restaurant implements Parcelable {
     private int distanceMetres;
     private boolean opened;
     private String address;
+    private int img;
 
 
     //Parcelable
@@ -33,7 +34,7 @@ public class Restaurant implements Parcelable {
     };
 
 
-    public Restaurant(String name, int nbFriends, int nbInvitations, int distanceMetres, String plat, String address) {
+    public Restaurant(String name, int nbFriends, int nbInvitations, int distanceMetres, String plat, String address, int img) {
         this.name = name;
         this.nbFriends = nbFriends;
         this.nbInvitations = nbInvitations;
@@ -41,6 +42,7 @@ public class Restaurant implements Parcelable {
         this.plat = plat;
         this.address = address;
         opened = false;
+        this.img = img;
 
     }
 
@@ -54,6 +56,7 @@ public class Restaurant implements Parcelable {
         source.readBooleanArray(app);
         opened =  app[0];
         address = source.readString();
+        img = source.readInt();
 
     }
 
@@ -106,8 +109,13 @@ public class Restaurant implements Parcelable {
     }
 
 
+    public int getImg() {
+        return img;
+    }
 
-
+    public void setImg(int img) {
+        this.img = img;
+    }
 
     @Override
     public int describeContents() {
@@ -134,6 +142,7 @@ public class Restaurant implements Parcelable {
         open[0]=opened;
         dest.writeBooleanArray(open);
         dest.writeString(address);
+        dest.writeInt(img);
 
     }
 

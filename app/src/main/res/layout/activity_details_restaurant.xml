@@ -30,6 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
+                android:transitionName="@string/activity_image_trans"
                 app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
                 android:minHeight="0dp"
                 android:fitsSystemWindows="true"

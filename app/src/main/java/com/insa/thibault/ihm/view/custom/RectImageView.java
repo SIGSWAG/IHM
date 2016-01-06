@@ -22,7 +22,7 @@ import com.insa.thibault.ihm.R;
 public class RectImageView extends ImageView {
 
     double angleRad;//angle in degrees
-
+    int angle;
 
     public RectImageView(Context ctx, AttributeSet attrs) {
         super(ctx, attrs);
@@ -30,13 +30,15 @@ public class RectImageView extends ImageView {
 
         TypedArray ta = ctx.obtainStyledAttributes(attrs, R.styleable.rect);
 
-        int angle = ta.getInteger(R.styleable.rect_angle, 0);
+        angle = ta.getInteger(R.styleable.rect_angle, 0);
         angleRad =  getRadFromDeg(angle);
+
+
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-
+        angleRad =  getRadFromDeg(angle);
         Drawable drawable = getDrawable();
 
         if (drawable == null) {
@@ -107,6 +109,13 @@ public class RectImageView extends ImageView {
 
     }
 
+    public int getAngle() {
+        return angle;
+    }
+
+    public void setAngle(int angle) {
+        this.angle = angle;
+    }
 }
 
 
