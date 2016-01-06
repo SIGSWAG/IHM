@@ -3,7 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <import type="android.view.View"/>
         <variable name="restaurant" type="com.insa.thibault.ihm.business.Restaurant"/>
+        <variable
+            name="recyclerInvitationAdapter"
+            type="com.insa.thibault.ihm.adapter.RecyclerInvitationAdapter" />
     </data>
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/scroll"
@@ -110,9 +114,19 @@
                     <android.support.v7.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-
                         android:id="@+id/list_invit"
                         />
+
+                    <TextView
+                        android:visibility="@{recyclerInvitationAdapter.getItemCount > 0 ? View.GONE : View.VISIBLE}"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Acceptez une invitation ou allez manger à un restaurant !"
+                        android:id="@+id/invitations_text_hint"
+                        android:textStyle="italic"
+                        android:textColor="@color/insaFontGray"
+                        android:adjustViewBounds="true"/>
                 </LinearLayout>
 
 

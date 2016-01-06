@@ -190,6 +190,8 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
         listFriendsEating.setAdapter(friendAtRestaurantAdapter);
         friendAtRestaurantAdapter.notifyDataSetChanged();
 
+        binding.setRecyclerInvitationAdapter(recyclerInvitationAdapter);
+
         return v;
     }
 
