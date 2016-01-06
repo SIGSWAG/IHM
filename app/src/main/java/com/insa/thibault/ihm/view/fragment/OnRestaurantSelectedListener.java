@@ -1,5 +1,7 @@
 package com.insa.thibault.ihm.view.fragment;
 
+import android.view.View;
+
 import com.insa.thibault.ihm.business.Restaurant;
 
 /**
@@ -7,5 +9,5 @@ import com.insa.thibault.ihm.business.Restaurant;
  */
 public interface OnRestaurantSelectedListener {
 
-    void onRestaurantSelected(Restaurant restaurant);
+    void onRestaurantSelected(View v, Restaurant restaurant);
 }

@@ -1,5 +1,11 @@
 package com.insa.thibault.ihm.tools;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+
+import com.insa.thibault.ihm.R;
 import com.insa.thibault.ihm.business.Invitation;
 import com.insa.thibault.ihm.business.Restaurant;
 import com.insa.thibault.ihm.business.User;
@@ -11,10 +17,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 /**
  * Created by Thibault on 31/12/2015.
  */
 public class Tools {
+
 
     private static User currentUser;
     private static List<Restaurant> restaurantList;
@@ -33,9 +42,22 @@ public class Tools {
         someUsers = Arrays.asList(user1, user2, user3, user4, user5, user6, user7, user8);
     }
 
-    public static void init() {
+
+    public static Bitmap getRestaurantBitmap(Context context, Restaurant restaurant){
+
+        Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
+                R.drawable.restaurant_insa);
+
+        return icon;
+
+    }
+
+
+    public static void init(Context context) {
         if(restaurantList == null) {
             restaurantList = new ArrayList<>();
+
+
             Restaurant restaurant = new Restaurant("Beurk", 12, 2, 30, "Brocoli", "20 Avenue Jean Capelle O, 69100 Villeurbanne, France");
             restaurant.setOpened(true);
             restaurantList.add(restaurant);
@@ -76,13 +98,13 @@ public class Tools {
         }
     }
 
-    public static User getCurrentUser() {
-        init();
+    public static User getCurrentUser(Context context) {
+        init(context);
         return currentUser;
     }
 
-    public static List<Restaurant> getRestaurants() {
-        init();
+    public static List<Restaurant> getRestaurants(Context context) {
+        init(context);
         return restaurantList;
     }
 

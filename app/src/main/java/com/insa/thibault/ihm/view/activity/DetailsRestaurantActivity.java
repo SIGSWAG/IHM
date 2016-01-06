@@ -13,14 +13,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.insa.thibault.ihm.R;
 import com.insa.thibault.ihm.RestaurantApplication;
 import com.insa.thibault.ihm.business.Restaurant;
 import com.insa.thibault.ihm.business.User;
+import com.insa.thibault.ihm.tools.Tools;
 import com.insa.thibault.ihm.view.fragment.DetailsRestaurantFragment;
 
 import javax.inject.Inject;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class DetailsRestaurantActivity extends AppCompatActivity {
 
@@ -30,6 +35,9 @@ public class DetailsRestaurantActivity extends AppCompatActivity {
     protected User currentUser;
 
     private Restaurant restaurant;
+
+    @Bind(R.id.backdrop)
+    protected ImageView restaurantImage;
 
 
     public static Intent newIntent(Context context, Restaurant restaurant){
@@ -42,10 +50,9 @@ public class DetailsRestaurantActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         ((RestaurantApplication)getApplication()).getAppComponent().inject(this);
         setContentView(R.layout.activity_details_restaurant);
-
+        ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -54,7 +61,15 @@ public class DetailsRestaurantActivity extends AppCompatActivity {
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
 
+
+        restaurantImage.setTransitionName(getString(R.string.activity_image_trans));
+        restaurantImage.setImageBitmap(Tools.getRestaurantBitmap(this, restaurant));
+
+
         Intent intent = getIntent();
+
+
+
 
         final Restaurant restaurant = intent.getParcelableExtra(KEY_RESTAURANT);
 

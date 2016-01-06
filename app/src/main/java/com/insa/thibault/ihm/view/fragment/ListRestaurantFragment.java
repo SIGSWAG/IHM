@@ -100,7 +100,8 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Log.d("List","Click");
         if(mCallback != null){
-            mCallback.onRestaurantSelected(restaurantList.get(position));
+
+            mCallback.onRestaurantSelected(view, restaurantList.get(position));
         }
     }
 }

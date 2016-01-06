@@ -8,12 +8,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.insa.thibault.ihm.R;
 import com.insa.thibault.ihm.business.Restaurant;
 import com.insa.thibault.ihm.business.User;
+import com.insa.thibault.ihm.tools.Tools;
 import com.insa.thibault.ihm.utils.SnackbarUtils;
 
 import java.util.List;
@@ -50,6 +52,7 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
             viewHolder.plat = (TextView) convertView.findViewById(R.id.main_plat);
             viewHolder.info = (TextView) convertView.findViewById(R.id.info);
             viewHolder.layoutMeal = (LinearLayout) convertView.findViewById(R.id.layout_meal);
+            viewHolder.img = (ImageView) convertView.findViewById(R.id.img_restau);
 
             convertView.setTag(viewHolder);
         }
@@ -95,6 +98,7 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
             viewHolder.info.setTextColor(getContext().getResources().getColor(R.color.materialRed));
 
         }
+        viewHolder.img.setImageBitmap(Tools.getRestaurantBitmap(getContext(), restaurant));
 
         return convertView;
     }
@@ -106,7 +110,7 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
         LinearLayout layoutMeal;
         TextView info;
         TextView plat;
-
+        ImageView img;
 
         ImageButton buttonStar;
     }

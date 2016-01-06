@@ -1,5 +1,7 @@
 package com.insa.thibault.ihm.business;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -15,6 +17,7 @@ public class Restaurant implements Parcelable {
     private int distanceMetres;
     private boolean opened;
     private String address;
+
 
     //Parcelable
     public static final Parcelable.Creator<Restaurant> CREATOR = new Parcelable.Creator<Restaurant>() {
@@ -38,6 +41,7 @@ public class Restaurant implements Parcelable {
         this.plat = plat;
         this.address = address;
         opened = false;
+
     }
 
     public Restaurant(Parcel source) {
@@ -50,6 +54,7 @@ public class Restaurant implements Parcelable {
         source.readBooleanArray(app);
         opened =  app[0];
         address = source.readString();
+
     }
 
     public String getName() {
@@ -100,6 +105,10 @@ public class Restaurant implements Parcelable {
         this.address = address;
     }
 
+
+
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -125,6 +134,7 @@ public class Restaurant implements Parcelable {
         open[0]=opened;
         dest.writeBooleanArray(open);
         dest.writeString(address);
+
     }
 
     @Override

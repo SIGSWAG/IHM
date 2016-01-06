@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/premiereLigne"
+        android:descendantFocusability="blocksDescendants"
         xmlns:tools="http://schemas.android.com/tools">
 
         <TextView
@@ -142,7 +143,7 @@
     <com.insa.thibault.ihm.view.custom.RectImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:id="@+id/imageView10"
+        android:id="@+id/img_restau"
         app:angle="14"
         android:focusable="false"
         android:focusableInTouchMode="false"
