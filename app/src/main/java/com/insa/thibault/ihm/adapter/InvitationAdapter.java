@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.insa.thibault.ihm.R;
 import com.insa.thibault.ihm.business.Invitation;
 import com.insa.thibault.ihm.business.User;
+import com.insa.thibault.ihm.view.fragment.ListInvitationFragment;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -24,10 +25,12 @@ import java.util.List;
 public class InvitationAdapter extends ArrayAdapter<Invitation> {
 
     private List<Invitation> invitations;
+    private ListInvitationFragment listInvitationFragment;
 
-    public InvitationAdapter(Context context, List<Invitation> invitations) {
+    public InvitationAdapter(Context context, List<Invitation> invitations, ListInvitationFragment listInvitationFragment) {
         super(context, 0, invitations);
         this.invitations = invitations;
+        this.listInvitationFragment = listInvitationFragment;
     }
 
     @Override
@@ -72,6 +75,7 @@ public class InvitationAdapter extends ArrayAdapter<Invitation> {
             public void onClick(View v) {
                 Snackbar.make(v, "Vous avez accepter l'invitation ! ", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                listInvitationFragment.acceptInvite(currentInvitation);
             }
         });
         viewHolder.declineInvite.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +83,7 @@ public class InvitationAdapter extends ArrayAdapter<Invitation> {
             public void onClick(View v) {
                 Snackbar.make(v, "Vous avez décliné l'invitation, pas cool ! ", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                listInvitationFragment.declineInvite(currentInvitation);
             }
         });
 
