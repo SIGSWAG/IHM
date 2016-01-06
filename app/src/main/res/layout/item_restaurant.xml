@@ -19,7 +19,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/name_restaurant"
-            tools:text="Castor et Pollux "
+            android:text="Castor et Pollux "
+            android:ellipsize="end"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
             android:textColor="@color/insaFontDark"
             android:layout_centerVertical="true"
@@ -114,7 +115,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:id="@+id/layout_meal"
-
             android:layout_alignBottom="@+id/info"
             android:layout_toEndOf="@+id/info">
 
@@ -127,10 +127,12 @@
                 android:textColor="@color/insaFontGray"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                tools:text="Epinards"
+                tools:text="Epinardsfziufhfzfzefzefzz  zefzefzef_eufzuiefbziuefz"
                 android:id="@+id/main_plat"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:layout_marginStart="4dp"
                 android:textColor="@color/insaFontGray"/>
         </LinearLayout>
