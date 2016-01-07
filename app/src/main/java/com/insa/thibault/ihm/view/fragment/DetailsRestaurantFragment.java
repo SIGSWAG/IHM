@@ -37,6 +37,7 @@ import com.insa.thibault.ihm.databinding.FragmentDetailsRestaurantBinding;
 import com.insa.thibault.ihm.tools.Tools;
 import com.insa.thibault.ihm.utils.SnackbarUtils;
 import com.insa.thibault.ihm.view.activity.FriendsActivity;
+import com.insa.thibault.ihm.view.custom.CustomLinearLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,7 +129,7 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
         }
 
         recyclerInvitationAdapter = new RecyclerInvitationAdapter(getActivity(), invitations, this, user);
-        recyclerViewInvitations.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerViewInvitations.setLayoutManager(new CustomLinearLayoutManager(getActivity()));
         recyclerViewInvitations.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
 
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {

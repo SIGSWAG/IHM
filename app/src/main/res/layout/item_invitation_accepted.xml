@@ -154,6 +154,8 @@
         android:layout_height="wrap_content"
         android:text="Acceptez une invitation ou allez manger à un restaurant !"
         android:id="@+id/my_meal_text_hint"
+        android:layout_marginLeft="@dimen/list_margin_left"
+        android:layout_marginRight="@dimen/list_margin_left"
         android:textStyle="italic"
         android:textColor="@color/insaFontGray"
         android:adjustViewBounds="true"/>
