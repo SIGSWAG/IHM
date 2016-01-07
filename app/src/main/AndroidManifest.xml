@@ -25,7 +25,13 @@
         <activity
             android:name=".view.activity.DetailsRestaurantActivity"
             android:label="@string/title_activity_details_restaurant"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data android:scheme="geo" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".view.activity.FriendsActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>

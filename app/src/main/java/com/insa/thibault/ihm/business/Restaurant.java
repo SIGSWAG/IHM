@@ -19,7 +19,8 @@ public class Restaurant implements Parcelable {
     private boolean opened;
     private String address;
     private int img;
-
+    private double latitude;
+    private double longitude;
 
     //Parcelable
     public static final Parcelable.Creator<Restaurant> CREATOR = new Parcelable.Creator<Restaurant>() {
@@ -35,7 +36,7 @@ public class Restaurant implements Parcelable {
     };
 
 
-    public Restaurant(String name, int nbFriends, int nbInvitations, int distanceMetres, String plat,String menu, String address, int img) {
+    public Restaurant(String name, int nbFriends, int nbInvitations, int distanceMetres, String plat,String menu, String address, int img, double latitude, double longitude) {
         this.name = name;
         this.nbFriends = nbFriends;
         this.nbInvitations = nbInvitations;
@@ -45,6 +46,8 @@ public class Restaurant implements Parcelable {
         opened = false;
         this.menu = menu;
         this.img = img;
+        this.latitude = latitude;
+        this.longitude = longitude;
 
     }
 
@@ -60,7 +63,8 @@ public class Restaurant implements Parcelable {
         address = source.readString();
         img = source.readInt();
         menu = source.readString();
-
+        latitude = source.readDouble();
+        longitude = source.readDouble();
     }
 
     public String getName() {
@@ -127,6 +131,22 @@ public class Restaurant implements Parcelable {
         this.img = img;
     }
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -154,7 +174,8 @@ public class Restaurant implements Parcelable {
         dest.writeString(address);
         dest.writeInt(img);
         dest.writeString(menu);
-
+        dest.writeDouble(latitude);
+        dest.writeDouble(longitude);
     }
 
     @Override
@@ -177,7 +198,4 @@ public class Restaurant implements Parcelable {
         }
         return false;
     }
-
-
-
 }

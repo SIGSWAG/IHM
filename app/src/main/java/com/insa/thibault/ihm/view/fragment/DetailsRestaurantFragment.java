@@ -11,6 +11,9 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +82,9 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
 
     @Bind(R.id.hour_meal)
     protected TextView mealTextView;
+
+    @Bind(R.id.info)
+    protected TextView address;
 
     public static DetailsRestaurantFragment newInstance(Bundle bundleArg, Restaurant restaurant){
         DetailsRestaurantFragment fragment = new DetailsRestaurantFragment();
@@ -192,6 +198,11 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
         friendAtRestaurantAdapter.notifyDataSetChanged();
 
         binding.setRecyclerInvitationAdapter(recyclerInvitationAdapter);
+
+        address.setMovementMethod(LinkMovementMethod.getInstance());
+        address.setText(Html.fromHtml(
+                "<a href=\"geo:" + restaurant.getLatitude() + "," + restaurant.getLongitude() + "?q=" + restaurant.getLatitude() + "," + restaurant.getLongitude() + "(" + restaurant.getName() + ")\">" + restaurant.getAddress() + "</a>"
+        ));
 
         return v;
     }
