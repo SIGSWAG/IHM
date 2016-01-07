@@ -280,10 +280,8 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
                     });
 
             alertDialog.show();
-
-
-        }else if(user.getCurrentRestaurant() == null){
-
+        }
+        else if(user.getCurrentRestaurant() == null){
             user.setCurrentRestaurant(currentInvitation.getRestaurant());
             recyclerInvitationAdapter.remove(currentInvitation);
             currentInvitation.setStatus(Invitation.ACCEPTED);

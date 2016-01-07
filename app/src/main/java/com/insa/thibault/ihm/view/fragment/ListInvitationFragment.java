@@ -157,6 +157,7 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         currentUser.setAcceptedInvitation(null);
+                        currentUser.setCurrentRestaurant(null);
                         invitationAcceptedNormalLayout.setVisibility(View.GONE);
                         myMealTextHint.setVisibility(View.VISIBLE);
                     }
