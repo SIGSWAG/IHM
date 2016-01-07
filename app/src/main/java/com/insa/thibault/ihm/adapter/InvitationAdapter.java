@@ -43,7 +43,7 @@ public class InvitationAdapter extends ArrayAdapter<Invitation> {
             viewHolder = new ViewHolder();
 
             viewHolder.inviterName = (TextView) convertView.findViewById(R.id.sender_full_name);
-            viewHolder.inviterImage = (ImageView) convertView.findViewById(R.id.inviter_profile_image);
+            //viewHolder.inviterImage = (ImageView) convertView.findViewById(R.id.inviter_profile_image);
             viewHolder.location = (TextView) convertView.findViewById(R.id.restaurant_invite_name);
             viewHolder.nbFriends = (TextView) convertView.findViewById(R.id.invite_nb_friends_eating);
             viewHolder.time = (TextView) convertView.findViewById(R.id.invite_datetime);

@@ -36,5 +36,6 @@
     <string name="activity_image_trans">image_trans</string>
     <string name="cancel_my_meal">Vous êtes déjà inscrit dans un repas, êtes vous sûr de vouloir renoncer à ce repas ?</string>
     <string name="accept_invite">Vous êtes déjà inscrit dans un repas, êtes vous sûr de vouloir renoncer à ce repas et accepter cette invitation ?</string>
+    <string name="at">à </string>
 
 </resources>
