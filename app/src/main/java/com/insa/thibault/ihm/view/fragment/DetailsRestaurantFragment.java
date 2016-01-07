@@ -220,9 +220,7 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
 
             alertDialog.show();
         }
-        else if(user.getCurrentRestaurant() == null){
-            user.setCurrentRestaurant(restaurant);
-
+        else if(user.getCurrentRestaurant() == null) {
             //user.addAcceptedInvitation(new Invitation(user, user, restaurant, 12, 45, 3, 12, Invitation.ACCEPTED));
             displayTimePicker(v);
 
@@ -298,10 +296,7 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
     }
 
 
-    void displayTimePicker(final View v){
-
-
-
+    void displayTimePicker(final View v) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View dialog_layout = inflater.inflate(R.layout.dialog_time_picker, null);
         AlertDialog dialog;
