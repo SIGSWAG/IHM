@@ -236,8 +236,9 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
 
             if(resultCode == FriendsActivity.RESULT_OK){
                 List<User> invitedFriends = data.getParcelableArrayListExtra(FriendsActivity.FRIENDS_LIST);
-
-                Toast.makeText(getContext(), invitedFriends.get(0).getFirstName(), Toast.LENGTH_LONG).show();
+                if(invitedFriends!=null && invitedFriends.size()>0) {
+                    Toast.makeText(getContext(), invitedFriends.get(0).getFirstName(), Toast.LENGTH_LONG).show();
+                }
             }
 
         }

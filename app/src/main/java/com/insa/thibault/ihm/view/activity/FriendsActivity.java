@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.insa.thibault.ihm.R;
 import com.insa.thibault.ihm.adapter.InviteListener;
@@ -15,7 +15,6 @@ import com.insa.thibault.ihm.view.fragment.FriendsFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -28,7 +27,7 @@ public class FriendsActivity extends AppCompatActivity implements InviteListener
     Map<String, User> invitedFriends;
 
     @Bind(R.id.validation_button)
-    Button validation;
+    ImageButton validation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

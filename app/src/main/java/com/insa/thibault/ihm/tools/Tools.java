@@ -96,7 +96,7 @@ public class Tools {
 
 
 
-            restaurantList.add(new Restaurant("Beurk", 12, 2, 30,"Brocolis & steak haché", "Soupe à l'oignon \n Brocolis & steak haché \n Fruits", "20 Avenue Albert Einstein, 69100 Villeurbanne, France",R.drawable.restaurant_insa));
+            restaurantList.add(new Restaurant("Castor et Pollux", 12, 2, 30,"Brocolis & steak haché", "Soupe à l'oignon \n Brocolis & steak haché \n Fruits", "20 Avenue Albert Einstein, 69100 Villeurbanne, France",R.drawable.restaurant_insa));
             restaurantList.add(new Restaurant("Le Prévert", 2, 5, 300,"Panini thon", "Salade \n Panini thon \n Eclair au café", "20 Avenue Albert Einstein, 69100 Villeurbanne, France",R.drawable.restau1));
             restaurantList.add(new Restaurant("Snack du campus", 7, 1, 500,"Tacos Kebab Maison", "Tacos Kebab Maison", "29 rue de la Doua, 69100 Villeurbanne, France",R.drawable.restau2));
             restaurantList.add(new Restaurant("Panorama", 0, 3, 200,"Frites - Omelette ou Kebab", "Frites - Omelette ou Kebab", "63 avenue Roger Salengro, 69100 Villeurbanne, France",R.drawable.restau3));
