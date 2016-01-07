@@ -134,7 +134,7 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
 
         User sender = acceptedInvitation.getSender();
         Restaurant acceptedRestaurant = acceptedInvitation.getRestaurant();
-        String acceptedTime = String.format("%02dh%02d", acceptedInvitation.getTimeHour(), acceptedInvitation.getTimeMinutes());
+        String acceptedTime = String.format("%02d:%02d", acceptedInvitation.getTimeHour(), acceptedInvitation.getTimeMinutes());
 
         senderText.setText(sender.getFirstName() + " " + sender.getLastName());
         restaurant.setText(acceptedRestaurant.getName());
@@ -157,6 +157,7 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         currentUser.setAcceptedInvitation(null);
+                        currentUser.setCurrentRestaurant(null);
                         invitationAcceptedNormalLayout.setVisibility(View.GONE);
                         myMealTextHint.setVisibility(View.VISIBLE);
                     }

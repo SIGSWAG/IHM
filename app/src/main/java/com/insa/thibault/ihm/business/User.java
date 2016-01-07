@@ -169,8 +169,8 @@ public class User implements Parcelable{
         return acceptedInvitation;
     }
 
-    public void setAcceptedInvitation(Invitation acceptedInvitations) {
-        this.acceptedInvitation = acceptedInvitations;
+    public void setAcceptedInvitation(Invitation acceptedInvitation) {
+        this.acceptedInvitation = acceptedInvitation;
     }
 
     public List<Restaurant> getFavoritesRestaurant() {

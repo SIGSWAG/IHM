@@ -29,11 +29,12 @@
                 android:layout_gravity="center"
                 android:visibility="gone"
                 tools:visibility ="visible"
-                android:layout_marginTop="16dp"
                 card_view:cardUseCompatPadding="true"
+                android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                card_view:cardCornerRadius="4dp">
+                card_view:cardCornerRadius="4dp"
+                >
                 <RelativeLayout
 
                     android:layout_width="match_parent"
@@ -78,10 +79,11 @@
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/card_viewli"
                 android:layout_gravity="center"
+                card_view:cardUseCompatPadding="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 card_view:cardCornerRadius="4dp"
-                android:layout_marginBottom="16dp">
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -136,6 +138,7 @@
             <android.support.v7.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/card_view"
+                card_view:cardUseCompatPadding="true"
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -189,8 +192,6 @@
                         android:layout_width="wrap_content"
                         android:textColor="@color/black"
                         android:layout_height="match_parent"
-                        android:autoLink="map"
-                        android:text="@{restaurant.address}"
                         tools:text="15 avenue Albert Einstein, 69100 Villeurbanne"/>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -198,8 +199,9 @@
             <android.support.v7.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/card_view_menu"
-                android:layout_marginTop="16dp"
+
                 android:layout_gravity="center"
+                card_view:cardUseCompatPadding="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 card_view:cardCornerRadius="4dp">
@@ -245,8 +247,8 @@
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/card_view_friends"
                 android:layout_gravity="center"
-                android:layout_marginTop="16dp"
                 card_view:cardUseCompatPadding="true"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 card_view:cardCornerRadius="4dp">

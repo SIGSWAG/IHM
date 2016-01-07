@@ -74,14 +74,10 @@ public class RecyclerInvitationAdapter extends RecyclerView.Adapter<RecyclerInvi
         holder.friendName.setText(currentInvitation.getSender().getFirstName());
         holder.hour.setText(currentInvitation.getTimeHour()+":"+currentInvitation.getTimeMinutes());
 
-
         holder.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 mCallBack.get().acceptedInvitation(v, RecyclerInvitationAdapter.this, currentInvitation );
-
             }
         });
 
@@ -90,12 +86,9 @@ public class RecyclerInvitationAdapter extends RecyclerView.Adapter<RecyclerInvi
             public void onClick(View v) {
                 RecyclerInvitationAdapter.this.remove(currentInvitation);
                 currentInvitation.setStatus(Invitation.DENIED);
-
+                currentUser.removeReceivedInvitation(currentInvitation);
             }
         });
-
-
-
     }
 
 
@@ -110,8 +103,9 @@ public class RecyclerInvitationAdapter extends RecyclerView.Adapter<RecyclerInvi
     }
 
     public void remove(int position) {
-        invitations.remove(position);
+        Invitation invitation = invitations.remove(position);
         notifyItemRemoved(position);
+        currentUser.removeReceivedInvitation(invitation);
     }
 
     public void remove(Invitation invitation) {
