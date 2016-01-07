@@ -313,7 +313,8 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
                         //user.getAcceptedInvitation().clear();
                         user.setAcceptedInvitation(invitation);
                         cardRestaurant.setVisibility(View.VISIBLE);
-                        mealTextView.setText(user.getAcceptedInvitation().getTimeHour()+"h"+user.getAcceptedInvitation().getTimeMinutes());
+                        String mealTime = String.format("%02dh%02d", user.getAcceptedInvitation().getTimeHour(), user.getAcceptedInvitation().getTimeMinutes());
+                        mealTextView.setText(mealTime);
 
                         Snackbar.make(v, R.string.saved, Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
