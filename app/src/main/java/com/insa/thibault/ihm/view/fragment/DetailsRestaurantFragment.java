@@ -308,7 +308,7 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
         db.setPositiveButton(getString(R.string.confirm), new
                 DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Invitation invitation = new Invitation(user, user, restaurant, timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 3, 12, Invitation.ACCEPTED);
+                        Invitation invitation = new Invitation(user, user, restaurant, timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 0, 12, Invitation.ACCEPTED);
                         user.setCurrentRestaurant(restaurant);
                         //user.getAcceptedInvitation().clear();
                         user.setAcceptedInvitation(invitation);

@@ -1,8 +1,11 @@
 package com.insa.thibault.ihm.view.fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -147,10 +150,25 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
     }
 
     private void declineAcceptedInvitation() {
-        // TODO Pop-up de confirmation
-        currentUser.setAcceptedInvitation(null);
-        invitationAcceptedNormalLayout.setVisibility(View.GONE);
-        myMealTextHint.setVisibility(View.VISIBLE);
+        AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+        alertDialog.setTitle(R.string.sure);
+        alertDialog.setMessage(getString(R.string.cancel_my_meal));
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.confirm),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        currentUser.setAcceptedInvitation(null);
+                        invitationAcceptedNormalLayout.setVisibility(View.GONE);
+                        myMealTextHint.setVisibility(View.VISIBLE);
+                    }
+                });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.cancel),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        alertDialog.show();
     }
 
     @Override
@@ -161,12 +179,41 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
         }
     }
 
-    public void acceptInvite(Invitation invitation) {
-        invitations.remove(invitation);
-        currentUser.setAcceptedInvitation(invitation);
-        currentUser.removeReceivedInvitation(invitation);
-        setAcceptedInvitation(invitation);
-        invitationAdapter.notifyDataSetChanged();
+    public void acceptInvite(final Invitation invitation) {
+        if(currentUser.getAcceptedInvitation() != null) {
+            AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+            alertDialog.setTitle(R.string.sure);
+            alertDialog.setMessage(getString(R.string.accept_invite));
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.confirm),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            invitations.remove(invitation);
+                            currentUser.setAcceptedInvitation(invitation);
+                            currentUser.removeReceivedInvitation(invitation);
+                            setAcceptedInvitation(invitation);
+                            invitationAdapter.notifyDataSetChanged();
+                            Snackbar.make(getView(), "Vous avez accepté l'invitation ! ", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                        }
+                    });
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.cancel),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+            alertDialog.show();
+        }
+        else {
+            invitations.remove(invitation);
+            currentUser.setAcceptedInvitation(invitation);
+            currentUser.removeReceivedInvitation(invitation);
+            setAcceptedInvitation(invitation);
+            invitationAdapter.notifyDataSetChanged();
+            Snackbar.make(getView(), "Vous avez accepté l'invitation ! ", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
     }
 
     public void declineInvite(Invitation invitation) {
