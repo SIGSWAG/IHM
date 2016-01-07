@@ -30,10 +30,10 @@
                 android:visibility="gone"
                 tools:visibility ="visible"
                 android:layout_marginTop="16dp"
-                card_view:cardUseCompatPadding="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                card_view:cardCornerRadius="4dp">
+                card_view:cardCornerRadius="4dp"
+                android:layout_marginBottom="16dp">
                 <RelativeLayout
 
                     android:layout_width="match_parent"
