@@ -220,9 +220,7 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
 
             alertDialog.show();
         }
-        else if(user.getCurrentRestaurant() == null){
-            user.setCurrentRestaurant(restaurant);
-
+        else if(user.getCurrentRestaurant() == null) {
             //user.addAcceptedInvitation(new Invitation(user, user, restaurant, 12, 45, 3, 12, Invitation.ACCEPTED));
             displayTimePicker(v);
 
@@ -298,10 +296,7 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
     }
 
 
-    void displayTimePicker(final View v){
-
-
-
+    void displayTimePicker(final View v) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View dialog_layout = inflater.inflate(R.layout.dialog_time_picker, null);
         AlertDialog dialog;
@@ -313,12 +308,13 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
         db.setPositiveButton(getString(R.string.confirm), new
                 DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Invitation invitation = new Invitation(user, user, restaurant, timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 3, 12, Invitation.ACCEPTED);
+                        Invitation invitation = new Invitation(user, user, restaurant, timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 0, 12, Invitation.ACCEPTED);
                         user.setCurrentRestaurant(restaurant);
                         //user.getAcceptedInvitation().clear();
                         user.setAcceptedInvitation(invitation);
                         cardRestaurant.setVisibility(View.VISIBLE);
-                        mealTextView.setText(user.getAcceptedInvitation().getTimeHour()+"h"+user.getAcceptedInvitation().getTimeMinutes());
+                        String mealTime = String.format("%02dh%02d", user.getAcceptedInvitation().getTimeHour(), user.getAcceptedInvitation().getTimeMinutes());
+                        mealTextView.setText(mealTime);
 
                         Snackbar.make(v, R.string.saved, Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
