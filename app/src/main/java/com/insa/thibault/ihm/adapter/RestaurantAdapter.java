@@ -83,9 +83,17 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant>{
                 if (user.addOrRemove(restaurant)) {
                     viewHolder.buttonStar.setImageResource(R.drawable.ic_star_black_24dp);
                     SnackbarUtils.showFavoriteAdded(v, restaurant);
+                    restaurants.remove(restaurant);
+                    restaurants.add(0, restaurant);
+                    RestaurantAdapter.this.notifyDataSetChanged();
+
                 } else {
                     viewHolder.buttonStar.setImageResource(R.drawable.ic_star_border_black_24dp);
                     SnackbarUtils.showFavoriteRemoved(v, restaurant);
+
+                    restaurants.remove(restaurant);
+                    restaurants.add(restaurant);
+                    RestaurantAdapter.this.notifyDataSetChanged();
                 }
             }
         });

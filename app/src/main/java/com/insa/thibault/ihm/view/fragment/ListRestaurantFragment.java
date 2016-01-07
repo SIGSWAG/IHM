@@ -50,6 +50,10 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
     @Inject
     protected List<Restaurant> restaurantList;
 
+
+    private List<Restaurant> restaurants;
+
+
     public ListRestaurantFragment() {
 
     }
@@ -87,7 +91,19 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(title);
 
-        restaurantAdapter = new RestaurantAdapter(this.getContext(), restaurantList, user);
+        restaurants = new ArrayList<>();
+
+        restaurants.addAll(user.getFavoritesRestaurant());
+
+        for(Restaurant restaurant : restaurantList){
+
+            if(!restaurants.contains(restaurant)){
+
+                restaurants.add(restaurant);
+            }
+        }
+
+        restaurantAdapter = new RestaurantAdapter(this.getContext(), restaurants, user);
 
         listRestaurants.setAdapter(restaurantAdapter);
         restaurantAdapter.notifyDataSetChanged();
@@ -101,7 +117,31 @@ public class ListRestaurantFragment extends Fragment implements AdapterView.OnIt
         Log.d("List","Click");
         if(mCallback != null){
 
-            mCallback.onRestaurantSelected(view, restaurantList.get(position));
+            mCallback.onRestaurantSelected(view, restaurants.get(position));
         }
     }
+
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(restaurantAdapter!=null) {
+
+
+            restaurants.clear();
+
+            restaurants.addAll(user.getFavoritesRestaurant());
+
+            for(Restaurant restaurant : restaurantList){
+
+                if(!restaurants.contains(restaurant)){
+
+                    restaurants.add(restaurant);
+                }
+            }
+            restaurantAdapter.notifyDataSetChanged();
+        }
+
+    }
+
 }
