@@ -33,6 +33,7 @@ import com.insa.thibault.ihm.business.User;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -200,9 +201,14 @@ public class FriendsFragment extends Fragment implements LoaderManager.LoaderCal
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+        List appUsers = new ArrayList<>();
+        appUsers.addAll(currentUser.getFriends().values());
+        mContactAdapter.setAppUsers(appUsers);
+
         // Put the result Cursor in the adapter for the ListView
         contacts = new ArrayList<>();
-        contacts.addAll(currentUser.getFriends().values());
+
         while (data.moveToNext()) {
             String name = data.getString(2);
             if(!currentUser.getFriends().containsKey(name)){
@@ -257,6 +263,7 @@ public class FriendsFragment extends Fragment implements LoaderManager.LoaderCal
         // contacts-related task you need to do.
         getLoaderManager().initLoader(0, null, this);
         contacts = new ArrayList<>();
+
         mContactAdapter =  new ContactAdapter(getActivity(),contacts, isInvitationFragment, mCallback);
 
         /**new SimpleCursorAdapter(

@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * Created by loict on 15/12/2015.
  */
-public class User implements Parcelable{
+public class User implements Parcelable, Comparable<User> {
 
     private String firstName;
     private String lastName;
@@ -257,5 +257,14 @@ public class User implements Parcelable{
 
     public void setTimeEating(String timeEating) {
         this.timeEating = timeEating;
+    }
+
+    @Override
+    public int compareTo(User another) {
+        int res = this.firstName.compareTo(another.firstName);
+        if(res == 0) {
+            return this.lastName.compareTo(another.lastName);
+        }
+        return res;
     }
 }

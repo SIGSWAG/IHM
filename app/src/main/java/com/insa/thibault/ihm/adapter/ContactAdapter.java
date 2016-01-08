@@ -21,7 +21,9 @@ import com.insa.thibault.ihm.business.User;
 import org.apache.commons.codec.binary.StringUtils;
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
@@ -32,6 +34,8 @@ import java.util.Random;
 public class ContactAdapter extends ArrayAdapter<User> {
 
     private List<User> contacts;
+
+    private List<User> appUsers;
 
     boolean inviteAdapter;
 
@@ -44,6 +48,7 @@ public class ContactAdapter extends ArrayAdapter<User> {
         this.contacts = invitations;
         this.inviteAdapter = inviteAdapter;
         this.listener = listener;
+        this.appUsers = new ArrayList<>();
     }
 
     @Override
@@ -128,6 +133,13 @@ public class ContactAdapter extends ArrayAdapter<User> {
     public void setContacts(List<User> contacts) {
         this.contacts = contacts;
         super.clear();
+        Collections.sort(contacts);
+        super.addAll(appUsers);
         super.addAll(contacts);
+    }
+
+    public void setAppUsers(List<User> appUsers) {
+        this.appUsers = appUsers;
+        Collections.sort(this.appUsers);
     }
 }
