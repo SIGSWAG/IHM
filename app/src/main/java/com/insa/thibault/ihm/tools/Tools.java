@@ -30,16 +30,16 @@ public class Tools {
 
     private static List<User> someUsers;
     static {
-        User user1 = new User("Will", "Smith", "12h15");
-        User user2 = new User("Damien", "Gallet", "13h14");
-        User user3 = new User("Marc", "Javin", "11h45");
-        User user4 = new User("Thibault", "Halepian", "13h45");
-        User user5 = new User("Aurélien", "Coussat", "12h10");
-        User user6 = new User("Hugo", "Delval", "12h35");
-        User user7 = new User("Loïc", "Touzard", "13h30");
-        User user8 = new User("Jonathan", "Taws", "12h45");
+        User user1 = new User("Will", "Smith", "12h15", true);
+        User user2 = new User("Damien", "Gallet", "13h14", true);
+        User user3 = new User("Marc", "Javin", "11h45", true);
+        //User user4 = new User("Thibault", "Halepian", "13h45", true);
+        User user5 = new User("Aurélien", "Coussat", "12h10", true);
+        User user6 = new User("Hugo", "Delval", "12h35", true);
+        User user7 = new User("Loïc", "Touzard", "13h30", true);
+        User user8 = new User("Jonathan", "Taws", "12h45", true);
 
-        someUsers = Arrays.asList(user1, user2, user3, user4, user5, user6, user7, user8);
+        someUsers = Arrays.asList(user1, user2, user3, user5, user6, user7, user8);
     }
 
 
@@ -113,6 +113,8 @@ public class Tools {
 
             List<Invitation> invitations = new ArrayList<>();
             User sender = new User("Damien", "Gallet");
+            sender.setAppUser(true);
+            sender.setCurrentRestaurant(restaurantList.get(0));
             User receiver = new User("Aziz", "SIGSWAG");
             invitations.add(new Invitation(sender, receiver, restaurantList.get(0), 12, 45, 3, 12, Invitation.PENDING));
             invitations.add(new Invitation(sender, receiver, restaurantList.get(1), 11, 30, 8, 12, Invitation.PENDING));
@@ -133,6 +135,11 @@ public class Tools {
             Map<String, User> friends = new HashMap<>();
             friends.put(user1.getFirstName() + user1.getLastName(), user1);
             friends.put(user2.getFirstName() + user2.getLastName(), user2);
+            for(User user : someUsers) {
+                friends.put(user.getFirstName() + user.getLastName(), user);
+            }
+            friends.put(sender.getFirstName() + sender.getLastName(), sender);
+
 
             currentUser = new User("Thibault", "Halepian", null, friends,
                     invitations, new ArrayList<Invitation>(),

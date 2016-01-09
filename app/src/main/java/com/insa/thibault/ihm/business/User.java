@@ -75,6 +75,11 @@ public class User implements Parcelable, Comparable<User> {
         this.timeEating = timeEating;
     }
 
+    public User(String firstName, String lastName, String timeEating, boolean isAppUser) {
+        this(firstName, lastName, timeEating);
+        this.isAppUser = isAppUser;
+    }
+
     public User(String firstName, String lastName, Restaurant currentRestaurant, Map<String, User> friends,
                 List<Invitation> receivedInvitations, List<Invitation> sentInvitations,
                 Invitation acceptedInvitation, List<Restaurant> favoritesRestaurant) {
