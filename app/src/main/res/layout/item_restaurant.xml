@@ -6,6 +6,8 @@
     android:descendantFocusability="blocksDescendants"
     xmlns:tools="http://schemas.android.com/tools"
     android:paddingStart="@dimen/material_space_medium"
+    android:paddingTop="2dp"
+    android:paddingBottom="2dp"
     android:backgroundTintMode="screen">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
