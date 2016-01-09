@@ -119,7 +119,8 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
 
         if(user.getAcceptedInvitation() !=  null && user.getAcceptedInvitation().getRestaurant().getName().compareTo(restaurant.getName())==0){
             cardRestaurant.setVisibility(View.VISIBLE);
-            mealTextView.setText(user.getAcceptedInvitation().getTimeHour()+"h"+user.getAcceptedInvitation().getTimeMinutes());
+            String mealTime = String.format("%02dh%02d", user.getAcceptedInvitation().getTimeHour(), user.getAcceptedInvitation().getTimeMinutes());
+            mealTextView.setText(mealTime);
 
         }else{
             cardRestaurant.setVisibility(View.GONE);
@@ -278,7 +279,8 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
                             currentInvitation.setStatus(Invitation.ACCEPTED);
                             user.setAcceptedInvitation(currentInvitation);
                             cardRestaurant.setVisibility(View.VISIBLE);
-                            mealTextView.setText(user.getAcceptedInvitation().getTimeHour()+"h"+user.getAcceptedInvitation().getTimeMinutes());
+                            String mealTime = String.format("%02dh%02d", user.getAcceptedInvitation().getTimeHour(), user.getAcceptedInvitation().getTimeMinutes());
+                            mealTextView.setText(mealTime);
                             Snackbar.make(view, R.string.saved, Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                             dialog.dismiss();
@@ -299,7 +301,8 @@ public class DetailsRestaurantFragment extends Fragment implements View.OnClickL
             currentInvitation.setStatus(Invitation.ACCEPTED);
             user.setAcceptedInvitation(currentInvitation);
             cardRestaurant.setVisibility(View.VISIBLE);
-            mealTextView.setText(user.getAcceptedInvitation().getTimeHour()+"h"+user.getAcceptedInvitation().getTimeMinutes());
+            String mealTime = String.format("%02dh%02d", user.getAcceptedInvitation().getTimeHour(), user.getAcceptedInvitation().getTimeMinutes());
+            mealTextView.setText(mealTime);
             Snackbar.make(view, R.string.saved, Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }

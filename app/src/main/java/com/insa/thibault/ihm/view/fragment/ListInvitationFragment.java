@@ -107,6 +107,16 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
         invitationsList.setOnItemClickListener(this);
         invitationsList.setEmptyView(invitationsTextHint);
 
+        myMeal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Invitation acceptedInvitation = currentUser.getAcceptedInvitation();
+                if(acceptedInvitation != null) {
+                    mCallback.onInvitationSelected(currentUser.getAcceptedInvitation());
+                }
+            }
+        });
+
         invitationAcceptedNormalLayout = (LinearLayout) myMeal.findViewById(R.id.invitation_accepted_normal);
         myMealTextHint = (TextView) myMeal.findViewById(R.id.my_meal_text_hint);
 

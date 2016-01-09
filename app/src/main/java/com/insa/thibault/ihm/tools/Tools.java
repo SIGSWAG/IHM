@@ -114,8 +114,9 @@ public class Tools {
             List<Invitation> invitations = new ArrayList<>();
             User sender = new User("Damien", "Gallet");
             User receiver = new User("Aziz", "SIGSWAG");
-            invitations.add(new Invitation(sender, receiver, restaurantList.get(0), 12, 45, 3, 12,Invitation.PENDING));
-            invitations.add(new Invitation(sender, receiver, restaurantList.get(0), 11, 30, 3, 12, Invitation.PENDING));
+            invitations.add(new Invitation(sender, receiver, restaurantList.get(0), 12, 45, 3, 12, Invitation.PENDING));
+            invitations.add(new Invitation(sender, receiver, restaurantList.get(1), 11, 30, 8, 12, Invitation.PENDING));
+
             User user1 = new User("Adam", "Rivault", null, null,
                     null, null,
                     null, null);
@@ -126,6 +127,8 @@ public class Tools {
                     null, null,
                     null, null);
             user2.setAppUser(true);
+
+            invitations.add(new Invitation(user2, receiver, restaurantList.get(3), 13, 0, 2, 10, Invitation.PENDING));
 
             Map<String, User> friends = new HashMap<>();
             friends.put(user1.getFirstName() + user1.getLastName(), user1);
