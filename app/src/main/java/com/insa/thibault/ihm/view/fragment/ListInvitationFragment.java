@@ -144,7 +144,7 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
 
         User sender = acceptedInvitation.getSender();
         Restaurant acceptedRestaurant = acceptedInvitation.getRestaurant();
-        String acceptedTime = String.format("%02d:%02d", acceptedInvitation.getTimeHour(), acceptedInvitation.getTimeMinutes());
+        String acceptedTime = String.format("%02dh%02d", acceptedInvitation.getTimeHour(), acceptedInvitation.getTimeMinutes());
 
         senderText.setText(sender.getFirstName() + " " + sender.getLastName());
         restaurant.setText(acceptedRestaurant.getName());
@@ -229,6 +229,7 @@ public class ListInvitationFragment extends Fragment implements AdapterView.OnIt
 
     public void declineInvite(Invitation invitation) {
         invitations.remove(invitation);
+        currentUser.removeReceivedInvitation(invitation);
         invitationAdapter.notifyDataSetChanged();
     }
 }

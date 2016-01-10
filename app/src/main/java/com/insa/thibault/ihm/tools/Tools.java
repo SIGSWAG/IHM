@@ -117,13 +117,14 @@ public class Tools {
             sender.setCurrentRestaurant(restaurantList.get(0));
             User receiver = new User("Aziz", "SIGSWAG");
             invitations.add(new Invitation(sender, receiver, restaurantList.get(0), 12, 45, 3, 12, Invitation.PENDING));
-            invitations.add(new Invitation(sender, receiver, restaurantList.get(1), 11, 30, 8, 12, Invitation.PENDING));
 
             User user1 = new User("Adam", "Rivault", null, null,
                     null, null,
                     null, null);
             user1.setAppUser(true);
             user1.setCurrentRestaurant(restaurantList.get(0));
+
+            invitations.add(new Invitation(user1, receiver, restaurantList.get(1), 11, 30, 8, 12, Invitation.PENDING));
 
             User user2 = new User("Adelin", "Ricaud", null, null,
                     null, null,

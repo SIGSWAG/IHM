@@ -64,10 +64,8 @@ public class InvitationAdapter extends ArrayAdapter<Invitation> {
         //viewHolder.inviterImage.setImageDrawable(sender.getImage());
         viewHolder.nbFriends.setText(currentInvitation.getNbFriends() + " amis y vont");
         viewHolder.location.setText(currentInvitation.getRestaurant().getName());
-        String time = currentInvitation.getTimeHour() + "h";
-        if(currentInvitation.getTimeMinutes() != 0) {
-            time += currentInvitation.getTimeMinutes();
-        }
+        String time = String.format("%02dh%02d", currentInvitation.getTimeHour(), currentInvitation.getTimeMinutes());
+
         viewHolder.time.setText(time);
         // TODO Buttons
         viewHolder.acceptInvite.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +77,7 @@ public class InvitationAdapter extends ArrayAdapter<Invitation> {
         viewHolder.declineInvite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Vous avez décliné l'invitation, pas cool ! ", Snackbar.LENGTH_LONG)
+                Snackbar.make(v, "Vous avez décliné l'invitation", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 listInvitationFragment.declineInvite(currentInvitation);
             }

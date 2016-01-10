@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    android:weightSum="1" >
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,30 +29,40 @@
         android:layout_marginLeft="@dimen/title_margin_left"
         android:layout_marginTop="@dimen/title_separator_margin_top" />
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/list_friends_meals"
-        tools:layout_height="100dp"
-        android:descendantFocusability="blocksDescendants"
-        android:layout_weight="1.06" />
-
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true">
 
-        <TextView
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-            android:layout_width="wrap_content"
+        <ListView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Demandez à vos amis de vous invitez ou invitez-les vous même !"
-            android:id="@+id/invitations_text_hint"
-            android:textStyle="italic"
-            android:layout_marginLeft="@dimen/list_margin_left"
-            android:layout_marginRight="@dimen/list_margin_left"
-            android:textColor="@color/insaFontGray"
-            android:adjustViewBounds="true"/>
+            android:id="@+id/list_friends_meals"
+            tools:layout_height="100dp"
+            android:descendantFocusability="blocksDescendants"
+            android:layout_weight="1.06" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Demandez à vos amis de vous invitez ou invitez-les vous même !"
+                android:id="@+id/invitations_text_hint"
+                android:textStyle="italic"
+                android:layout_marginLeft="@dimen/list_margin_left"
+                android:layout_marginRight="@dimen/list_margin_left"
+                android:textColor="@color/insaFontGray"
+                android:adjustViewBounds="true"/>
+
+        </LinearLayout>
 
     </LinearLayout>
+
+
 
 </LinearLayout>
